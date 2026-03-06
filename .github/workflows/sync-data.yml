@@ -95,7 +95,13 @@ jobs:
           # We use a refresh approach to ensure it's a clean data-only branch
           git checkout --orphan data-temp
           git rm -rf .
-          mv ../temp-data/* .
+          
+          # Ensure current dir is clean for copying
+          rm -rf directing postproduction cloudinary-mapping.json
+          
+          # Copy files from temp
+          cp -rf ../temp-data/* .
+          
           git add -A
           git commit -m "chore: full data & static sync [ci skip]
           
