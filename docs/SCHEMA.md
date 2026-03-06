@@ -34,29 +34,7 @@ Fields marked with 🚫 are business/finance fields **not used** by the portfoli
 | `Client` | singleLineText | `client` | Direct text field |
 | `Last Modified` | lastModifiedTime | — | Not exposed in output, but tracked by Airtable |
 
-### Business/Finance Fields (ignored by sync)
-
-| Field | Type | Purpose |
-|---|---|---|
-| 🚫 `Status Box` | formula | Invoice/payment status tracker |
-| 🚫 `Rate` | currency (£) | Day rate |
-| 🚫 `Days` | number | Days of work |
-| 🚫 `Discount` / `Discount Total` | percent / formula | |
-| 🚫 `Expenses` | currency (£) | |
-| 🚫 `Per Diems` / `Per Diems Count` | currency / number | |
-| 🚫 `Total` | formula | Rate×Days - Discount + Expenses |
-| 🚫 `Invoice Date` / `Invoice Terms` / `Invoice ID` / `Invoice PDF` / `Invoice URL` | various | Invoicing |
-| 🚫 `Create Invoice` | button | |
-| 🚫 `Paid` | checkbox | |
-| 🚫 `Notes` | multilineText | |
-| 🚫 `Tax Year Bracket` | formula | UK tax year |
-| 🚫 `Client Invoice ID` / `Client Address` / `Client City` / `Client Post Code` / `Client Email` | lookup | |
-| 🚫 `Greek` | singleLineText | Greek translation |
-| 🚫 `OT` / `OT Rate` | duration / currency | Overtime |
-| 🚫 `OLD ID` | singleLineText | Legacy |
-| 🚫 `Receipts` | multipleAttachments | |
-| 🚫 `#` | autoNumber | |
-| 🚫 `Feature - OLD` / `Front Page - OLD` | checkbox | Deprecated |
+> Additional business/finance fields exist in Airtable but are **not used** by the portfolio sync and are omitted from this public document.
 
 ---
 
@@ -83,7 +61,7 @@ Fields marked with 🚫 are business/finance fields **not used** by the portfoli
 | `Company` | singleLineText | **Primary**. Display name in `productionCompany` |
 | `Name` | singleLineText | Fallback for company name |
 | `Projects` | multipleRecordLinks → Projects | Reverse link |
-| 🚫 `Invoice ID` / `Address` / `City` / `Post Code` / `Email` | various | Business fields |
+
 
 ---
 
