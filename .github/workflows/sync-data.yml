@@ -116,3 +116,11 @@ jobs:
           git commit -m "chore: full data & static sync [ci skip] (clean)"
           git push -f origin data-branch:data
           echo "✅ Data branch updated successfully (Artifacts only)"
+
+      - name: Purge jsDelivr Cache
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "🧹 Purging jsDelivr cache..."
+          curl -s "https://purge.jsdelivr.net/gh/$GITHUB_REPOSITORY@data/directing/portfolio-data.json"
+          curl -s "https://purge.jsdelivr.net/gh/$GITHUB_REPOSITORY@data/postproduction/portfolio-data.json"
+          echo "✅ Cache purged"
