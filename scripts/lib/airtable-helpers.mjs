@@ -63,7 +63,7 @@ export async function fetchAirtableTable(tableName, sortField, token, baseId) {
  */
 export async function buildLookupMaps(token, baseId) {
   const [festivalsRecords, clientsRecords] = await Promise.all([
-    fetchAirtableTable('Festivals', null, token, baseId),
+    fetchAirtableTable('tblGdWlTVC06ZT60H', null, token, baseId),  // Festivals
     fetchAirtableTable('Client Book', null, token, baseId)
   ]);
 

@@ -62,7 +62,7 @@ export async function syncPortfolios(config) {
     const [projectRecords, journalRecords, festivalRecords, clientRecords, settingsRecords] = await Promise.all([
         fetchAirtableTable('Projects', 'Release Date', airtableToken, airtableBaseId),
         fetchAirtableTable('Journal', 'Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('Festivals', null, airtableToken, airtableBaseId),
+        fetchAirtableTable('tblGdWlTVC06ZT60H', null, airtableToken, airtableBaseId),  // Festivals
         fetchAirtableTable('Client Book', null, airtableToken, airtableBaseId),
         fetchAirtableTable('Settings', null, airtableToken, airtableBaseId),
     ]);
