@@ -156,7 +156,7 @@ These fields have graceful fallbacks and may be added to Airtable later:
 
 ## Output JSON Schema
 
-Each `{mode}/portfolio-data.json` file:
+Each `{mode}/portfolio-data.json` file (on the **`data` branch**):
 
 ```json
 {

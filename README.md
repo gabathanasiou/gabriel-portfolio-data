@@ -12,7 +12,10 @@ Airtable (CMS) → GitHub Actions (this repo) → jsDelivr (CDN) → Vite Fronte
 
 Instead of each frontend rebuild burning Airtable requests, the data is synced once to this repo and served statically.
 
-### Output Structure
+### Output Structure (Branch: `data`)
+
+The automated workflow pushes build artifacts to the dedicated **`data` branch**. This branch contains **only** the generated static files:
+
 ```
 directing/
 ├── portfolio-data.json      # Directing portfolio data
@@ -26,11 +29,14 @@ cloudinary-mapping.json      # Shared image cache (publicId → URL)
 ```
 
 ### Sync Pipeline
-1. **Fetch** all 5 Airtable tables in parallel (5 API calls total for both portfolios)
-2. **Sync images** to Cloudinary using cache-first strategy (only uploads new/changed images)
+1. **Fetch** all 5 Airtable tables in parallel
+2. **Sync images** to Cloudinary using cache-first strategy
 3. **Process** both portfolio modes from the same raw data
-4. **Generate** sitemaps and robots.txt from the processed data
-5. **Commit** changes to `main` → jsDelivr CDN auto-updates
+4. **Generate** sitemaps and robots.txt
+5. **Push** changes to the dedicated `data` branch
+
+> [!NOTE]
+> The `main` branch is strictly for source code (`scripts/`, `docs/`, `workflows/`). Automated syncs never touch the `main` branch, allowing you to edit code locally without merge conflicts.
 
 ## 🚀 How to Trigger a Data Sync
 
@@ -50,10 +56,10 @@ npm run sync:robots     # Just the robots.txt files
 
 ## 📦 Consumption
 
-The frontend fetches data from jsDelivr CDN:
+The frontend fetches data from jsDelivr CDN via the **`@data` branch**:
 
 ```javascript
-const response = await fetch('https://cdn.jsdelivr.net/gh/gabathanasiou/gabriel-portfolio-data@main/directing/portfolio-data.json');
+const response = await fetch('https://cdn.jsdelivr.net/gh/gabathanasiou/gabriel-portfolio-data@data/directing/portfolio-data.json');
 const payload = await response.json();
 ```
 
