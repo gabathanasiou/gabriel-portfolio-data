@@ -7,8 +7,8 @@ name: Sync Data & Static Files
 # 4. Commits changes to the main branch
 
 on:
-  schedule:
-    - cron: '0 * * * *' # Run hourly automatically
+  repository_dispatch:
+    types: [airtable-webhook-sync]
   workflow_dispatch:
     inputs:
       reason:
