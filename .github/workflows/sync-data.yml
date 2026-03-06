@@ -79,39 +79,25 @@ jobs:
       - name: Deploy Data to 'data' branch
         if: steps.check_changes.outputs.changed == 'true'
         run: |
-          # Use a temporary directory to build the data-only branch content
-          mkdir -p ../temp-data
+          # 1. Prepare artifact stage
+          mkdir -p ../stage
+          [ -d "directing" ] && cp -r directing ../stage/
+          [ -d "postproduction" ] && cp -r postproduction ../stage/
+          [ -f "cloudinary-mapping.json" ] && cp cloudinary-mapping.json ../stage/
           
-          # Copy only the files we want to persist in the 'data' branch
-          [ -d "directing" ] && cp -r directing ../temp-data/
-          [ -d "postproduction" ] && cp -r postproduction ../temp-data/
-          [ -f "cloudinary-mapping.json" ] && cp cloudinary-mapping.json ../temp-data/
-          
-          # Configure identity
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          
-          # Switch to the data branch (creating it if it doesn't exist)
-          # We use a refresh approach to ensure it's a clean data-only branch
-          git checkout --orphan data-temp
+          # 2. Switch to a fresh orphan branch
+          git checkout --orphan data-branch
           git rm -rf .
           
-          # Ensure current dir is clean for copying
-          rm -rf directing postproduction cloudinary-mapping.json
+          # 3. Copy artifacts back
+          cp -r ../stage/* .
           
-          # Copy files from temp
-          cp -rf ../temp-data/* .
+          # 4. Explicitly add only what we want
+          git add -f directing/ postproduction/ cloudinary-mapping.json
           
-          # Add ONLY the build artifacts (avoid node_modules or other random runner files)
-          [ -d "directing" ] && git add directing
-          [ -d "postproduction" ] && git add postproduction
-          [ -f "cloudinary-mapping.json" ] && git add cloudinary-mapping.json
-          
-          git commit -m "chore: full data & static sync [ci skip]
-          
-          Reason: ${{ github.event.inputs.reason || 'Automated Sync' }}
-          Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          
-          # Force push to the 'data' branch
-          git push -f origin data-temp:data
-          echo "✅ Data pushed to 'data' branch!"
+          # 5. Commit and push
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git commit -m "chore: full data & static sync [ci skip] (clean)"
+          git push -f origin data-branch:data
+          echo "✅ Data branch updated successfully (Artifacts only)"
