@@ -60,11 +60,11 @@ export async function syncPortfolios(config) {
     // ── Step 1: Fetch all tables in parallel (5 API calls total) ──
     log('🔄 Fetching all Airtable tables...');
     const [projectRecords, journalRecords, festivalRecords, clientRecords, settingsRecords] = await Promise.all([
-        fetchAirtableTable('Projects', 'Release Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('Journal', 'Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('tblGdWlTVC06ZT60H', null, airtableToken, airtableBaseId),  // Festivals
-        fetchAirtableTable('Client Book', null, airtableToken, airtableBaseId),
-        fetchAirtableTable('Settings', null, airtableToken, airtableBaseId),
+        fetchAirtableTable('tblqZvYhmZ8H81poY', 'Release Date', airtableToken, airtableBaseId), // Projects
+        fetchAirtableTable('tblISFDv21C0PkgEv', 'Date', airtableToken, airtableBaseId),         // Journal
+        fetchAirtableTable('tblGdWlTVC06ZT60H', null, airtableToken, airtableBaseId),          // Festivals
+        fetchAirtableTable('tblv9PEHYyMy2EuqJ', null, airtableToken, airtableBaseId),          // Client Book
+        fetchAirtableTable('tbl37Kj4J5zPK74oN', null, airtableToken, airtableBaseId),          // Settings
     ]);
     log(`✅ Fetched: ${projectRecords.length} projects, ${journalRecords.length} journal, ${festivalRecords.length} festivals, ${clientRecords.length} clients, ${settingsRecords.length} settings`);
 
