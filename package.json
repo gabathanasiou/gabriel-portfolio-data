@@ -1,0 +1,30 @@
+{
+  "name": "gabriel-portfolio-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync:directing": "PORTFOLIO_MODE=directing node scripts/sync-data.mjs && PORTFOLIO_MODE=directing node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=directing node scripts/generate-robots.mjs",
+    "sync:postproduction": "PORTFOLIO_MODE=postproduction node scripts/sync-data.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-robots.mjs",
+    "sync:all": "npm run sync:directing && npm run sync:postproduction"
+  },
+  "dependencies": {
+    "cloudinary": "^2.1.0",
+    "dotenv": "^16.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabathanasiou/gabriel-portfolio-data.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gabathanasiou/gabriel-portfolio-data/issues"
+  },
+  "homepage": "https://github.com/gabathanasiou/gabriel-portfolio-data#readme",
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}

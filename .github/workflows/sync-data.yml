@@ -1,0 +1,102 @@
+name: Sync Data & Static Files
+
+# Scheduled workflow - syncs everything for BOTH portfolios:
+# 1. Fetches data from Airtable for both directing & postproduction
+# 2. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) inside domain-specific subfolders
+# 3. Uploads image changes to Cloudinary CDN
+# 4. Commits changes to the main branch
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Run hourly automatically
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for sync (optional)'
+        required: false
+        default: 'Manual content sync'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Sync DIRECTING mode outputs
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          PORTFOLIO_MODE: 'directing'
+        run: |
+          echo "📄 Generating static files for DIRECTING..."
+          npm run sync:directing
+          echo "✅ Directing static files generated!"
+
+      - name: Sync POSTPRODUCTION mode outputs
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          PORTFOLIO_MODE: 'postproduction'
+        run: |
+          echo "📄 Generating static files for POSTPRODUCTION..."
+          npm run sync:postproduction
+          echo "✅ Postproduction static files generated!"
+
+      - name: Sync INSTAGRAM STUDIO outputs
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+        run: |
+          echo "📸 Attempting to Sync Instagram Studio backup uploads... (Optional Step)"
+          if [ -f "scripts/upload-instagram-data.mjs" ]; then
+            node scripts/upload-instagram-data.mjs || echo "Skipping Instagram Studio Upload"
+          fi
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Changes detected"
+          fi
+
+      - name: Commit & Push Changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git commit -m "chore: full data & static sync [ci skip]
+          
+          Reason: ${{ github.event.inputs.reason || 'Automated Sync' }}
+          Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push origin main
+          echo "✅ Changes committed and deployed to jsDelivr!"
