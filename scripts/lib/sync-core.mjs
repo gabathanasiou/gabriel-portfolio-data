@@ -31,7 +31,7 @@ import {
  * @param {string} config.airtableBaseId - Airtable base ID
  * @param {string} config.outputDir - Directory for output files (default: 'public')
  * @param {boolean} config.verbose - Enable verbose logging
- * @param {boolean} config.forceFullSync - Force full sync, bypassing incremental checks
+ * @param {boolean} config.forceFullSync - Force full sync (now always true)
  * @param {boolean} config.skipFileWrites - Skip writing files to disk (for serverless environments)
  * @param {string} config.portfolioMode - Portfolio mode: 'directing' or 'postproduction' (default: 'directing')
  * @returns {Promise<Object>} Sync results with success status and generated data
@@ -42,7 +42,6 @@ export async function syncAllData(config) {
     airtableBaseId,
     outputDir = 'public',
     verbose = false,
-    forceFullSync = false,
     skipFileWrites = false,
     portfolioMode = 'directing'
   } = config;
@@ -61,372 +60,98 @@ export async function syncAllData(config) {
     syncStats: {
       mode: 'full',
       apiCalls: 0,
-      apiCallsSaved: 0,
-      newRecords: 0,
-      changedRecords: 0,
-      deletedRecords: 0,
-      unchangedRecords: 0
+      apiCallsSaved: 0
     }
   };
 
   try {
-    if (verbose) console.log(`[sync-core] 🔄 Starting data sync for portfolio mode: ${portfolioMode}...`);
+    if (verbose) console.log(`[sync-core] 🔄 Starting FULL data sync for portfolio mode: ${portfolioMode}...`);
 
-    // Use generic portfolio data name
     const outputFileName = `portfolio-data.json`;
     const outputFile = path.join(outputDir, outputFileName);
     if (verbose) console.log(`[sync-core] 📁 Output file: ${outputFileName}`);
 
-    // Load existing portfolio data for incremental sync
-    const existingData = loadExistingData(outputFile);
-    const previousMetadata = existingData?.syncMetadata;
+    // Build lookup maps for festivals and clients
+    const { festivalsMap, clientsMap } = await buildLookupMaps(airtableToken, airtableBaseId);
+    results.syncStats.apiCalls += 2;
+    if (verbose) console.log('[sync-core] ✅ Built lookup maps');
 
-    // Determine sync mode
-    const useIncrementalSync = false;
+    // Load Cloudinary mapping if exists
+    const cloudinaryMapping = loadCloudinaryMapping(outputDir);
 
-    if (useIncrementalSync) {
-      if (verbose) console.log('[sync-core] 🔍 Checking for changes (incremental mode)...');
+    // Fetch all records
+    const [projectsRecords, journalRecords, festivalsRecords, clientsRecords, settingsRecords] = await Promise.all([
+      fetchAirtableTable('Projects', 'Release Date', airtableToken, airtableBaseId),
+      fetchAirtableTable('Journal', 'Date', airtableToken, airtableBaseId),
+      fetchAirtableTable('Festivals', null, airtableToken, airtableBaseId),
+      fetchAirtableTable('Client Book', null, airtableToken, airtableBaseId),
+      fetchAirtableTable('Settings', null, airtableToken, airtableBaseId)
+    ]);
+    results.syncStats.apiCalls += 5;
 
-      // Fetch timestamps only (lightweight check)
-      const [projectsTimestamps, journalTimestamps, festivalsTimestamps, clientsTimestamps, settingsTimestamps] = await Promise.all([
-        fetchTimestamps('Projects', airtableToken, airtableBaseId),
-        fetchTimestamps('Journal', airtableToken, airtableBaseId),
-        fetchTimestamps('Festivals', airtableToken, airtableBaseId),
-        fetchTimestamps('Client Book', airtableToken, airtableBaseId),
-        fetchTimestamps('Settings', airtableToken, airtableBaseId)
-      ]);
+    const rawRecords = {
+      Projects: projectsRecords,
+      Journal: journalRecords,
+      Festivals: festivalsRecords,
+      'Client Book': clientsRecords,
+      Settings: settingsRecords
+    };
 
-      results.syncStats.apiCalls += 5;
+    // Process config/settings data FIRST
+    results.config = processConfigRecords(settingsRecords, cloudinaryMapping, verbose, portfolioMode);
+    if (verbose) console.log('[sync-core] ✅ Processed config/settings data');
 
-      const currentTimestamps = {
-        Projects: projectsTimestamps,
-        Journal: journalTimestamps,
-        Festivals: festivalsTimestamps,
-        'Client Book': clientsTimestamps,
-        Settings: settingsTimestamps
-      };
+    // Process projects
+    results.projects = await processProjectRecords(
+      projectsRecords,
+      festivalsMap,
+      clientsMap,
+      cloudinaryMapping,
+      results.config,
+      verbose,
+      portfolioMode
+    );
+    if (verbose) console.log(`[sync-core] ✅ Processed ${results.projects.length} projects`);
 
-      // Check for changes
-      const changes = checkForChanges(previousMetadata, currentTimestamps);
-
-      // Calculate totals
-      const totalChanges = Object.values(changes).reduce((sum, table) =>
-        sum + table.changed.length + table.new.length + table.deleted.length, 0);
-
-      if (totalChanges === 0) {
-        // No changes detected - return cached data
-        if (verbose) console.log('[sync-core] ✅ No changes detected, using cached data');
-
-        results.success = true;
-        results.projects = existingData.projects || [];
-        results.journal = existingData.posts || [];
-        results.config = existingData.config || null;
-        results.syncStats.mode = 'cached';
-        results.syncStats.apiCallsSaved = 45; // Approximate savings
-        results.syncStats.unchangedRecords = projectsTimestamps.length + journalTimestamps.length;
-
-        return results;
-      }
-
-      // Changes detected - fetch only changed records
-      if (verbose) {
-        console.log(`[sync-core] 📊 Changes detected:`);
-        for (const [table, tableChanges] of Object.entries(changes)) {
-          const total = tableChanges.changed.length + tableChanges.new.length + tableChanges.deleted.length;
-          if (total > 0) {
-            console.log(`  ${table}: ${tableChanges.new.length} new, ${tableChanges.changed.length} changed, ${tableChanges.deleted.length} deleted`);
-          }
-        }
-      }
-
-      results.syncStats.mode = 'incremental';
-      results.syncStats.newRecords = Object.values(changes).reduce((sum, t) => sum + t.new.length, 0);
-      results.syncStats.changedRecords = Object.values(changes).reduce((sum, t) => sum + t.changed.length, 0);
-      results.syncStats.deletedRecords = Object.values(changes).reduce((sum, t) => sum + t.deleted.length, 0);
-
-      // Load existing raw records to merge with changes
-      const existingRawRecords = existingData._rawRecords || {
-        Projects: [],
-        Journal: [],
-        Festivals: [],
-        'Client Book': [],
-        Settings: []
-      };
-
-      // Fetch changed records for each table
-      const fetchPromises = [];
-      const tableNames = ['Projects', 'Journal', 'Festivals', 'Client Book', 'Settings'];
-      const sortFields = { Projects: 'Release Date', Journal: 'Date', Festivals: null, 'Client Book': null, Settings: null };
-
-      for (const tableName of tableNames) {
-        const tableChanges = changes[tableName];
-        const changedIds = [...tableChanges.new, ...tableChanges.changed];
-
-        if (changedIds.length > 0) {
-          fetchPromises.push(
-            fetchChangedRecords(tableName, changedIds, sortFields[tableName], airtableToken, airtableBaseId)
-              .then(records => ({ tableName, records }))
-          );
-          results.syncStats.apiCalls++;
-        }
-      }
-
-      const changedRecordsResults = await Promise.all(fetchPromises);
-
-      // Merge changed records with existing records
-      const rawRecords = { ...existingRawRecords };
-
-      for (const { tableName, records } of changedRecordsResults) {
-        const existingRecords = rawRecords[tableName] || [];
-        const changedIds = new Set(records.map(r => r.id));
-        const deletedIds = new Set(changes[tableName].deleted);
-
-        // Remove deleted records and records that were updated
-        const unchangedRecords = existingRecords.filter(r =>
-          !changedIds.has(r.id) && !deletedIds.has(r.id)
-        );
-
-        // Merge unchanged + changed records
-        rawRecords[tableName] = [...unchangedRecords, ...records];
-      }
-
-      // Also need to handle tables with only deletions (no new/changed records)
-      for (const tableName of tableNames) {
-        const deletedIds = new Set(changes[tableName].deleted);
-        if (deletedIds.size > 0 && !changedRecordsResults.some(r => r.tableName === tableName)) {
-          const existingRecords = rawRecords[tableName] || [];
-          rawRecords[tableName] = existingRecords.filter(r => !deletedIds.has(r.id));
-        }
-      }
-
-      results.syncStats.apiCallsSaved = Math.max(0, 50 - results.syncStats.apiCalls);
-
-      // Build lookup maps from merged data
-      const festivalsMap = {};
-      (rawRecords.Festivals || []).forEach(r => {
-        festivalsMap[r.id] = r.fields['Display Name'] || r.fields['Name'] || r.fields['Award'] || 'Unknown Award';
-      });
-
-      const clientsMap = {};
-      (rawRecords['Client Book'] || []).forEach(r => {
-        clientsMap[r.id] = r.fields['Company'] || r.fields['Company Name'] || r.fields['Client'] || 'Unknown';
-      });
-
-      if (verbose) console.log('[sync-core] ✅ Built lookup maps from merged data');
-
-      // Load Cloudinary mapping
-      const cloudinaryMapping = loadCloudinaryMapping(outputDir);
-
-      // Process records
-      results.config = processConfigRecords(rawRecords.Settings || [], cloudinaryMapping, verbose, portfolioMode);
-      if (verbose) console.log('[sync-core] ✅ Processed config/settings data');
-
-      results.projects = await processProjectRecords(
-        rawRecords.Projects || [],
-        festivalsMap,
-        clientsMap,
-        cloudinaryMapping,
-        results.config,
-        verbose,
-        portfolioMode
-      );
-      if (verbose) console.log(`[sync-core] ✅ Processed ${results.projects.length} projects`);
-
-      // Conditionally process journal based on hasJournal flag
-      if (results.config.hasJournal) {
-        results.journal = processJournalRecords(rawRecords.Journal || [], cloudinaryMapping, verbose);
-        if (verbose) console.log(`[sync-core] ✅ Processed ${results.journal.length} journal posts`);
-      } else {
-        results.journal = [];
-        if (verbose) console.log(`[sync-core] ⏭️ Skipped journal processing (hasJournal=false)`);
-      }
-
-      // Build sets of changed record IDs for incremental Cloudinary sync
-      const changedProjectIds = new Set([
-        ...changes.Projects.new,
-        ...changes.Projects.changed
-      ]);
-      const changedJournalIds = new Set([
-        ...changes.Journal.new,
-        ...changes.Journal.changed
-      ]);
-
-      // Upload images to Cloudinary (only for changed records)
-      const updatedMapping = await syncImagesToCloudinary(
-        results.projects,
-        results.journal,
-        cloudinaryMapping,
-        verbose,
-        changedProjectIds,
-        changedJournalIds
-      );
-
-      // Save updated Cloudinary mapping (skip in serverless environments)
-      if (updatedMapping && !skipFileWrites) {
-        saveCloudinaryMapping(outputDir, updatedMapping);
-        if (verbose) console.log(`[sync-core] ✅ Saved Cloudinary mapping`);
-      } else if (updatedMapping && skipFileWrites && verbose) {
-        console.log(`[sync-core] ⏭️ Skipped saving Cloudinary mapping (serverless mode)`);
-      }
-
-      // Build new timestamp map for next sync
-      const newTimestampMap = {};
-      for (const [tableName, timestamps] of Object.entries(currentTimestamps)) {
-        newTimestampMap[tableName] = {};
-        timestamps.forEach(({ id, lastModified }) => {
-          newTimestampMap[tableName][id] = lastModified;
-        });
-      }
-
-      // Save portfolio data with metadata (skip in serverless environments)
-      const portfolioData = {
-        projects: cleanProcessedData(results.projects),
-        posts: cleanProcessedData(results.journal),
-        config: results.config,
-        portfolioMode: portfolioMode,
-        lastUpdated: results.timestamp,
-        version: '1.0',
-        source: 'build-time-sync',
-        _rawRecords: rawRecords,
-        syncMetadata: {
-          lastSync: results.timestamp,
-          timestamps: newTimestampMap
-        }
-      };
-
-      if (!skipFileWrites) {
-        fs.mkdirSync(outputDir, { recursive: true });
-        fs.writeFileSync(outputFile, JSON.stringify(portfolioData, null, 2));
-        if (verbose) console.log(`[sync-core] ✅ Wrote ${outputFile} (incremental mode)`);
-      } else if (verbose) {
-        console.log(`[sync-core] ⏭️ Skipped writing ${outputFile} (serverless mode)`);
-      }
-
+    // Conditionally process journal based on hasJournal flag
+    if (results.config.hasJournal) {
+      results.journal = processJournalRecords(journalRecords, cloudinaryMapping, verbose);
+      if (verbose) console.log(`[sync-core] ✅ Processed ${results.journal.length} journal posts`);
     } else {
-      // FULL SYNC MODE
-      if (forceFullSync && verbose) {
-        console.log('[sync-core] 🔄 Force full sync requested');
-      } else if (verbose) {
-        console.log('[sync-core] 🔄 Full sync mode (no previous metadata)');
-      }
+      results.journal = [];
+      if (verbose) console.log(`[sync-core] ⏭️ Skipped journal processing (hasJournal=false)`);
+    }
 
-      results.syncStats.mode = 'full';
+    // Upload images to Cloudinary (incremental detection by attachment ID)
+    const updatedMapping = await syncImagesToCloudinary(
+      results.projects,
+      results.journal,
+      cloudinaryMapping,
+      verbose
+    );
 
-      // Build lookup maps for festivals and clients
-      const { festivalsMap, clientsMap } = await buildLookupMaps(airtableToken, airtableBaseId);
-      results.syncStats.apiCalls += 2;
-      if (verbose) console.log('[sync-core] ✅ Built lookup maps');
+    // Save updated Cloudinary mapping (skip in serverless environments)
+    if (updatedMapping && !skipFileWrites) {
+      saveCloudinaryMapping(outputDir, updatedMapping);
+      if (verbose) console.log(`[sync-core] ✅ Saved Cloudinary mapping`);
+    }
 
-      // Load Cloudinary mapping if exists
-      const cloudinaryMapping = loadCloudinaryMapping(outputDir);
+    // Save portfolio data with metadata (skip in serverless environments)
+    const portfolioData = {
+      projects: cleanProcessedData(results.projects),
+      posts: cleanProcessedData(results.journal),
+      config: results.config,
+      portfolioMode: portfolioMode,
+      lastUpdated: results.timestamp,
+      version: '1.0',
+      source: 'build-time-sync',
+      _rawRecords: rawRecords
+    };
 
-      // Fetch all records
-      const [projectsRecords, journalRecords, festivalsRecords, clientsRecords, settingsRecords] = await Promise.all([
-        fetchAirtableTable('Projects', 'Release Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('Journal', 'Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('Festivals', null, airtableToken, airtableBaseId),
-        fetchAirtableTable('Client Book', null, airtableToken, airtableBaseId),
-        fetchAirtableTable('Settings', null, airtableToken, airtableBaseId)
-      ]);
-      results.syncStats.apiCalls += 5;
-
-      const rawRecords = {
-        Projects: projectsRecords,
-        Journal: journalRecords,
-        Festivals: festivalsRecords,
-        'Client Book': clientsRecords,
-        Settings: settingsRecords
-      };
-
-      // Process config/settings data FIRST
-      results.config = processConfigRecords(settingsRecords, cloudinaryMapping, verbose, portfolioMode);
-      if (verbose) console.log('[sync-core] ✅ Processed config/settings data');
-
-      // Process projects
-      results.projects = await processProjectRecords(
-        projectsRecords,
-        festivalsMap,
-        clientsMap,
-        cloudinaryMapping,
-        results.config,
-        verbose,
-        portfolioMode
-      );
-      if (verbose) console.log(`[sync-core] ✅ Processed ${results.projects.length} projects`);
-
-      // Conditionally process journal based on hasJournal flag
-      if (results.config.hasJournal) {
-        results.journal = processJournalRecords(journalRecords, cloudinaryMapping, verbose);
-        if (verbose) console.log(`[sync-core] ✅ Processed ${results.journal.length} journal posts`);
-      } else {
-        results.journal = [];
-        if (verbose) console.log(`[sync-core] ⏭️ Skipped journal processing (hasJournal=false)`);
-      }
-
-      // Upload images to Cloudinary (incremental detection by attachment ID)
-      const updatedMapping = await syncImagesToCloudinary(
-        results.projects,
-        results.journal,
-        cloudinaryMapping,
-        verbose
-      );
-
-      // Save updated Cloudinary mapping (skip in serverless environments)
-      if (updatedMapping && !skipFileWrites) {
-        saveCloudinaryMapping(outputDir, updatedMapping);
-        if (verbose) console.log(`[sync-core] ✅ Saved Cloudinary mapping`);
-      } else if (updatedMapping && skipFileWrites && verbose) {
-        console.log(`[sync-core] ⏭️ Skipped saving Cloudinary mapping (serverless mode)`);
-      }
-
-      // Fetch timestamps for next incremental sync
-      const [projectsTimestamps, journalTimestamps, festivalsTimestamps, clientsTimestamps, settingsTimestamps] = await Promise.all([
-        fetchTimestamps('Projects', airtableToken, airtableBaseId),
-        fetchTimestamps('Journal', airtableToken, airtableBaseId),
-        fetchTimestamps('Festivals', airtableToken, airtableBaseId),
-        fetchTimestamps('Client Book', airtableToken, airtableBaseId),
-        fetchTimestamps('Settings', airtableToken, airtableBaseId)
-      ]);
-      results.syncStats.apiCalls += 5;
-
-      // Build timestamp map
-      const timestampMap = {
-        Projects: {},
-        Journal: {},
-        Festivals: {},
-        'Client Book': {},
-        Settings: {}
-      };
-
-      projectsTimestamps.forEach(({ id, lastModified }) => { timestampMap.Projects[id] = lastModified; });
-      journalTimestamps.forEach(({ id, lastModified }) => { timestampMap.Journal[id] = lastModified; });
-      festivalsTimestamps.forEach(({ id, lastModified }) => { timestampMap.Festivals[id] = lastModified; });
-      clientsTimestamps.forEach(({ id, lastModified }) => { timestampMap['Client Book'][id] = lastModified; });
-      settingsTimestamps.forEach(({ id, lastModified }) => { timestampMap.Settings[id] = lastModified; });
-
-      // Save portfolio data with metadata (skip in serverless environments)
-      const portfolioData = {
-        projects: cleanProcessedData(results.projects),
-        posts: cleanProcessedData(results.journal),
-        config: results.config,
-        portfolioMode: portfolioMode,
-        lastUpdated: results.timestamp,
-        version: '1.0',
-        source: 'build-time-sync',
-        _rawRecords: rawRecords,
-        syncMetadata: {
-          lastSync: results.timestamp,
-          timestamps: timestampMap
-        }
-      };
-
-      if (!skipFileWrites) {
-        fs.mkdirSync(outputDir, { recursive: true });
-        fs.writeFileSync(outputFile, JSON.stringify(portfolioData, null, 2));
-        if (verbose) console.log(`[sync-core] ✅ Wrote ${outputFile} (full mode)`);
-      } else if (verbose) {
-        console.log(`[sync-core] ⏭️ Skipped writing ${outputFile} (serverless mode)`);
-      }
+    if (!skipFileWrites) {
+      fs.mkdirSync(outputDir, { recursive: true });
+      fs.writeFileSync(outputFile, JSON.stringify(portfolioData, null, 2));
+      if (verbose) console.log(`[sync-core] ✅ Wrote ${outputFile} (full mode)`);
     }
 
     results.success = true;
@@ -458,7 +183,6 @@ export async function syncBothPortfolios(config) {
     airtableBaseId,
     outputDir = 'public',
     verbose = false,
-    forceFullSync = false,
     skipFileWrites = false
   } = config;
 
@@ -474,191 +198,39 @@ export async function syncBothPortfolios(config) {
     timestamp: new Date().toISOString(),
     syncStats: {
       mode: 'full',
-      apiCalls: 0,
-      apiCallsSaved: 0
+      apiCalls: 0
     }
   };
 
   try {
     if (verbose) console.log('[sync-core] 🔄 Starting DUAL portfolio sync (fetch once, write both)...');
 
-    // Load existing data for BOTH portfolios to check for changes
-    const existingDataDirecting = loadExistingData(path.join(outputDir, 'portfolio-data-directing.json'));
-    const existingDataPostprod = loadExistingData(path.join(outputDir, 'portfolio-data-postproduction.json'));
-
-    // Use the most recent metadata for change detection
-    const previousMetadata = existingDataDirecting?.syncMetadata || existingDataPostprod?.syncMetadata;
-    const useIncrementalSync = false;
-
     let rawRecords;
-    let currentTimestamps;
-    let changes = null;
 
-    if (useIncrementalSync) {
-      if (verbose) console.log('[sync-core] 🔍 Checking for changes (incremental mode)...');
-
-      // Fetch timestamps only (lightweight check) - ONE set of API calls for both portfolios
-      const [projectsTimestamps, journalTimestamps, festivalsTimestamps, clientsTimestamps, settingsTimestamps] = await Promise.all([
-        fetchTimestamps('Projects', airtableToken, airtableBaseId),
-        fetchTimestamps('Journal', airtableToken, airtableBaseId),
-        fetchTimestamps('Festivals', airtableToken, airtableBaseId),
-        fetchTimestamps('Client Book', airtableToken, airtableBaseId),
-        fetchTimestamps('Settings', airtableToken, airtableBaseId)
-      ]);
-
-      combinedResults.syncStats.apiCalls += 5;
-
-      currentTimestamps = {
-        Projects: projectsTimestamps,
-        Journal: journalTimestamps,
-        Festivals: festivalsTimestamps,
-        'Client Book': clientsTimestamps,
-        Settings: settingsTimestamps
-      };
-
-      // Check for changes
-      changes = checkForChanges(previousMetadata, currentTimestamps);
-
-      const totalChanges = Object.values(changes).reduce((sum, table) =>
-        sum + table.changed.length + table.new.length + table.deleted.length, 0);
-
-      if (totalChanges === 0) {
-        // No changes detected - return cached data for both portfolios
-        if (verbose) console.log('[sync-core] ✅ No changes detected, using cached data for both portfolios');
-
-        combinedResults.success = true;
-        combinedResults.syncStats.mode = 'cached';
-        combinedResults.syncStats.apiCallsSaved = 45;
-        combinedResults.portfolios = {
-          directing: {
-            projects: existingDataDirecting?.projects || [],
-            journal: existingDataDirecting?.posts || [],
-            config: existingDataDirecting?.config || null
-          },
-          postproduction: {
-            projects: existingDataPostprod?.projects || [],
-            journal: existingDataPostprod?.posts || [],
-            config: existingDataPostprod?.config || null
-          }
-        };
-
-        return combinedResults;
-      }
-
-      // Changes detected
-      if (verbose) {
-        console.log(`[sync-core] 📊 Changes detected:`);
-        for (const [table, tableChanges] of Object.entries(changes)) {
-          const total = tableChanges.changed.length + tableChanges.new.length + tableChanges.deleted.length;
-          if (total > 0) {
-            console.log(`  ${table}: ${tableChanges.new.length} new, ${tableChanges.changed.length} changed, ${tableChanges.deleted.length} deleted`);
-          }
-        }
-      }
-
-      combinedResults.syncStats.mode = 'incremental';
-
-      // Load existing raw records to merge with changes
-      const existingRawRecords = existingDataDirecting?._rawRecords || existingDataPostprod?._rawRecords || {
-        Projects: [],
-        Journal: [],
-        Festivals: [],
-        'Client Book': [],
-        Settings: []
-      };
-
-      // Fetch changed records for each table - ONE set of fetches for both portfolios
-      const fetchPromises = [];
-      const tableNames = ['Projects', 'Journal', 'Festivals', 'Client Book', 'Settings'];
-      const sortFields = { Projects: 'Release Date', Journal: 'Date', Festivals: null, 'Client Book': null, Settings: null };
-
-      for (const tableName of tableNames) {
-        const tableChanges = changes[tableName];
-        const changedIds = [...tableChanges.new, ...tableChanges.changed];
-
-        if (changedIds.length > 0) {
-          fetchPromises.push(
-            fetchChangedRecords(tableName, changedIds, sortFields[tableName], airtableToken, airtableBaseId)
-              .then(records => ({ tableName, records }))
-          );
-          combinedResults.syncStats.apiCalls++;
-        }
-      }
-
-      const changedRecordsResults = await Promise.all(fetchPromises);
-
-      // Merge changed records with existing records
-      rawRecords = { ...existingRawRecords };
-
-      for (const { tableName, records } of changedRecordsResults) {
-        const existingRecords = rawRecords[tableName] || [];
-        const changedIds = new Set(records.map(r => r.id));
-        const deletedIds = new Set(changes[tableName].deleted);
-
-        const unchangedRecords = existingRecords.filter(r =>
-          !changedIds.has(r.id) && !deletedIds.has(r.id)
-        );
-
-        rawRecords[tableName] = [...unchangedRecords, ...records];
-      }
-
-      // Handle tables with only deletions
-      for (const tableName of tableNames) {
-        const deletedIds = new Set(changes[tableName].deleted);
-        if (deletedIds.size > 0 && !changedRecordsResults.some(r => r.tableName === tableName)) {
-          const existingRecords = rawRecords[tableName] || [];
-          rawRecords[tableName] = existingRecords.filter(r => !deletedIds.has(r.id));
-        }
-      }
-
-      combinedResults.syncStats.apiCallsSaved = Math.max(0, 50 - combinedResults.syncStats.apiCalls);
-
-    } else {
-      // FULL SYNC MODE - fetch everything once
-      if (forceFullSync && verbose) {
-        console.log('[sync-core] 🔄 Force full sync requested');
-      } else if (verbose) {
-        console.log('[sync-core] 🔄 Full sync mode (no previous metadata)');
-      }
-
-      combinedResults.syncStats.mode = 'full';
-
-      // Fetch all records - ONE set of API calls for both portfolios
-      const [projectsRecords, journalRecords, festivalsRecords, clientsRecords, settingsRecords] = await Promise.all([
-        fetchAirtableTable('Projects', 'Release Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('Journal', 'Date', airtableToken, airtableBaseId),
-        fetchAirtableTable('Festivals', null, airtableToken, airtableBaseId),
-        fetchAirtableTable('Client Book', null, airtableToken, airtableBaseId),
-        fetchAirtableTable('Settings', null, airtableToken, airtableBaseId)
-      ]);
-      combinedResults.syncStats.apiCalls += 5;
-
-      rawRecords = {
-        Projects: projectsRecords,
-        Journal: journalRecords,
-        Festivals: festivalsRecords,
-        'Client Book': clientsRecords,
-        Settings: settingsRecords
-      };
-
-      // Fetch timestamps for next incremental sync
-      const [projectsTimestamps, journalTimestamps, festivalsTimestamps, clientsTimestamps, settingsTimestamps] = await Promise.all([
-        fetchTimestamps('Projects', airtableToken, airtableBaseId),
-        fetchTimestamps('Journal', airtableToken, airtableBaseId),
-        fetchTimestamps('Festivals', airtableToken, airtableBaseId),
-        fetchTimestamps('Client Book', airtableToken, airtableBaseId),
-        fetchTimestamps('Settings', airtableToken, airtableBaseId)
-      ]);
-      combinedResults.syncStats.apiCalls += 5;
-
-      currentTimestamps = {
-        Projects: projectsTimestamps,
-        Journal: journalTimestamps,
-        Festivals: festivalsTimestamps,
-        'Client Book': clientsTimestamps,
-        Settings: settingsTimestamps
-      };
+    // FULL SYNC MODE - fetch everything once
+    if (verbose) {
+      console.log('[sync-core] 🔄 Full sync mode (no previous metadata)');
     }
+
+    combinedResults.syncStats.mode = 'full';
+
+    // Fetch all records - ONE set of API calls for both portfolios
+    const [projectsRecords, journalRecords, festivalsRecords, clientsRecords, settingsRecords] = await Promise.all([
+      fetchAirtableTable('Projects', 'Release Date', airtableToken, airtableBaseId),
+      fetchAirtableTable('Journal', 'Date', airtableToken, airtableBaseId),
+      fetchAirtableTable('Festivals', null, airtableToken, airtableBaseId),
+      fetchAirtableTable('Client Book', null, airtableToken, airtableBaseId),
+      fetchAirtableTable('Settings', null, airtableToken, airtableBaseId)
+    ]);
+    combinedResults.syncStats.apiCalls += 5;
+
+    rawRecords = {
+      Projects: projectsRecords,
+      Journal: journalRecords,
+      Festivals: festivalsRecords,
+      'Client Book': clientsRecords,
+      Settings: settingsRecords
+    };
 
     // Build lookup maps (shared between both portfolios)
     const festivalsMap = {};
@@ -676,34 +248,9 @@ export async function syncBothPortfolios(config) {
     // Load Cloudinary mapping (shared)
     const cloudinaryMapping = loadCloudinaryMapping(outputDir);
 
-    // Build timestamp map for metadata
-    const timestampMap = {
-      Projects: {},
-      Journal: {},
-      Festivals: {},
-      'Client Book': {},
-      Settings: {}
-    };
-
-    if (currentTimestamps) {
-      currentTimestamps.Projects?.forEach(({ id, lastModified }) => { timestampMap.Projects[id] = lastModified; });
-      currentTimestamps.Journal?.forEach(({ id, lastModified }) => { timestampMap.Journal[id] = lastModified; });
-      currentTimestamps.Festivals?.forEach(({ id, lastModified }) => { timestampMap.Festivals[id] = lastModified; });
-      currentTimestamps['Client Book']?.forEach(({ id, lastModified }) => { timestampMap['Client Book'][id] = lastModified; });
-      currentTimestamps.Settings?.forEach(({ id, lastModified }) => { timestampMap.Settings[id] = lastModified; });
-    }
-
     // **CRITICAL: Upload images to Cloudinary BEFORE processing portfolios**
     // This ensures processProjectRecords and processJournalRecords use the updated cloudinaryMapping
     if (verbose) console.log('[sync-core] 🔄 Uploading new/changed images to Cloudinary...');
-
-    // Determine changed IDs for incremental Cloudinary sync
-    let changedProjectIds = null;
-    let changedJournalIds = null;
-    if (changes) {
-      changedProjectIds = new Set([...changes.Projects.new, ...changes.Projects.changed]);
-      changedJournalIds = new Set([...changes.Journal.new, ...changes.Journal.changed]);
-    }
 
     let updatedCloudinaryMapping = cloudinaryMapping;
     const projectsToUpload = rawRecords.Projects || [];
@@ -713,15 +260,15 @@ export async function syncBothPortfolios(config) {
       projectsToUpload,
       journalToUpload,
       cloudinaryMapping,
-      verbose,
-      changedProjectIds,
-      changedJournalIds
+      verbose
     );
 
     // Save updated mapping
     if (updatedCloudinaryMapping && !skipFileWrites) {
       saveCloudinaryMapping(outputDir, updatedCloudinaryMapping);
       if (verbose) console.log(`[sync-core] ✅ Saved updated Cloudinary mapping`);
+    } else if (updatedCloudinaryMapping && skipFileWrites && verbose) {
+      console.log(`[sync-core] ⏭️ Skipped saving Cloudinary mapping (serverless mode)`);
     }
 
     // Use the updated mapping for all portfolio processing
@@ -775,11 +322,7 @@ export async function syncBothPortfolios(config) {
         lastUpdated: combinedResults.timestamp,
         version: '1.0',
         source: 'build-time-sync',
-        _rawRecords: rawRecords,
-        syncMetadata: {
-          lastSync: combinedResults.timestamp,
-          timestamps: timestampMap
-        }
+        _rawRecords: rawRecords
       };
 
       // Write file

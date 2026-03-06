@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sync:directing": "PORTFOLIO_MODE=directing node scripts/sync-data.mjs && PORTFOLIO_MODE=directing node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=directing node scripts/generate-robots.mjs",
-    "sync:postproduction": "PORTFOLIO_MODE=postproduction node scripts/sync-data.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-robots.mjs",
-    "sync:all": "npm run sync:directing && npm run sync:postproduction"
+    "sync:data": "node scripts/sync-data.mjs",
+    "sync:sitemap": "PORTFOLIO_MODE=directing node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-sitemap.mjs",
+    "sync:robots": "PORTFOLIO_MODE=directing node scripts/generate-robots.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-robots.mjs",
+    "sync:all": "npm run sync:data && npm run sync:sitemap && npm run sync:robots"
   },
   "dependencies": {
     "cloudinary": "^2.1.0",

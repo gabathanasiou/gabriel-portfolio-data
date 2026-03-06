@@ -1,10 +1,10 @@
 name: Sync Data & Static Files
 
-# Scheduled workflow - syncs everything for BOTH portfolios:
-# 1. Fetches data from Airtable for both directing & postproduction
-# 2. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) inside domain-specific subfolders
-# 3. Uploads image changes to Cloudinary CDN
-# 4. Commits changes to the main branch
+# Syncs everything for BOTH portfolios in a single run:
+# 1. Fetches data from Airtable ONCE for both directing & postproduction (5 API calls)
+# 2. Syncs new images to Cloudinary (cache-first, only uploads genuinely new images)
+# 3. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) per domain
+# 4. Commits changes to the main branch → jsDelivr CDN auto-updates
 
 on:
   repository_dispatch:
@@ -38,33 +38,20 @@ jobs:
       - name: Install dependencies
         run: npm ci || npm install
 
-      - name: Sync DIRECTING mode outputs
+      - name: Sync all portfolio data & images
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          PORTFOLIO_MODE: 'directing'
+          USE_CLOUDINARY: 'true'
         run: |
-          echo "📄 Generating static files for DIRECTING..."
-          npm run sync:directing
-          echo "✅ Directing static files generated!"
+          echo "🔄 Syncing all portfolio data (single Airtable fetch)..."
+          npm run sync:all
+          echo "✅ All portfolio data synced!"
 
-      - name: Sync POSTPRODUCTION mode outputs
-        env:
-          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          PORTFOLIO_MODE: 'postproduction'
-        run: |
-          echo "📄 Generating static files for POSTPRODUCTION..."
-          npm run sync:postproduction
-          echo "✅ Postproduction static files generated!"
-
-      - name: Sync INSTAGRAM STUDIO outputs
+      - name: Sync Instagram Studio (optional)
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
@@ -72,7 +59,7 @@ jobs:
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
         run: |
-          echo "📸 Attempting to Sync Instagram Studio backup uploads... (Optional Step)"
+          echo "📸 Attempting Instagram Studio sync..."
           if [ -f "scripts/upload-instagram-data.mjs" ]; then
             node scripts/upload-instagram-data.mjs || echo "Skipping Instagram Studio Upload"
           fi

@@ -38,7 +38,7 @@ function loadPortfolioData() {
 }
 
 function generateSitemap(portfolioData) {
-  const { config, projects, articles } = portfolioData;
+  const { config, projects, posts: articles } = portfolioData;
   const domain = config.domain || 'example.com';
   const baseUrl = `https://${domain}`;
   const hasJournal = config.hasJournal !== false;

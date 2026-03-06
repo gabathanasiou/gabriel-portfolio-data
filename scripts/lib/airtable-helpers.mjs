@@ -18,8 +18,8 @@ import { slugify } from '../utils/generators/slugify.mjs';
  * @returns {Promise<Array>} Array of Airtable records
  */
 export async function fetchAirtableTable(tableName, sortField, token, baseId) {
-  const sortParam = sortField 
-    ? `&sort%5B0%5D%5Bfield%5D=${encodeURIComponent(sortField)}&sort%5B0%5D%5Bdirection%5D=desc` 
+  const sortParam = sortField
+    ? `&sort%5B0%5D%5Bfield%5D=${encodeURIComponent(sortField)}&sort%5B0%5D%5Bdirection%5D=desc`
     : '';
   let allRecords = [];
   let offset = null;
@@ -27,9 +27,9 @@ export async function fetchAirtableTable(tableName, sortField, token, baseId) {
   do {
     const offsetParam = offset ? `&offset=${offset}` : '';
     const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}?${sortParam}${offsetParam}`;
-    
-    const res = await fetch(url, { 
-      headers: { Authorization: `Bearer ${token}` } 
+
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` }
     });
 
     if (!res.ok) {
@@ -88,17 +88,17 @@ export async function buildLookupMaps(token, baseId) {
 export function parseExternalLinks(rawText) {
   const links = [];
   const videos = [];
-  
+
   if (!rawText) return { links, videos };
-  
+
   const items = rawText.split(/[,|\n]+/).map(s => s.trim()).filter(s => s.length > 0);
-  
+
   for (const item of items) {
     if (!item.startsWith('http')) continue;
-    
+
     const videoInfo = getVideoId(item);
     const isVideo = videoInfo.type !== null;
-    
+
     if (isVideo) {
       videos.push(item);
     } else {
@@ -113,12 +113,12 @@ export function parseExternalLinks(rawText) {
         else if (core === 'vimeo') label = 'Vimeo';
         else if (core === 'facebook') label = 'Facebook';
         else label = core.charAt(0).toUpperCase() + core.slice(1);
-      } catch (e) {}
-      
+      } catch (e) { }
+
       links.push({ label, url: item });
     }
   }
-  
+
   return { links, videos };
 }
 
@@ -182,12 +182,12 @@ export function resolveProductionCompany(productionCompanyField, clientsMap) {
  */
 export function resolveAwards(festivalsField, festivalsMap) {
   if (!festivalsField) return [];
-  
+
   if (Array.isArray(festivalsField)) {
     return festivalsField.map(id => festivalsMap[id] || id);
   } else if (typeof festivalsField === 'string') {
     return festivalsField.split('\n').filter(s => s.trim().length > 0);
   }
-  
+
   return [];
 }
