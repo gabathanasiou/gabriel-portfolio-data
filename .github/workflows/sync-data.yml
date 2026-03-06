@@ -73,8 +73,10 @@ jobs:
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
         run: |
           echo "📸 Attempting Instagram Studio sync..."
-          if [ -f "scripts/upload-instagram-data.mjs" ]; then
-            node scripts/upload-instagram-data.mjs || echo "Skipping Instagram Studio Upload"
+          if [ -f "scripts/instagram-studio-data-backup.json" ] && [ -f "scripts/upload-instagram-data.mjs" ]; then
+            node scripts/upload-instagram-data.mjs
+          else
+            echo "ℹ️ Skipping Instagram Studio Upload: Backup file or script missing."
           fi
 
       - name: Check for changes
