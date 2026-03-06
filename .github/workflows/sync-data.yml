@@ -67,13 +67,13 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          git add -A
-          if git diff --staged --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "ℹ️ No changes detected"
-          else
+          # Check if the generated files exist and have content
+          if [ -d "directing" ] || [ -d "postproduction" ] || [ -f "cloudinary-mapping.json" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "✅ Changes detected"
+            echo "✅ Data generated"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No data detected"
           fi
 
       - name: Deploy Data to 'data' branch
@@ -83,28 +83,25 @@ jobs:
           mkdir -p ../temp-data
           
           # Copy only the files we want to persist in the 'data' branch
-          cp -r directing ../temp-data/
-          cp -r postproduction ../temp-data/
-          cp cloudinary-mapping.json ../temp-data/
-          
-          # Switch to the data branch (creating it if it doesn't exist)
-          git checkout --orphan data
-          git rm -rf .
-          
-          # Move files back from temp
-          mv ../temp-data/* .
+          [ -d "directing" ] && cp -r directing ../temp-data/
+          [ -d "postproduction" ] && cp -r postproduction ../temp-data/
+          [ -f "cloudinary-mapping.json" ] && cp cloudinary-mapping.json ../temp-data/
           
           # Configure identity
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
           
-          # Add and commit
+          # Switch to the data branch (creating it if it doesn't exist)
+          # We use a refresh approach to ensure it's a clean data-only branch
+          git checkout --orphan data-temp
+          git rm -rf .
+          mv ../temp-data/* .
           git add -A
           git commit -m "chore: full data & static sync [ci skip]
           
           Reason: ${{ github.event.inputs.reason || 'Automated Sync' }}
           Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           
-          # Force push to the data branch
-          git push -f origin data
-          echo "✅ Data pushed to 'data' branch and available via jsDelivr @data!"
+          # Force push to the 'data' branch
+          git push -f origin data-temp:data
+          echo "✅ Data pushed to 'data' branch!"
