@@ -1,10 +1,11 @@
 name: Sync Data & Static Files
 
 # Syncs everything for BOTH portfolios in a single run:
-# 1. Fetches data from Airtable ONCE for both directing & postproduction (5 API calls)
-# 2. Syncs new images to Cloudinary (cache-first, only uploads genuinely new images)
-# 3. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) per domain
-# 4. Commits changes to the main branch → jsDelivr CDN auto-updates
+# 1. Downloads the existing Cloudinary mapping from the 'data' branch (warm cache)
+# 2. Fetches data from Airtable ONCE for both directing & postproduction (5 API calls)
+# 3. Syncs new images to Cloudinary (cache-first, only uploads genuinely new images)
+# 4. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) per domain
+# 5. Pushes artifacts to the dedicated 'data' branch → jsDelivr CDN auto-updates
 
 on:
   repository_dispatch:
@@ -37,6 +38,18 @@ jobs:
 
       - name: Install dependencies
         run: npm ci || npm install
+
+      - name: Restore Cloudinary mapping cache
+        run: |
+          echo "📦 Downloading existing Cloudinary mapping from data branch..."
+          curl -sL "https://cdn.jsdelivr.net/gh/gabathanasiou/gabriel-portfolio-data@data/cloudinary-mapping.json" \
+            -o cloudinary-mapping.json 2>/dev/null || echo "{}" > cloudinary-mapping.json
+          if [ -s cloudinary-mapping.json ] && python3 -c "import json; json.load(open('cloudinary-mapping.json'))" 2>/dev/null; then
+            echo "✅ Loaded existing mapping ($(wc -c < cloudinary-mapping.json | tr -d ' ') bytes)"
+          else
+            echo "ℹ️ No existing mapping found, starting fresh"
+            echo '{"generatedAt":"","projects":[],"journal":[],"config":{"images":[]}}' > cloudinary-mapping.json
+          fi
 
       - name: Sync all portfolio data & images
         env:

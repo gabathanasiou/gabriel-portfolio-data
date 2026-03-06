@@ -1,7 +1,6 @@
 # Airtable → Portfolio Data Schema Reference
 
 > **Auto-generated from live Airtable Metadata API** on 2026-03-06.
-> Raw JSON: [`airtable-schema.json`](./airtable-schema.json)
 > Base ID: `appLKDqYcLzFsfafU`
 
 This document maps every Airtable field to its corresponding output in `portfolio-data.json`.

@@ -1,0 +1,466 @@
+sync	Set up job	﻿2026-03-06T18:42:52.1769035Z Current runner version: '2.332.0'
+sync	Set up job	2026-03-06T18:42:52.1805797Z ##[group]Runner Image Provisioner
+sync	Set up job	2026-03-06T18:42:52.1807172Z Hosted Compute Agent
+sync	Set up job	2026-03-06T18:42:52.1808287Z Version: 20260213.493
+sync	Set up job	2026-03-06T18:42:52.1809370Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+sync	Set up job	2026-03-06T18:42:52.1810897Z Build Date: 2026-02-13T00:28:41Z
+sync	Set up job	2026-03-06T18:42:52.1812309Z Worker ID: {275cb1e2-62d8-41f8-81a1-707da98895a2}
+sync	Set up job	2026-03-06T18:42:52.1813682Z Azure Region: centralus
+sync	Set up job	2026-03-06T18:42:52.1814866Z ##[endgroup]
+sync	Set up job	2026-03-06T18:42:52.1817281Z ##[group]Operating System
+sync	Set up job	2026-03-06T18:42:52.1818396Z Ubuntu
+sync	Set up job	2026-03-06T18:42:52.1819374Z 24.04.3
+sync	Set up job	2026-03-06T18:42:52.1820493Z LTS
+sync	Set up job	2026-03-06T18:42:52.1821415Z ##[endgroup]
+sync	Set up job	2026-03-06T18:42:52.1822599Z ##[group]Runner Image
+sync	Set up job	2026-03-06T18:42:52.1823686Z Image: ubuntu-24.04
+sync	Set up job	2026-03-06T18:42:52.1824632Z Version: 20260302.42.1
+sync	Set up job	2026-03-06T18:42:52.1826688Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260302.42/images/ubuntu/Ubuntu2404-Readme.md
+sync	Set up job	2026-03-06T18:42:52.1828639Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260302.42
+sync	Set up job	2026-03-06T18:42:52.1829609Z ##[endgroup]
+sync	Set up job	2026-03-06T18:42:52.1831278Z ##[group]GITHUB_TOKEN Permissions
+sync	Set up job	2026-03-06T18:42:52.1833528Z Contents: write
+sync	Set up job	2026-03-06T18:42:52.1834107Z Metadata: read
+sync	Set up job	2026-03-06T18:42:52.1834756Z ##[endgroup]
+sync	Set up job	2026-03-06T18:42:52.1836813Z Secret source: Actions
+sync	Set up job	2026-03-06T18:42:52.1837812Z Prepare workflow directory
+sync	Set up job	2026-03-06T18:42:52.2208497Z Prepare all required actions
+sync	Set up job	2026-03-06T18:42:52.2263857Z Getting action download info
+sync	Set up job	2026-03-06T18:42:52.5431888Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+sync	Set up job	2026-03-06T18:42:52.6578544Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+sync	Set up job	2026-03-06T18:42:52.8574088Z Complete job name: sync
+sync	Checkout repository	﻿2026-03-06T18:42:52.9303089Z ##[group]Run actions/checkout@v4
+sync	Checkout repository	2026-03-06T18:42:52.9303978Z with:
+sync	Checkout repository	2026-03-06T18:42:52.9304408Z   fetch-depth: 0
+sync	Checkout repository	2026-03-06T18:42:52.9305051Z   token: ***
+sync	Checkout repository	2026-03-06T18:42:52.9305553Z   repository: gabathanasiou/gabriel-portfolio-data
+sync	Checkout repository	2026-03-06T18:42:52.9306175Z   ssh-strict: true
+sync	Checkout repository	2026-03-06T18:42:52.9306594Z   ssh-user: git
+sync	Checkout repository	2026-03-06T18:42:52.9307027Z   persist-credentials: true
+sync	Checkout repository	2026-03-06T18:42:52.9307514Z   clean: true
+sync	Checkout repository	2026-03-06T18:42:52.9307961Z   sparse-checkout-cone-mode: true
+sync	Checkout repository	2026-03-06T18:42:52.9308488Z   fetch-tags: false
+sync	Checkout repository	2026-03-06T18:42:52.9308932Z   show-progress: true
+sync	Checkout repository	2026-03-06T18:42:52.9309369Z   lfs: false
+sync	Checkout repository	2026-03-06T18:42:52.9309776Z   submodules: false
+sync	Checkout repository	2026-03-06T18:42:52.9310450Z   set-safe-directory: true
+sync	Checkout repository	2026-03-06T18:42:52.9311215Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:53.0480813Z Syncing repository: gabathanasiou/gabriel-portfolio-data
+sync	Checkout repository	2026-03-06T18:42:53.0483563Z ##[group]Getting Git version info
+sync	Checkout repository	2026-03-06T18:42:53.0484984Z Working directory is '/home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data'
+sync	Checkout repository	2026-03-06T18:42:53.0486993Z [command]/usr/bin/git version
+sync	Checkout repository	2026-03-06T18:42:53.0587629Z git version 2.53.0
+sync	Checkout repository	2026-03-06T18:42:53.0621801Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:53.0638963Z Temporarily overriding HOME='/home/runner/work/_temp/e3ddf82b-d706-405a-9aa7-7a2a191a4153' before making global git config changes
+sync	Checkout repository	2026-03-06T18:42:53.0641668Z Adding repository directory to the temporary git global config as a safe directory
+sync	Checkout repository	2026-03-06T18:42:53.0656560Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data
+sync	Checkout repository	2026-03-06T18:42:53.0714870Z Deleting the contents of '/home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data'
+sync	Checkout repository	2026-03-06T18:42:53.0718623Z ##[group]Initializing the repository
+sync	Checkout repository	2026-03-06T18:42:53.0724951Z [command]/usr/bin/git init /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data
+sync	Checkout repository	2026-03-06T18:42:53.3647419Z hint: Using 'master' as the name for the initial branch. This default branch name
+sync	Checkout repository	2026-03-06T18:42:53.3651474Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+sync	Checkout repository	2026-03-06T18:42:53.3653675Z hint: to use in all of your new repositories, which will suppress this warning,
+sync	Checkout repository	2026-03-06T18:42:53.3654937Z hint: call:
+sync	Checkout repository	2026-03-06T18:42:53.3655580Z hint:
+sync	Checkout repository	2026-03-06T18:42:53.3656466Z hint: 	git config --global init.defaultBranch <name>
+sync	Checkout repository	2026-03-06T18:42:53.3657449Z hint:
+sync	Checkout repository	2026-03-06T18:42:53.3658370Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+sync	Checkout repository	2026-03-06T18:42:53.3659893Z hint: 'development'. The just-created branch can be renamed via this command:
+sync	Checkout repository	2026-03-06T18:42:53.3661313Z hint:
+sync	Checkout repository	2026-03-06T18:42:53.3661996Z hint: 	git branch -m <name>
+sync	Checkout repository	2026-03-06T18:42:53.3662761Z hint:
+sync	Checkout repository	2026-03-06T18:42:53.3663422Z hint: Disable this message with "git config set advice.defaultBranchName false"
+sync	Checkout repository	2026-03-06T18:42:53.3664888Z Initialized empty Git repository in /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/.git/
+sync	Checkout repository	2026-03-06T18:42:53.3667952Z [command]/usr/bin/git remote add origin https://github.com/gabathanasiou/gabriel-portfolio-data
+sync	Checkout repository	2026-03-06T18:42:53.3715959Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:53.3717664Z ##[group]Disabling automatic garbage collection
+sync	Checkout repository	2026-03-06T18:42:53.3719097Z [command]/usr/bin/git config --local gc.auto 0
+sync	Checkout repository	2026-03-06T18:42:53.3757094Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:53.3758387Z ##[group]Setting up auth
+sync	Checkout repository	2026-03-06T18:42:53.3765444Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+sync	Checkout repository	2026-03-06T18:42:53.3803685Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+sync	Checkout repository	2026-03-06T18:42:53.6641470Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+sync	Checkout repository	2026-03-06T18:42:53.6683576Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+sync	Checkout repository	2026-03-06T18:42:53.6942265Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+sync	Checkout repository	2026-03-06T18:42:53.6982796Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+sync	Checkout repository	2026-03-06T18:42:53.7223473Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+sync	Checkout repository	2026-03-06T18:42:53.7622725Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:53.7624590Z ##[group]Fetching the repository
+sync	Checkout repository	2026-03-06T18:42:53.7634693Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+sync	Checkout repository	2026-03-06T18:42:54.5167943Z From https://github.com/gabathanasiou/gabriel-portfolio-data
+sync	Checkout repository	2026-03-06T18:42:54.5169031Z  * [new branch]      main       -> origin/main
+sync	Checkout repository	2026-03-06T18:42:54.5232588Z [command]/usr/bin/git branch --list --remote origin/main
+sync	Checkout repository	2026-03-06T18:42:54.5257596Z   origin/main
+sync	Checkout repository	2026-03-06T18:42:54.5266563Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+sync	Checkout repository	2026-03-06T18:42:54.5644708Z 8e876c7be2cb6c81547f834723fbb32aba6fb938
+sync	Checkout repository	2026-03-06T18:42:54.5652540Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:54.5653339Z ##[group]Determining the checkout info
+sync	Checkout repository	2026-03-06T18:42:54.5654140Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:54.5657582Z [command]/usr/bin/git sparse-checkout disable
+sync	Checkout repository	2026-03-06T18:42:54.6167187Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+sync	Checkout repository	2026-03-06T18:42:54.6399548Z ##[group]Checking out the ref
+sync	Checkout repository	2026-03-06T18:42:54.6405441Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+sync	Checkout repository	2026-03-06T18:42:54.7099675Z Switched to a new branch 'main'
+sync	Checkout repository	2026-03-06T18:42:54.7100762Z branch 'main' set up to track 'origin/main'.
+sync	Checkout repository	2026-03-06T18:42:54.7107215Z ##[endgroup]
+sync	Checkout repository	2026-03-06T18:42:54.7148641Z [command]/usr/bin/git log -1 --format=%H
+sync	Checkout repository	2026-03-06T18:42:54.7172747Z 8e876c7be2cb6c81547f834723fbb32aba6fb938
+sync	Setup Node.js	﻿2026-03-06T18:42:54.7747852Z ##[group]Run actions/setup-node@v4
+sync	Setup Node.js	2026-03-06T18:42:54.7748421Z with:
+sync	Setup Node.js	2026-03-06T18:42:54.7748801Z   node-version: 20
+sync	Setup Node.js	2026-03-06T18:42:54.7749449Z   cache: npm
+sync	Setup Node.js	2026-03-06T18:42:54.7749873Z   always-auth: false
+sync	Setup Node.js	2026-03-06T18:42:54.7750461Z   check-latest: false
+sync	Setup Node.js	2026-03-06T18:42:54.7751072Z   token: ***
+sync	Setup Node.js	2026-03-06T18:42:54.7751437Z ##[endgroup]
+sync	Setup Node.js	2026-03-06T18:42:55.2169206Z Found in cache @ /opt/hostedtoolcache/node/20.20.0/x64
+sync	Setup Node.js	2026-03-06T18:42:55.2176636Z ##[group]Environment details
+sync	Setup Node.js	2026-03-06T18:42:55.5526978Z node: v20.20.0
+sync	Setup Node.js	2026-03-06T18:42:55.5527485Z npm: 10.8.2
+sync	Setup Node.js	2026-03-06T18:42:55.5527795Z yarn: 1.22.22
+sync	Setup Node.js	2026-03-06T18:42:55.5528499Z ##[endgroup]
+sync	Setup Node.js	2026-03-06T18:42:55.5552417Z [command]/opt/hostedtoolcache/node/20.20.0/x64/bin/npm config get cache
+sync	Setup Node.js	2026-03-06T18:42:55.8036645Z /home/runner/.npm
+sync	Setup Node.js	2026-03-06T18:42:56.0037640Z Cache hit for: node-cache-Linux-x64-npm-4daf4c0e8c867641e5c34cdf2beff9c5c6c5994d8b49e07eafef4746210c43a5
+sync	Setup Node.js	2026-03-06T18:42:56.3543867Z Received 413416 of 413416 (100.0%), 2.0 MBs/sec
+sync	Setup Node.js	2026-03-06T18:42:56.3546623Z Cache Size: ~0 MB (413416 B)
+sync	Setup Node.js	2026-03-06T18:42:56.3574145Z [command]/usr/bin/tar -xf /home/runner/work/_temp/88885282-5185-4c82-befa-a7a0eb30de9a/cache.tzst -P -C /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data --use-compress-program unzstd
+sync	Setup Node.js	2026-03-06T18:42:56.3646767Z Cache restored successfully
+sync	Setup Node.js	2026-03-06T18:42:56.3653223Z Cache restored from key: node-cache-Linux-x64-npm-4daf4c0e8c867641e5c34cdf2beff9c5c6c5994d8b49e07eafef4746210c43a5
+sync	Install dependencies	﻿2026-03-06T18:42:56.3781966Z ##[group]Run npm ci || npm install
+sync	Install dependencies	2026-03-06T18:42:56.3782369Z [36;1mnpm ci || npm install[0m
+sync	Install dependencies	2026-03-06T18:42:56.3842187Z shell: /usr/bin/bash -e {0}
+sync	Install dependencies	2026-03-06T18:42:56.3842482Z ##[endgroup]
+sync	Install dependencies	2026-03-06T18:42:57.8805734Z 
+sync	Install dependencies	2026-03-06T18:42:57.8813501Z added 3 packages, and audited 4 packages in 1s
+sync	Install dependencies	2026-03-06T18:42:57.8813937Z 
+sync	Install dependencies	2026-03-06T18:42:57.8814269Z 1 package is looking for funding
+sync	Install dependencies	2026-03-06T18:42:57.8814765Z   run `npm fund` for details
+sync	Install dependencies	2026-03-06T18:42:57.8815043Z 
+sync	Install dependencies	2026-03-06T18:42:57.8815231Z found 0 vulnerabilities
+sync	Sync all portfolio data & images	﻿2026-03-06T18:42:57.8926470Z ##[group]Run echo "🔄 Syncing all portfolio data (single Airtable fetch)..."
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8927079Z [36;1mecho "🔄 Syncing all portfolio data (single Airtable fetch)..."[0m
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8927473Z [36;1mnpm run sync:all[0m
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8927733Z [36;1mecho "✅ All portfolio data synced!"[0m
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8978597Z shell: /usr/bin/bash -e {0}
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8978855Z env:
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8979393Z   AIRTABLE_TOKEN: ***
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8979664Z   AIRTABLE_BASE_ID: ***
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8979910Z   CLOUDINARY_CLOUD_NAME: ***
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8980161Z   CLOUDINARY_API_KEY: ***
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8980747Z   CLOUDINARY_API_SECRET: ***
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8980983Z   USE_CLOUDINARY: true
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.8981193Z ##[endgroup]
+sync	Sync all portfolio data & images	2026-03-06T18:42:57.9053724Z 🔄 Syncing all portfolio data (single Airtable fetch)...
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.0122490Z 
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.0123046Z > gabriel-portfolio-data@1.0.0 sync:all
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.0123720Z > npm run sync:data && npm run sync:sitemap && npm run sync:robots
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.0124170Z 
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.1248228Z 
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.1249246Z > gabriel-portfolio-data@1.0.0 sync:data
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.1250013Z > node scripts/sync-data.mjs
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.1251997Z 
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.2486998Z [sync-data] 🔄 Starting unified portfolio sync...
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.2487503Z 
+sync	Sync all portfolio data & images	2026-03-06T18:42:58.2495478Z [sync] 🔄 Fetching all Airtable tables...
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.1550649Z [sync] ✅ Fetched: 216 projects, 2 journal, 23 festivals, 75 clients, 2 settings
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.1552683Z [sync] ✅ Built lookup maps
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.1562333Z [sync] 📦 Loaded 0 cached Cloudinary entries
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.5339854Z [sync]    ⏭️ Exists (API): Diesel: Express Yourself [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.6689312Z [sync]    ⏭️ Exists (API): Diesel: Express Yourself [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.7635521Z [sync]    ⏭️ Exists (API): Frosstrom & Leister Videos [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.8616065Z [sync]    ⏭️ Exists (API): Frosstrom & Leister Videos [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:01.9381004Z [sync]    ⏭️ Exists (API): Frosstrom & Leister Videos [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.0265112Z [sync]    ⏭️ Exists (API): Fashion Films [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.1024527Z [sync]    ⏭️ Exists (API): Fashion Films [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.1991959Z [sync]    ⏭️ Exists (API): Fashion Films [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.3512638Z [sync]    ⏭️ Exists (API): Fashion Films [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.4409821Z [sync]    ⏭️ Exists (API): Fashion Films [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.7519564Z [sync]    ⏭️ Exists (API): Fashion Films [5]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.8325710Z [sync]    ⏭️ Exists (API): I look at the times [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:02.9605110Z [sync]    ⏭️ Exists (API): I look at the times [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.0383668Z [sync]    ⏭️ Exists (API): I look at the times [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.2037710Z [sync]    ⏭️ Exists (API): I look at the times [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.2868502Z [sync]    ⏭️ Exists (API): The Secret of Life [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.3633783Z [sync]    ⏭️ Exists (API): Gettin’ Lost [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.4503549Z [sync]    ⏭️ Exists (API): Gettin’ Lost [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.6045142Z [sync]    ⏭️ Exists (API): ARU LONDON - POSTGRAD 25 [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.7160053Z [sync]    ⏭️ Exists (API): ARU LONDON - POSTGRAD 25 [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:03.8255796Z [sync]    ⏭️ Exists (API): Blinded by the Light - EPK [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.0201694Z [sync]    ⏭️ Exists (API): Blinded by the Light - EPK [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.1170492Z [sync]    ⏭️ Exists (API): Blinded by the Light - EPK [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.2858738Z [sync]    ⏭️ Exists (API): Blinded by the Light - EPK [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.3865563Z [sync]    ⏭️ Exists (API): WakeCup – A Serene Autumn Escape [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.5161886Z [sync]    ⏭️ Exists (API): WakeCup – A Serene Autumn Escape [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.6410029Z [sync]    ⏭️ Exists (API): WakeCup – A Serene Autumn Escape [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.8259216Z [sync]    ⏭️ Exists (API): Material Life [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:04.9297127Z [sync]    ⏭️ Exists (API): Material Life [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.0255483Z [sync]    ⏭️ Exists (API): Material Life [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.1190677Z [sync]    ⏭️ Exists (API): Material Life [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.2146121Z [sync]    ⏭️ Exists (API): TEDx - University of Macedonia [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.2983319Z [sync]    ⏭️ Exists (API): TEDx - University of Macedonia [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.3706220Z [sync]    ⏭️ Exists (API): Sports Analytics School - Launch Video [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.4555372Z [sync]    ⏭️ Exists (API): Sports Analytics School - Launch Video [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.5808072Z [sync]    ⏭️ Exists (API): Sports Analytics School - Launch Video [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.6784891Z [sync]    ⏭️ Exists (API): Sports Analytics School - Launch Video [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.7718088Z [sync]    ⏭️ Exists (API): Virgin Media - It's a Steal [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:05.8541357Z [sync]    ⏭️ Exists (API): Virgin Media - It's a Steal [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.0170215Z [sync]    ⏭️ Exists (API): Virgin Media - It's a Steal [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.1077296Z [sync]    ⏭️ Exists (API): THE BIG MINI Adventure Challenge [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.2168973Z [sync]    ⏭️ Exists (API): THE BIG MINI Adventure Challenge [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.3213206Z [sync]    ⏭️ Exists (API): THE BIG MINI Adventure Challenge [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.4058391Z [sync]    ⏭️ Exists (API): Compartment 33 [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.5170671Z [sync]    ⏭️ Exists (API): Compartment 33 [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.5935157Z [sync]    ⏭️ Exists (API): Compartment 33 [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.6638999Z [sync]    ⏭️ Exists (API): Ayra Starr Pepsi [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.7849786Z [sync]    ⏭️ Exists (API): Ayra Starr Pepsi [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.8620169Z [sync]    ⏭️ Exists (API): Ayra Starr Pepsi [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:06.9410657Z [sync]    ⏭️ Exists (API): The Textile Building - Investors’ Pitch Video [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.0366199Z [sync]    ⏭️ Exists (API): The Textile Building - Investors’ Pitch Video [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.1849552Z [sync]    ⏭️ Exists (API): Choked [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.2567274Z [sync]    ⏭️ Exists (API): Choked [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.3753997Z [sync]    ⏭️ Exists (API): Choked [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.5171333Z [sync]    ⏭️ Exists (API): Choked [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.7008600Z [sync]    ⏭️ Exists (API): SQUID Campaign 2024 [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:07.9317525Z [sync]    ⏭️ Exists (API): SQUID Campaign 2024 [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:08.0105045Z [sync]    ⏭️ Exists (API): SQUID Campaign 2024 [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:08.2123162Z [sync]    ⏭️ Exists (API): SQUID Campaign 2024 [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:08.3114476Z [sync]    ⏭️ Exists (API): Curiouser [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:08.4799962Z [sync]    ⏭️ Exists (API): Curiouser [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:08.5804505Z [sync]    ⏭️ Exists (API): Curiouser [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:08.6960428Z [sync]    ⏭️ Exists (API): Curiouser [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.0020825Z [sync]    ⏭️ Exists (API): The Newspaper [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.2766371Z [sync]    ⏭️ Exists (API): The Newspaper [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.4488567Z [sync]    ⏭️ Exists (API): The Newspaper [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.5466004Z [sync]    ⏭️ Exists (API): Astoria [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.6267434Z [sync]    ⏭️ Exists (API): Astoria [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.7065283Z [sync]    ⏭️ Exists (API): Astoria [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:09.8285843Z [sync]    ⏭️ Exists (API): Project Michalis [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.2163590Z [sync]    ⏭️ Exists (API): Project Michalis [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.3658040Z [sync]    ⏭️ Exists (API): Project Michalis [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.4544349Z [sync]    ⏭️ Exists (API): Health Lottery - WHISH [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.5200674Z [sync]    ⏭️ Exists (API): Health Lottery - WHISH [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.7143402Z [sync]    ⏭️ Exists (API): Health Lottery - WHISH [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.8474860Z [sync]    ⏭️ Exists (API): Lanique - Raise your Spirits [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:10.9336186Z [sync]    ⏭️ Exists (API): Lanique - Raise your Spirits [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.0190064Z [sync]    ⏭️ Exists (API): RestSpace [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.0991472Z [sync]    ⏭️ Exists (API): RestSpace [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.2762032Z [sync]    ⏭️ Exists (API): RestSpace [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.3595524Z [sync]    ⏭️ Exists (API): AIZ EITZ  [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.4708106Z [sync]    ⏭️ Exists (API): AIZ EITZ  [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.5499752Z [sync]    ⏭️ Exists (API): AIZ EITZ  [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.6397906Z [sync]    ⏭️ Exists (API): Gilley UK [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.7398149Z [sync]    ⏭️ Exists (API): Gilley UK [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:11.8477355Z [sync]    ⏭️ Exists (API): Gilley UK [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.0059147Z [sync]    ⏭️ Exists (API): Pink Taxi [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.1097997Z [sync]    ⏭️ Exists (API): Pink Taxi [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.2162398Z [sync]    ⏭️ Exists (API): Greenwich Peninsula - Investor's Pitch Video [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.2912969Z [sync]    ⏭️ Exists (API): Greenwich Peninsula - Investor's Pitch Video [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.3709271Z [sync]    ⏭️ Exists (API): Greenwich Peninsula - Investor's Pitch Video [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.4541715Z [sync]    ⏭️ Exists (API): Greenwich Peninsula - Investor's Pitch Video [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.5399352Z [sync]    ⏭️ Exists (API): Greenwich Peninsula - Investor's Pitch Video [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.6736661Z [sync]    ⏭️ Exists (API): Greenwich Peninsula - Investor's Pitch Video [5]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.7662562Z [sync]    ⏭️ Exists (API): Pure Souls [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.8538342Z [sync]    ⏭️ Exists (API): Pure Souls [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:12.9637667Z [sync]    ⏭️ Exists (API): Pure Souls [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.1936241Z [sync]    ⏭️ Exists (API): ARU: Open Day Videos [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.2922642Z [sync]    ⏭️ Exists (API): ARU: Open Day Videos [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.4561162Z [sync]    ⏭️ Exists (API): Crossroads [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.5231266Z [sync]    ⏭️ Exists (API): Crossroads [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.5944340Z [sync]    ⏭️ Exists (API): Crossroads [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.6895221Z [sync]    ⏭️ Exists (API): Earth, my love [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:13.8385818Z [sync]    ⏭️ Exists (API): Earth, my love [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.0173464Z [sync]    ⏭️ Exists (API): Earth, my love [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.1230134Z [sync]    ⏭️ Exists (API): Birkin Price [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.3093253Z [sync]    ⏭️ Exists (API): Birkin Price [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.4216245Z [sync]    ⏭️ Exists (API): Birkin Price [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.5167195Z [sync]    ⏭️ Exists (API): Birkin Price [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.6123779Z [sync]    ⏭️ Exists (API): Birkin Price [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.7590997Z [sync]    ⏭️ Exists (API): Birkin Price [5]
+sync	Sync all portfolio data & images	2026-03-06T18:43:14.8429895Z [sync]    ⏭️ Exists (API): Birkin Price [6]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.0728680Z [sync]    ⏭️ Exists (API): Bar Knights [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.1496758Z [sync]    ⏭️ Exists (API): Bugzy Malone - Lean [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.2848881Z [sync]    ⏭️ Exists (API): Bugzy Malone - Lean [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.4293157Z [sync]    ⏭️ Exists (API): Bugzy Malone - Lean [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.5139848Z [sync]    ⏭️ Exists (API): Bugzy Malone - Lean [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.6291811Z [sync]    ⏭️ Exists (API): Bugzy Malone - Lean [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.7499264Z [sync]    ⏭️ Exists (API): Bugzy Malone - Lean [5]
+sync	Sync all portfolio data & images	2026-03-06T18:43:15.8653326Z [sync]    ⏭️ Exists (API): Fraqua - VIVE [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:16.6068845Z [sync]    ⏭️ Exists (API): LosBros - Impossible to Resist [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:16.6910953Z [sync]    ⏭️ Exists (API): LosBros - Impossible to Resist [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:16.7871993Z [sync]    ⏭️ Exists (API): LosBros - Impossible to Resist [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:16.8551339Z [sync]    ⏭️ Exists (API): BIOCORD at AgriTechnica [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:16.9933030Z [sync]    ⏭️ Exists (API): BIOCORD at AgriTechnica [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:17.2336955Z [sync]    ⏭️ Exists (API): It’s a Matter of Time [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:17.3133357Z [sync]    ⏭️ Exists (API): It’s a Matter of Time [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:17.4567258Z [sync]    ⏭️ Exists (API): Rose [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:17.5367345Z [sync]    ⏭️ Exists (API): Rose [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.1185880Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.2287903Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.3206527Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.4342877Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.5019545Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.5877508Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [5]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.7802538Z [sync]    ⏭️ Exists (API): Anglia Ruskin University London  [6]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.8515611Z [sync]    ⏭️ Exists (API): I Saw it First [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:18.9635193Z [sync]    ⏭️ Exists (API): I Saw it First [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.0561962Z [sync]    ⏭️ Exists (API): I Saw it First [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.1211648Z [sync]    ⏭️ Exists (API): I Saw it First [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.2058362Z [sync]    ⏭️ Exists (API): Kim [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.3466405Z [sync]    ⏭️ Exists (API): Kitt Medical x Medical Tracker - Partnership Video [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.4168686Z [sync]    ⏭️ Exists (API): Kitt Medical x Medical Tracker - Partnership Video [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.5001341Z [sync]    ⏭️ Exists (API): Kitt Medical x Medical Tracker - Partnership Video [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.5902770Z [sync]    ⏭️ Exists (API): Kitt Medical x Medical Tracker - Partnership Video [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.6774519Z [sync]    ⏭️ Exists (API): Liveloula [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.7715131Z [sync]    ⏭️ Exists (API): Liveloula [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.8446160Z [sync]    ⏭️ Exists (API): Liveloula [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:19.9446244Z [sync]    ⏭️ Exists (API): Liveloula [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.0159199Z [sync]    ⏭️ Exists (API): Daughters United [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.2336382Z [sync]    ⏭️ Exists (API): “Let’s Get Ready To Rumble” Energy [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.3277210Z [sync]    ⏭️ Exists (API): “Let’s Get Ready To Rumble” Energy [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.4065120Z [sync]    ⏭️ Exists (API): “Let’s Get Ready To Rumble” Energy [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.5248234Z [sync]    ⏭️ Exists (API): Hello Sunday [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.6094790Z [sync]    ⏭️ Exists (API): Hello Sunday [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.7281631Z [sync]    ⏭️ Exists (API): Hello Sunday [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.8063935Z [sync]    ⏭️ Exists (API): Justify my Night [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.8695908Z [sync]    ⏭️ Exists (API): Justify my Night [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:20.9534602Z [sync]    ⏭️ Exists (API): Justify my Night [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.0308019Z [sync]    ⏭️ Exists (API): Justify my Night [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.1149661Z [sync]    ⏭️ Exists (API): Justify my Night [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.2619751Z [sync]    ⏭️ Exists (API): Boudica [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.3539866Z [sync]    ⏭️ Exists (API): Boudica [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.4241052Z [sync]    ⏭️ Exists (API): Boudica [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.5023603Z [sync]    ⏭️ Exists (API): Boudica [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.5796256Z [sync]    ⏭️ Exists (API): Boudica [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.6978520Z [sync]    ⏭️ Exists (API): SQUID Campaign 2025 [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.7759152Z [sync]    ⏭️ Exists (API): SQUID Campaign 2025 [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.8657364Z [sync]    ⏭️ Exists (API): SQUID Campaign 2025 [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:21.9409906Z [sync]    ⏭️ Exists (API): Dona & Vixen [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.0224058Z [sync]    ⏭️ Exists (API): Dona & Vixen [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.2561641Z [sync]    ⏭️ Exists (API): Dona & Vixen [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.3446507Z [sync]    ⏭️ Exists (API): Dona & Vixen [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.4395816Z [sync]    ⏭️ Exists (API): ClientEarth In Asia [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.7295919Z [sync]    ⏭️ Exists (API): ClientEarth In Asia [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.8871057Z [sync]    ⏭️ Exists (API): ClientEarth In Asia [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:22.9824053Z [sync]    ⏭️ Exists (API): ClientEarth In Asia [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.0709793Z [sync]    ⏭️ Exists (API): ClientEarth In Asia [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.1555529Z [sync]    ⏭️ Exists (API): The Dyas - Juna [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.2197076Z [sync]    ⏭️ Exists (API): The Dyas - Juna [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.3170957Z [sync]    ⏭️ Exists (API): The Dyas - Juna [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.4140737Z [sync]    ⏭️ Exists (API): Talon: PipeSnug & FlueSnug [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.4829467Z [sync]    ⏭️ Exists (API): Before the Rooster Crows [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.5998237Z [sync]    ⏭️ Exists (API): Before the Rooster Crows [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.7044567Z [sync]    ⏭️ Exists (API): Hidden Drummers of India [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.7844916Z [sync]    ⏭️ Exists (API): Hidden Drummers of India [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:23.8749358Z [sync]    ⏭️ Exists (API): Hidden Drummers of India [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.1079467Z [sync]    ⏭️ Exists (API): Hidden Drummers of India [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.1807069Z [sync]    ⏭️ Exists (API): Hidden Drummers of India [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.2495059Z [sync]    ⏭️ Exists (API): The Big Thirst [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.4254661Z [sync]    ⏭️ Exists (API): The Big Thirst [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.5292530Z [sync]    ⏭️ Exists (API): The Big Thirst [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.6173065Z [sync]    ⏭️ Exists (API): The Big Thirst [3]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.7495911Z [sync]    ⏭️ Exists (API): The Big Thirst [4]
+sync	Sync all portfolio data & images	2026-03-06T18:43:24.9456671Z [sync]    ⏭️ Exists (API): Blue Story - EPK [0]
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.0465510Z [sync]    ⏭️ Exists (API): Blue Story - EPK [1]
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.1214964Z [sync]    ⏭️ Exists (API): Blue Story - EPK [2]
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.1856557Z [sync]    ⏭️ Exists (API): World Premiere at Raindance Film Festival 
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.3373362Z [sync]    ⏭️ Exists (API): directing (profile)
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4016394Z [sync]    ⏭️ Exists (API): directing (defaultOg)
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4018039Z [sync] ✅ Cloudinary sync: 0 cached, 200 verified via API, 0 uploaded, 0 failed (200 total)
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4029143Z [sync] ✅ Saved Cloudinary mapping
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4029602Z [sync] 
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4030431Z 📂 Processing portfolio: directing
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4034574Z [sync] ✅ Config ready (domain: directedbygabriel.com)
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4150706Z [sync] ✅ 42 projects
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4154542Z [sync] ✅ 1 journal posts
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4178430Z [sync] ✅ Wrote /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/directing/portfolio-data.json
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4179453Z [sync] 
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4180112Z 📂 Processing portfolio: postproduction
+sync	Sync all portfolio data & images	2026-03-06T18:43:25.4181503Z [sync] ✅ Config ready (domain: lemonpost.studio)
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7118748Z [sync] ✅ 80 projects
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7119650Z [sync] ⏭️ Journal disabled for postproduction
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7146645Z [sync] ✅ Wrote /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/postproduction/portfolio-data.json
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7147629Z [sync] 
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7148353Z 🎉 Sync complete! (5 API calls for all portfolios)
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7148777Z 
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7149126Z [sync-data] ✅ Sync complete!
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7149910Z [sync-data]    directing: 42 projects, 1 journal posts
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7150682Z [sync-data]    postproduction: 80 projects, 0 journal posts
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.7151050Z [sync-data]    API calls: 5
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8299815Z 
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8300627Z > gabriel-portfolio-data@1.0.0 sync:sitemap
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8302108Z > PORTFOLIO_MODE=directing node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-sitemap.mjs
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8303150Z 
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8601422Z [sitemap] 🔄 Generating sitemap for portfolio mode: directing...
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8619615Z [sitemap] ✅ Generated: /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/directing/sitemap.xml
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8620581Z [sitemap]    - Domain: directedbygabriel.com
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8620959Z [sitemap]    - Projects: 42
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8621289Z [sitemap]    - Journal: 0 articles
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8908327Z [sitemap] 🔄 Generating sitemap for portfolio mode: postproduction...
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8929349Z [sitemap] ✅ Generated: /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/postproduction/sitemap.xml
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8930836Z [sitemap]    - Domain: lemonpost.studio
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8931436Z [sitemap]    - Projects: 80
+sync	Sync all portfolio data & images	2026-03-06T18:43:27.8931991Z [sitemap]    - Journal: disabled
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0026440Z 
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0026926Z > gabriel-portfolio-data@1.0.0 sync:robots
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0028164Z > PORTFOLIO_MODE=directing node scripts/generate-robots.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-robots.mjs
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0028688Z 
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0330648Z [robots] 🔄 Generating robots.txt for portfolio mode: directing...
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0346871Z [robots] ✅ Generated: /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/directing/robots.txt
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0348038Z [robots]    - Domain: directedbygabriel.com
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0348914Z [robots]    - Sitemap: https://directedbygabriel.com/sitemap.xml
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0634975Z [robots] 🔄 Generating robots.txt for portfolio mode: postproduction...
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0652590Z [robots] ✅ Generated: /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/postproduction/robots.txt
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0653573Z [robots]    - Domain: lemonpost.studio
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0654134Z [robots]    - Sitemap: https://lemonpost.studio/sitemap.xml
+sync	Sync all portfolio data & images	2026-03-06T18:43:28.0793161Z ✅ All portfolio data synced!
+sync	Sync Instagram Studio (optional)	﻿2026-03-06T18:43:28.0826397Z ##[group]Run echo "📸 Attempting Instagram Studio sync..."
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0826831Z [36;1mecho "📸 Attempting Instagram Studio sync..."[0m
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0827235Z [36;1mif [ -f "scripts/upload-instagram-data.mjs" ]; then[0m
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0827744Z [36;1m  node scripts/upload-instagram-data.mjs || echo "Skipping Instagram Studio Upload"[0m
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0828188Z [36;1mfi[0m
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0877775Z shell: /usr/bin/bash -e {0}
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0878028Z env:
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0878557Z   AIRTABLE_TOKEN: ***
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0878825Z   AIRTABLE_BASE_ID: ***
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0879076Z   CLOUDINARY_CLOUD_NAME: ***
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0879331Z   CLOUDINARY_API_KEY: ***
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0879627Z   CLOUDINARY_API_SECRET: ***
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0879858Z ##[endgroup]
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.0951049Z 📸 Attempting Instagram Studio sync...
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.1980799Z 
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.1981636Z ☁️  Uploading Instagram Studio data to Cloudinary
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.1981924Z 
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.1986689Z Cloud: ***
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.1989985Z 📖 Reading Instagram data from: /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/scripts/instagram-studio-data-backup.json
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.1998131Z ❌ Error uploading Instagram data: ENOENT: no such file or directory, open '/home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data/scripts/instagram-studio-data-backup.json'
+sync	Sync Instagram Studio (optional)	2026-03-06T18:43:28.2036977Z Skipping Instagram Studio Upload
+sync	Check for changes	﻿2026-03-06T18:43:28.2065526Z ##[group]Run git add -A
+sync	Check for changes	2026-03-06T18:43:28.2065829Z [36;1mgit add -A[0m
+sync	Check for changes	2026-03-06T18:43:28.2066072Z [36;1mif git diff --staged --quiet; then[0m
+sync	Check for changes	2026-03-06T18:43:28.2066391Z [36;1m  echo "changed=false" >> $GITHUB_OUTPUT[0m
+sync	Check for changes	2026-03-06T18:43:28.2066701Z [36;1m  echo "ℹ️ No changes detected"[0m
+sync	Check for changes	2026-03-06T18:43:28.2066966Z [36;1melse[0m
+sync	Check for changes	2026-03-06T18:43:28.2067194Z [36;1m  echo "changed=true" >> $GITHUB_OUTPUT[0m
+sync	Check for changes	2026-03-06T18:43:28.2067511Z [36;1m  echo "✅ Changes detected"[0m
+sync	Check for changes	2026-03-06T18:43:28.2067778Z [36;1mfi[0m
+sync	Check for changes	2026-03-06T18:43:28.2117370Z shell: /usr/bin/bash -e {0}
+sync	Check for changes	2026-03-06T18:43:28.2117633Z ##[endgroup]
+sync	Check for changes	2026-03-06T18:43:28.2244667Z ℹ️ No changes detected
+sync	Post Setup Node.js	﻿2026-03-06T18:43:28.2353325Z Post job cleanup.
+sync	Post Setup Node.js	2026-03-06T18:43:28.3881651Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-4daf4c0e8c867641e5c34cdf2beff9c5c6c5994d8b49e07eafef4746210c43a5, not saving cache.
+sync	Post Checkout repository	﻿2026-03-06T18:43:28.4005143Z Post job cleanup.
+sync	Post Checkout repository	2026-03-06T18:43:28.4954779Z [command]/usr/bin/git version
+sync	Post Checkout repository	2026-03-06T18:43:28.4991254Z git version 2.53.0
+sync	Post Checkout repository	2026-03-06T18:43:28.5035698Z Temporarily overriding HOME='/home/runner/work/_temp/592c49bc-e7a4-4df4-a3d6-b9dab28cc3e8' before making global git config changes
+sync	Post Checkout repository	2026-03-06T18:43:28.5037303Z Adding repository directory to the temporary git global config as a safe directory
+sync	Post Checkout repository	2026-03-06T18:43:28.5042845Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/gabriel-portfolio-data/gabriel-portfolio-data
+sync	Post Checkout repository	2026-03-06T18:43:28.5080703Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+sync	Post Checkout repository	2026-03-06T18:43:28.5115468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+sync	Post Checkout repository	2026-03-06T18:43:28.5356593Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+sync	Post Checkout repository	2026-03-06T18:43:28.5379242Z http.https://github.com/.extraheader
+sync	Post Checkout repository	2026-03-06T18:43:28.5391738Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+sync	Post Checkout repository	2026-03-06T18:43:28.5426248Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+sync	Post Checkout repository	2026-03-06T18:43:28.5656149Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+sync	Post Checkout repository	2026-03-06T18:43:28.5686683Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+sync	Complete job	﻿2026-03-06T18:43:28.6028872Z Cleaning up orphan processes

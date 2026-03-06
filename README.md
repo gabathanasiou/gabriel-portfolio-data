@@ -66,4 +66,4 @@ const payload = await response.json();
 ## 📐 Schema Reference
 
 See [`docs/SCHEMA.md`](docs/SCHEMA.md) for the complete Airtable → Output field mapping.
-Raw Airtable base schema: [`docs/airtable-schema.json`](docs/airtable-schema.json).
+
