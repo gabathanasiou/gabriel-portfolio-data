@@ -16,9 +16,6 @@ import { normalizeTitle, calculateReadingTime, parseCreditsText } from '../utils
 import { uploadToCloudinary as uploadToCloudinaryHelper, checkImageExists } from '../utils/cloudinary/cloudinaryHelpers.mjs';
 import {
   fetchAirtableTable,
-  fetchTimestamps,
-  checkForChanges,
-  fetchChangedRecords,
   buildLookupMaps,
   parseExternalLinks,
   makeSlug,
