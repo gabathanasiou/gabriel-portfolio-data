@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-06T18:25:05.209Z",
+  "generatedAt": "2026-03-06T18:38:24.061Z",
   "projects": [
     {
       "recordId": "recEegt54sIu0M5ib",
@@ -2741,6 +2741,25 @@
     }
   ],
   "config": {
-    "images": []
+    "images": [
+      {
+        "type": "profile",
+        "portfolioId": "directing",
+        "publicId": "portfolio-config-directing-profile",
+        "cloudinaryUrl": "https://res.cloudinary.com/date24ay6/image/upload/v1772822178/portfolio-config-directing-profile.jpg",
+        "airtableId": "attcysI6UpbklG5Uj",
+        "format": "jpg",
+        "size": 4174874
+      },
+      {
+        "type": "defaultOg",
+        "portfolioId": "directing",
+        "publicId": "portfolio-config-directing-defaultOg",
+        "cloudinaryUrl": "https://res.cloudinary.com/date24ay6/image/upload/v1772822180/portfolio-config-directing-defaultOg.jpg",
+        "airtableId": "attGrfDpBF8strlhg",
+        "format": "jpg",
+        "size": 204575
+      }
+    ]
   }
 }

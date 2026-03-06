@@ -181,6 +181,7 @@ Images are synced to Cloudinary using a **check-then-upload** strategy:
 1. Public ID convention:
    - Projects: `portfolio-projects-{recordId}-{galleryIndex}`
    - Journal: `portfolio-journal-{recordId}`
+   - Settings: `portfolio-config-{portfolioId}-{type}` (types: logo, favicon, showreel, profile, defaultOg)
 2. For each image, `checkImageExists(publicId)` queries the Cloudinary API
 3. If found → use existing URL (skip upload)
 4. If not found → `uploadToCloudinary(airtableUrl, publicId)` uploads at original quality

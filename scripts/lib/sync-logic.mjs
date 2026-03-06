@@ -79,7 +79,7 @@ export async function syncPortfolios(config) {
 
     // ── Step 3: Sync images to Cloudinary (check-then-upload) ──
     const existingMapping = loadCloudinaryMapping(outputDir);
-    const updatedMapping = await syncImagesToCloudinary(projectRecords, journalRecords, existingMapping, verbose);
+    const updatedMapping = await syncImagesToCloudinary(projectRecords, journalRecords, settingsRecords, existingMapping, verbose);
 
     if (!skipFileWrites && updatedMapping) {
         saveCloudinaryMapping(outputDir, updatedMapping);
@@ -157,8 +157,11 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
     const f = record.fields || {};
 
     // Cloudinary config image lookup (profile, showreel, logo, etc.)
+    // Filter by portfolioId/mode to ensure we get the right images for THIS mode
     const configImages = Object.fromEntries(
-        (cloudinaryMapping?.config?.images || []).map(img => [img.type, img.cloudinaryUrl])
+        (cloudinaryMapping?.config?.images || [])
+            .filter(img => (img.portfolioId || '').toLowerCase() === portfolioMode.toLowerCase())
+            .map(img => [img.type, img.cloudinaryUrl])
     );
 
     // Helper: resolve attachment URL with Cloudinary override
@@ -498,7 +501,7 @@ function configureCloudinarySdk() {
  * This means unchanged content = 0 Cloudinary API calls (instant).
  * Only genuinely new/changed images hit the network.
  */
-async function syncImagesToCloudinary(projectRecords, journalRecords, existingMapping, verbose) {
+async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRecords, existingMapping, verbose) {
     const cloudinaryConfig = configureCloudinarySdk();
     if (!cloudinaryConfig.enabled) {
         if (verbose) console.log('[sync] ⏭️ Cloudinary disabled or credentials missing');
@@ -524,13 +527,18 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, existingMa
             }
         }
     }
+    for (const img of (existingMapping?.config?.images || [])) {
+        if (img.publicId && img.cloudinaryUrl && img.airtableId) {
+            cache.set(`${img.publicId}::${img.airtableId}`, img);
+        }
+    }
     log(`📦 Loaded ${cache.size} cached Cloudinary entries`);
 
     const newMapping = {
         generatedAt: new Date().toISOString(),
         projects: [],
         journal: [],
-        config: existingMapping?.config || { images: [] },
+        config: { images: [] },
     };
 
     let uploaded = 0, cached = 0, checkedAndFound = 0, failed = 0;
@@ -606,6 +614,33 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, existingMa
         }
 
         newMapping.journal.push(postEntry);
+    }
+
+    // ── Config / Settings images ──
+    const configImageFields = [
+        { field: 'Logo', type: 'logo' },
+        { field: 'Favicon', type: 'favicon' },
+        { field: 'Showreel Placeholder', type: 'showreel' },
+        { field: 'About Image', type: 'profile' },
+        { field: 'Default OG Image', type: 'defaultOg' },
+    ];
+
+    for (const record of settingsRecords) {
+        const f = record.fields || {};
+        const portfolioId = f['Portfolio ID'] || 'directing';
+
+        for (const item of configImageFields) {
+            const attachment = (f[item.field] || [])[0];
+            if (attachment) {
+                const publicId = `portfolio-config-${portfolioId}-${item.type}`;
+                const resolved = await resolveImage(publicId, attachment.id, attachment.url, portfolioId, `(${item.type})`);
+                newMapping.config.images.push({
+                    type: item.type,
+                    portfolioId,
+                    ...resolved
+                });
+            }
+        }
     }
 
     const total = cached + checkedAndFound + uploaded + failed;

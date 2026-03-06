@@ -2292,7 +2292,7 @@
     },
     "about": {
       "bio": "Gabriel Athanasiou (ελ: Γαβριήλ Αθανασίου) is a director based in London whose work uncovers the subtleties of human psychology and the echoes of generational trauma. \n\nHe studied Film Directing at the Aristotle University of Thessaloniki and the New York Film Academy.\n\nHis film Astoria earned a Greek Film Academy Award nomination in 2022, and he joined Berlinale Talents in 2023.\nWhether in film or commercial work, Gabriel brings an intimate, emotionally charged approach to every project.",
-      "profileImage": "https://v5.airtableusercontent.com/v3/u/50/50/1772834400000/6jx_I3mWosbQVRziBogOLg/waMOpQodwXYr7PAzJWJ7wijo6rd_b3z5o0TTUSJeqCQchRj9XVpfVYDdWWa-7QPsYRnGBcEx4b_vHv0Dtu_8IonfnBqYdcxRytxrVllQN80X_gbko6CuYU_dratxUrsyEGmscJFX7LCm0Et__vZmvLSV_OscU_o0TyAAM_Aqcnc/B1J1O7tqmv12dpq7OCJh2Z7zGkNfOg4QEdNoMix_t1Y"
+      "profileImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772822178/portfolio-config-directing-profile.jpg"
     },
     "allowedRoles": [
       "Director"
@@ -2304,12 +2304,12 @@
       "Beauty Work"
     ],
     "otherPortfolioName": "Lemon Post",
-    "defaultOgImage": "https://v5.airtableusercontent.com/v3/u/50/50/1772834400000/FakGpLagiO7xqPbuapOKhg/rIBv9GH_ARuRy-OkouXS24FtgNfEaIVRwrQ_unmBcQ_gY1KzDw9GwXj8PQ-hlUu62_V2-d9DrNrFCdYSP4bV10lK25EJcM7sECU-lmSjkkZhPPWyjj2_vtH7uDZNdCANX3we8TFZCV_Ihu1zC5I8_ZzHk3s83fKM6zAlWKelQpfGq_tflLVjbiVNMuY3mUdx/A9FUH88kV8xtwzBUw06J00A3Z4_MpB4nx6LVSD55a2Y",
+    "defaultOgImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772822180/portfolio-config-directing-defaultOg.jpg",
     "portfolioOwnerName": "Gabriel Athanasiou",
     "lastModified": "2025-12-04T11:07:57.000Z"
   },
   "portfolioMode": "directing",
-  "lastUpdated": "2026-03-06T18:25:03.821Z",
+  "lastUpdated": "2026-03-06T18:38:20.990Z",
   "version": "2.0",
   "source": "sync-logic"
 }
