@@ -102,7 +102,11 @@ jobs:
           # Copy files from temp
           cp -rf ../temp-data/* .
           
-          git add -A
+          # Add ONLY the build artifacts (avoid node_modules or other random runner files)
+          [ -d "directing" ] && git add directing
+          [ -d "postproduction" ] && git add postproduction
+          [ -f "cloudinary-mapping.json" ] && git add cloudinary-mapping.json
+          
           git commit -m "chore: full data & static sync [ci skip]
           
           Reason: ${{ github.event.inputs.reason || 'Automated Sync' }}
