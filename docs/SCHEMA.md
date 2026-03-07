@@ -22,10 +22,10 @@ Fields marked with 🚫 are business/finance fields **not used** by the portfoli
 | `Release Date` | date | `releaseDate`, `year` | Primary sort field. YYYY-MM-DD |
 | `Work Date` | date | `workDate` | Fallback date when Release Date is empty |
 | `About` | singleLineText | `description` | Project description text |
-| `Video URL` | url | `videoUrl` | Comma-separated video URLs (YouTube/Vimeo) |
+| `Video URL` | multilineText | `videoUrl` | Comma/Newline-separated URLs. Supports `[Label] URL` syntax. |
 | `Gallery` | multipleAttachments | `gallery[]` | Images uploaded to Cloudinary, URLs resolved from mapping |
-| `Credits` | multilineText | `credits[]` | Parsed via `parseCreditsText()` into `{role, name}` pairs |
-| `External Links` | url | `externalLinks[]` + additional videos | Parsed into `{label, url}` links and extracted video URLs |
+| `Credits` | multilineText | `credits[]` | Parsed via `parseCreditsText()`. Supports `Role: Name`, `Role by Name`, or `Name`. |
+| `External Links` | multilineText | `externalLinks[]` | Parsed into `{label, url}`. Supports `[Label] URL` and auto-domain labeling. |
 | `Display Status` | singleSelect | `isFeatured`, `isHero` | Choices: Hidden, Portfolio Only, Featured, Hero. **Used for Directing portfolio** |
 | `Display Status (Post)` | singleSelect | `isFeatured`, `isHero` | Same choices. **Used for Post-Production portfolio** |
 | `Production Company` | multipleRecordLinks → Client Book | `productionCompany` | Record ID resolved via clientsMap |

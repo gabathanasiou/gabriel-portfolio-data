@@ -94,29 +94,34 @@ export function parseExternalLinks(rawText) {
   const items = rawText.split(/[,|\n]+/).map(s => s.trim()).filter(s => s.length > 0);
 
   for (const item of items) {
-    if (!item.startsWith('http')) continue;
+    const match = item.match(/\[(.*?)\]\s*(https?:\/\/\S+)/);
+    let customLabel = "";
+    let url = "";
 
-    const videoInfo = getVideoId(item);
-    const isVideo = videoInfo.type !== null;
-
-    if (isVideo) {
-      videos.push(item);
+    if (match) {
+      customLabel = match[1].trim();
+      url = match[2].trim();
+    } else if (item.startsWith('http')) {
+      url = item;
     } else {
-      let label = "Link";
-      try {
-        const hostname = new URL(item).hostname;
-        const core = hostname.replace('www.', '').split('.')[0];
-        if (core === 'imdb') label = 'IMDb';
-        else if (core === 'youtube') label = 'YouTube';
-        else if (core === 'linkedin') label = 'LinkedIn';
-        else if (core === 'instagram') label = 'Instagram';
-        else if (core === 'vimeo') label = 'Vimeo';
-        else if (core === 'facebook') label = 'Facebook';
-        else label = core.charAt(0).toUpperCase() + core.slice(1);
-      } catch (e) { }
-
-      links.push({ label, url: item });
+      continue;
     }
+
+    let domainLabel = "Link";
+    try {
+      const hostname = new URL(url).hostname;
+      const core = hostname.replace('www.', '').split('.')[0];
+      if (core === 'imdb') domainLabel = 'IMDb';
+      else if (core === 'youtube') domainLabel = 'YouTube';
+      else if (core === 'linkedin') domainLabel = 'LinkedIn';
+      else if (core === 'instagram') domainLabel = 'Instagram';
+      else if (core === 'vimeo') domainLabel = 'Vimeo';
+      else if (core === 'facebook') domainLabel = 'Facebook';
+      else domainLabel = core.charAt(0).toUpperCase() + core.slice(1);
+    } catch (e) { }
+
+    const finalLabel = customLabel ? `${customLabel} → ${domainLabel}` : domainLabel;
+    links.push({ label: finalLabel, url: url });
   }
 
   return { links, videos };

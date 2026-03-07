@@ -25,21 +25,21 @@ export function normalizeTitle(title) {
  */
 export function parseCreditsText(text) {
   if (!text) return [];
-  
-  // Split on newlines first, then commas, handling both formats
-  // Use (?:\r?\n) for newlines and ,(?=\s*\w+:) for commas followed by a role
+
+  // Split on newlines first, then commas
   const items = text
-    .split(/\r?\n/)  // Split on newlines first
+    .split(/\r?\n/)
     .flatMap(line => {
-      // For each line, split on commas but only if followed by "Role:"
-      // This prevents splitting names like "John, Jr." or addresses
-      const parts = line.split(/,\s*(?=[A-Z][^:]*:)/);
+      // Split on commas but only if followed by a potential role name pattern
+      // Pattern: Start of string/space, Capitalized word(s), then ":" or " by "
+      const parts = line.split(/,\s*(?=[A-Z][^:]*(?::|\s+by\s+))/i);
       return parts;
     })
     .map(s => s.trim())
     .filter(s => s.length > 0);
-  
+
   return items.map(item => {
+    // 1. Try Colon (Role: Name)
     const colonIndex = item.indexOf(':');
     if (colonIndex > 0) {
       return {
@@ -47,6 +47,17 @@ export function parseCreditsText(text) {
         name: item.substring(colonIndex + 1).trim()
       };
     }
+
+    // 2. Try " by " (Role by Name) - Case Insensitive
+    const byMatch = item.match(/(.*?)\s+by\s+(.*)/i);
+    if (byMatch) {
+      return {
+        role: byMatch[1].trim(),
+        name: byMatch[2].trim()
+      };
+    }
+
+    // 3. Fallback (Treatment as a single credit name if no pattern found)
     return { role: 'Credit', name: item };
   });
 }

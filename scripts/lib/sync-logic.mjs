@@ -358,7 +358,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
         const rawLinks = f['External Links'] || '';
         const { links, videos: externalVideos } = parseExternalLinks(rawLinks);
 
-        const primaryVideos = videoUrlField ? videoUrlField.split(',').map(v => v.trim()).filter(Boolean) : [];
+        const primaryVideos = videoUrlField ? videoUrlField.split(/[,|\n]+/).map(v => v.trim()).filter(Boolean) : [];
         const additionalExternalVideos = externalVideos.filter(v => !primaryVideos.includes(v));
         const finalVideoUrl = [...primaryVideos, ...additionalExternalVideos].join(', ');
 
