@@ -120,7 +120,15 @@ jobs:
       - name: Purge jsDelivr Cache
         if: steps.check_changes.outputs.changed == 'true'
         run: |
+          echo "⏳ Waiting 30s for CDN propagation before purging..."
+          sleep 30
           echo "🧹 Purging jsDelivr cache..."
-          curl -s "https://purge.jsdelivr.net/gh/$GITHUB_REPOSITORY@data/directing/portfolio-data.json"
-          curl -s "https://purge.jsdelivr.net/gh/$GITHUB_REPOSITORY@data/postproduction/portfolio-data.json"
-          echo "✅ Cache purged"
+          # Directing
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/portfolio-data.json"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/sitemap.xml"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
+          # Post-Production
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
+          echo "✅ Cache purged for all static files"
