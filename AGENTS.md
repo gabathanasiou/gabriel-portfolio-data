@@ -49,7 +49,8 @@ writes. These are for content/asset work — they cannot rotate API credentials.
 - Each `docs/*.md` manual is ≤400 lines / 50 KB and must open with a `# Title` and a
   read-first/`Status:` line in its first 8 lines.
 - `docs/audits/` holds dated, point-in-time audit reports; they are reference artifacts,
-  not living manuals. The current one is `docs/audits/2026-10-23-security-audit.md`.
+  not living manuals. The latest are `docs/audits/2026-10-23-security-audit.md` and
+  `docs/audits/2026-10-23-agentic-workflow-audit.md`.
 - Run `npm run lint:docs` before committing doc changes.
 
 ## Testing
