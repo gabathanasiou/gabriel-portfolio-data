@@ -1,31 +1,70 @@
 # Portfolio Data Maintenance Guide
 
+> **Read this before** touching the sync or the `data` branch. **Status:** current.
+> The `data` branch is a build artifact: change Airtable, not the branch. If you must
+> hotfix it, use the guarded worktree procedure below — never `git add .` in a checkout
+> of `data`.
+
 This guide explains how to perform maintenance tasks in the `gabriel-portfolio-data` repository, specifically manual data edits without triggering a full Airtable sync.
 
 ## 🛠️ Manual Data Edits (No Airtable Sync)
 
 Sometimes you need to make a quick fix to the production JSON files (e.g., fixing a typo or updating a setting) without waiting for a full fetch from Airtable or triggering a complete CI run.
 
-### Option 1: Edit the `data` Branch Directly (Production)
+### Option 1: Fix the source in Airtable (recommended)
 
-The production website fetches data from the `data` branch via the jsDelivr CDN. You can push direct changes here to bypass the sync script.
+Everything on `data` is generated, so a hand-edited file survives only until the next
+publish. Make the change in Airtable, then trigger the sync: **Actions → "Sync Data &
+Static Files" → Run workflow**. That path includes the publish guard and the jsDelivr
+purge.
 
-1.  **Checkout the `data` branch**:
+### Option 2: Emergency hotfix on the `data` branch
+
+Use this only when the live site is broken and the fix cannot wait for a sync. Treat
+`data` as a page of JSON, not a workspace: work in a throwaway worktree so your
+`.env.local` (live Airtable + Cloudinary credentials) and `node_modules/` are never in
+the checkout, and stage explicit paths only. **Never `git add .`** — `data` carries no
+application source, and its own `.gitignore` is a safety net, not a substitute for
+careful staging.
+
+1.  **Create a throwaway worktree** (from the main checkout on `main`):
     ```bash
-    git checkout data
+    git fetch origin data
+    git worktree add ../portfolio-data-hotfix origin/data
+    cd ../portfolio-data-hotfix
     ```
-2.  **Edit the target JSON file**:
+2.  **Edit the target file(s)**:
     - `directing/portfolio-data.json`
     - `postproduction/portfolio-data.json`
-3.  **Commit with `[ci skip]`**:
+    - `cloudinary-mapping.json`
+3.  **Stage explicit paths** — never `.`:
     ```bash
-    git add .
+    git add directing/ postproduction/ cloudinary-mapping.json
+    ```
+4.  **Run the guard** from the main checkout. It fails on anything that is not a
+    published artifact and on any `.env*`, `node_modules/` or `SCHEMA-FULL.local.md`
+    path:
+    ```bash
+    cd ../gabriel-portfolio-data
+    npm run guard:data -- ../portfolio-data-hotfix
+    ```
+5.  **Commit, push, clean up**:
+    ```bash
+    cd ../portfolio-data-hotfix
     git commit -m "chore: manual data patch [ci skip]"
     git push origin data
+    cd ../gabriel-portfolio-data
+    git worktree remove ../portfolio-data-hotfix
     ```
-    *Note: Using `[ci skip]` is a best practice to ensure no automated logic is accidentally triggered.*
+6.  **Purge the CDN** (see [Cache Clearing](#-cache-clearing)) and **record the fix in
+    Airtable** — the next sync overwrites a direct edit that has no Airtable source.
 
-### Option 2: Push Logic Changes to `main`
+> [!WARNING]
+> A direct push bypasses the workflow's publish guard, change check and CDN purge. The
+> `.gitignore` committed on `data` and step 4's guard are the only local protection —
+> read `git show --stat HEAD` before you push.
+
+### Option 3: Push Logic Changes to `main`
 
 Pushing to the `main` branch **never** triggers a data sync. Syncs are only triggered by:
 - **Airtable Webhooks** (`repository_dispatch`)

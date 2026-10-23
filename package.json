@@ -7,11 +7,19 @@
     "sync:data": "node scripts/sync-data.mjs",
     "sync:sitemap": "PORTFOLIO_MODE=directing node scripts/generate-sitemap.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-sitemap.mjs",
     "sync:robots": "PORTFOLIO_MODE=directing node scripts/generate-robots.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-robots.mjs",
-    "sync:all": "npm run sync:data && npm run sync:sitemap && npm run sync:robots"
+    "sync:all": "npm run sync:data && npm run sync:sitemap && npm run sync:robots",
+    "guard:data": "node scripts/guard-data-branch.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "roadmap": "node scripts/roadmap.mjs",
+    "roadmap:check": "node scripts/roadmap.mjs check",
+    "lint:docs": "node scripts/check-doc-budget.mjs",
+    "lint": "npm run lint:docs"
   },
   "dependencies": {
     "cloudinary": "^2.1.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "sanitize-html": "^2.18.1"
   },
   "repository": {
     "type": "git",
@@ -24,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/gabathanasiou/gabriel-portfolio-data/issues"
   },
-  "homepage": "https://github.com/gabathanasiou/gabriel-portfolio-data#readme"
+  "homepage": "https://github.com/gabathanasiou/gabriel-portfolio-data#readme",
+  "devDependencies": {
+    "vitest": "^5.0.5"
+  }
 }

@@ -7,6 +7,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { sanitizeDomain } from './lib/sanitize.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,7 +36,8 @@ function loadPortfolioData() {
   }
 }
 
-function generateRobots(domain) {
+export function generateRobots(rawDomain) {
+  const domain = sanitizeDomain(rawDomain) || 'example.com';
   const baseUrl = `https://${domain}`;
 
   return `User-agent: *
@@ -68,7 +70,7 @@ async function main() {
       process.exit(1);
     }
 
-    const domain = portfolioData.config.domain || 'example.com';
+    const domain = sanitizeDomain(portfolioData.config.domain) || 'example.com';
     const robots = generateRobots(domain);
     const outputPath = path.join(OUTPUT_DIR, `robots.txt`);
 
@@ -87,4 +89,6 @@ async function main() {
   }
 }
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
+  main();
+}

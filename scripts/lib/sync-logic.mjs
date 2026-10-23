@@ -14,6 +14,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import { getVideoThumbnail } from '../utils/videoHelpers.mjs';
 import { normalizeTitle, calculateReadingTime, parseCreditsText } from '../utils/helpers/textHelpers.mjs';
 import { uploadToCloudinary, checkImageExists } from '../utils/cloudinary/cloudinaryHelpers.mjs';
+import { sanitizeJournalContent, sanitizeDomain } from './sanitize.mjs';
 import {
     fetchAirtableTable,
     parseExternalLinks,
@@ -196,7 +197,7 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
         navTitle: f['Nav Title'] || '',
         seoTitle: f['SEO Title'] || '',
         seoDescription: f['SEO Description'] || '',
-        domain: f['Domain'] || '',
+        domain: sanitizeDomain(f['Domain'] || ''),
         logo: attachmentUrl('Logo', 'logo'),
         favicon: attachmentUrl('Favicon', 'favicon'),
         fontFamily: f['Font Family'] || '',
@@ -432,7 +433,7 @@ function processJournal(records, cloudinaryMapping, verbose) {
 
         const title = normalizeTitle(f['Title'] || 'Untitled');
         const date = f['Publish Date'] || f['Date'] || '';
-        const content = f['Content'] || '';
+        const content = sanitizeJournalContent(f['Content'] || '');
         const excerpt = f['Excerpt'] || '';
         const readingTime = calculateReadingTime(content);
 

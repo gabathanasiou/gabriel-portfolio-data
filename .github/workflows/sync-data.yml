@@ -94,23 +94,31 @@ jobs:
       - name: Deploy Data to 'data' branch
         if: steps.check_changes.outputs.changed == 'true'
         run: |
-          # 1. Prepare artifact stage
+          # 1. Prepare artifact stage (build output plus the data branch's own
+          #    .gitignore, so a later checkout of `data` cannot stage secrets)
+          rm -rf ../stage
           mkdir -p ../stage
-          [ -d "directing" ] && cp -r directing ../stage/
-          [ -d "postproduction" ] && cp -r postproduction ../stage/
-          [ -f "cloudinary-mapping.json" ] && cp cloudinary-mapping.json ../stage/
-          
-          # 2. Switch to a fresh orphan branch
+          if [ -d "directing" ]; then cp -r directing ../stage/; fi
+          if [ -d "postproduction" ]; then cp -r postproduction ../stage/; fi
+          if [ -f "cloudinary-mapping.json" ]; then cp cloudinary-mapping.json ../stage/; fi
+          cp .github/data-branch.gitignore ../stage/.gitignore
+
+          # 2. Refuse to publish anything that is not a generated artifact.
+          #    Fails on .env*, node_modules/, SCHEMA-FULL.local.md or any
+          #    path outside directing/, postproduction/, cloudinary-mapping.json.
+          node scripts/guard-data-branch.mjs ../stage
+
+          # 3. Switch to a fresh orphan branch
           git checkout --orphan data-branch
           git rm -rf .
-          
-          # 3. Copy artifacts back
-          cp -r ../stage/* .
-          
-          # 4. Explicitly add only what we want
-          git add -f directing/ postproduction/ cloudinary-mapping.json
-          
-          # 5. Commit and push
+
+          # 4. Copy artifacts back (`src/.` also copies dotfiles)
+          cp -r ../stage/. .
+
+          # 5. Explicitly add only what we want — never `git add .`
+          git add -f directing/ postproduction/ cloudinary-mapping.json .gitignore
+
+          # 6. Commit and push
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
           git commit -m "chore: full data & static sync [ci skip] (clean)"

@@ -26,6 +26,7 @@ postproduction/
 ├── sitemap.xml
 └── robots.txt
 cloudinary-mapping.json      # Shared image cache (publicId → URL)
+.gitignore                   # Secret-only guard for checkouts of this branch
 ```
 
 ### Sync Pipeline
