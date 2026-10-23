@@ -7,10 +7,41 @@
 
 import { getVideoId } from '../utils/videoHelpers.mjs';
 import { parseCreditsText as parseCreditsTextShared } from '../utils/helpers/textHelpers.mjs';
-import { slugify } from '../utils/generators/slugify.mjs';
+import { slugify, makeUniqueSlug } from '../utils/generators/slugify.mjs';
+import {
+  fetchWithTimeout,
+  retryWithBackoff,
+  isRateLimitError,
+  isNetworkError
+} from '../utils/helpers/networkHelpers.mjs';
+
+const AIRTABLE_TIMEOUT_MS = 30000;
+const AIRTABLE_MAX_ATTEMPTS = 4;
+
+/** Retry rate limits, transient network failures and 5xx — never 401/403/404. */
+export function isRetryableAirtableError(error) {
+  return isRateLimitError(error) ||
+    isNetworkError(error) ||
+    (typeof error?.status === 'number' && error.status >= 500);
+}
+
+async function fetchAirtablePage(url, token) {
+  const res = await fetchWithTimeout(url, {
+    headers: { Authorization: `Bearer ${token}` }
+  }, AIRTABLE_TIMEOUT_MS);
+
+  if (res.ok) return res;
+
+  const error = new Error(`Airtable request failed: ${res.status} ${res.statusText}`);
+  error.status = res.status;
+  error.isRateLimit = res.status === 429;
+  const retryAfter = Number(res.headers.get('retry-after'));
+  if (retryAfter > 0) error.retryAfterMs = retryAfter * 1000;
+  throw error;
+}
 
 /**
- * Fetch all records from an Airtable table with pagination support
+ * Fetch all records from a table, paginating and retrying transient failures.
  * @param {string} tableName - Name of the Airtable table
  * @param {string} sortField - Field to sort by (optional)
  * @param {string} token - Airtable API token
@@ -28,18 +59,12 @@ export async function fetchAirtableTable(tableName, sortField, token, baseId) {
     const offsetParam = offset ? `&offset=${offset}` : '';
     const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}?${sortParam}${offsetParam}`;
 
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    if (!res.ok) {
-      if (res.status === 429) {
-        const error = new Error(`Rate limit exceeded for ${tableName}`);
-        error.isRateLimit = true;
-        throw error;
-      }
-      throw new Error(`Failed to fetch ${tableName}: ${res.status} ${res.statusText}`);
-    }
+    const res = await retryWithBackoff(
+      () => fetchAirtablePage(url, token),
+      AIRTABLE_MAX_ATTEMPTS,
+      1000,
+      { shouldRetry: isRetryableAirtableError }
+    );
 
     const data = await res.json();
     allRecords = allRecords.concat(data.records || []);
@@ -137,6 +162,31 @@ export function makeSlug(base) {
   const slug = slugify(base);
   // Limit to 80 chars for backward compatibility
   return slug.slice(0, 80) || 'item';
+}
+
+/**
+ * A slug that is unique within one portfolio (audit F-16).
+ *
+ * Duplicate titles used to produce duplicate `/work/<slug>` URLs and duplicate
+ * sitemap entries. A title with no Latin characters slugifies to `untitled`,
+ * which would also collide, so those get the record id as a suffix unless the
+ * author literally called it "Untitled".
+ *
+ * @param {string} title
+ * @param {Set<string>} usedSlugs - mutated with the returned slug
+ * @param {string} recordId
+ */
+export function makeContentSlug(title, usedSlugs, recordId) {
+  const base = makeSlug(title);
+  const isTransliterationFailure = base === 'untitled' &&
+    String(title || '').trim().toLowerCase() !== 'untitled';
+
+  if (isTransliterationFailure) {
+    const suffix = String(recordId || '').replace(/[^a-z0-9]/gi, '').slice(0, 6).toLowerCase();
+    return makeUniqueSlug(`untitled-${suffix}`, usedSlugs);
+  }
+
+  return makeUniqueSlug(base, usedSlugs, recordId);
 }
 
 /**

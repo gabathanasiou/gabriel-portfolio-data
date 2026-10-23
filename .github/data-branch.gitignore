@@ -1,0 +1,22 @@
+# Published on the `data` branch as a local safety net.
+#
+# That branch carries build artifacts only and does not track this repo's
+# source or .gitignore, so a checkout of it had nothing stopping `git add .`
+# from staging live credentials. This file does — but it is a second layer:
+# the sync workflow's guard (scripts/guard-data-branch.mjs) is the first.
+#
+# Keep this list secret-only. Do NOT ignore directing/, postproduction/ or
+# cloudinary-mapping.json — those are the artifacts this branch exists for.
+
+.env
+.env.*
+*.env
+node_modules/
+docs/SCHEMA-FULL.local.md
+.DS_Store
+.npmrc
+.netrc
+*.pem
+*.key
+*.p12
+*.pfx

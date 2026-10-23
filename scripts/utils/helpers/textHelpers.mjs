@@ -10,9 +10,12 @@ export function normalizeTitle(title) {
   if (!title) return 'Untitled';
   let clean = title.replace(/[_-]/g, ' ');
   clean = clean.replace(/\s+/g, ' ').trim();
-  return clean.replace(
-    /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  // Capitalise words the author left entirely lowercase, but never destroy
+  // existing casing: "TEDx", "UK" and "iPhone" must survive intact (F-16/CODE-06).
+  return clean.replace(/\w\S*/g, (word) =>
+    word === word.toLowerCase()
+      ? word.charAt(0).toUpperCase() + word.slice(1)
+      : word
   );
 }
 

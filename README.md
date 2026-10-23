@@ -25,7 +25,8 @@ postproduction/
 ├── portfolio-data.json      # Post-production portfolio data
 ├── sitemap.xml
 └── robots.txt
-cloudinary-mapping.json      # Shared image cache (publicId → URL)
+cloudinary-mapping.json      # Image cache for published records only (no titles)
+.gitignore                   # Secret-only guard for checkouts of this branch
 ```
 
 ### Sync Pipeline
@@ -33,7 +34,10 @@ cloudinary-mapping.json      # Shared image cache (publicId → URL)
 2. **Sync images** to Cloudinary using cache-first strategy
 3. **Process** both portfolio modes from the same raw data
 4. **Generate** sitemaps and robots.txt
-5. **Push** changes to the dedicated `data` branch
+5. **Validate** the payload with the publish gate (non-empty, valid domain, both
+   Settings rows, no expiring Airtable URLs, no abrupt count drop)
+6. **Publish** an append-only commit to `data`, tagged `data-*` — roll back with the
+   workflow's `rollback` input
 
 > [!NOTE]
 > The `main` branch is strictly for source code (`scripts/`, `docs/`, `workflows/`). Automated syncs never touch the `main` branch, allowing you to edit code locally without merge conflicts.
@@ -47,7 +51,7 @@ cloudinary-mapping.json      # Shared image cache (publicId → URL)
 
 ```bash
 npm install
-# Configure .env.local with Airtable and Cloudinary credentials
+# Copy .env.example to .env.local and fill in the credentials
 npm run sync:all        # Full sync: data + sitemaps + robots
 npm run sync:data       # Just the JSON data files
 npm run sync:sitemap    # Just the sitemaps

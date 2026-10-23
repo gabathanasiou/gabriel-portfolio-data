@@ -4,6 +4,8 @@
  * Supports YouTube, Vimeo, and Facebook
  */
 
+import { fetchWithTimeout, retryWithBackoff } from './helpers/networkHelpers.mjs';
+
 /**
  * Extract video ID and type from various URL formats
  */
@@ -66,7 +68,7 @@ export async function resolveVideoUrl(url) {
     try {
       const https = await import('node:https');
       return new Promise((resolve) => {
-        https.default.get(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`, (res) => {
+        const request = https.default.get(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`, { timeout: 15000 }, (res) => {
           let data = '';
           res.on('data', chunk => data += chunk);
           res.on('end', () => {
@@ -78,7 +80,9 @@ export async function resolveVideoUrl(url) {
               resolve(url);
             }
           });
-        }).on('error', () => resolve(url));
+        });
+        request.on('timeout', () => { request.destroy(); resolve(url); });
+        request.on('error', () => resolve(url));
       });
     } catch (e) {
       console.warn(`Failed to resolve Vimeo OEmbed for: ${url}`);
@@ -149,7 +153,11 @@ export async function getVideoThumbnail(url) {
   
   if (type === 'vimeo') {
     try {
-      const response = await fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(firstUrl)}`);
+      const response = await retryWithBackoff(
+        () => fetchWithTimeout(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(firstUrl)}`, {}, 15000),
+        2,
+        500
+      );
       if (response.ok) {
         const data = await response.json();
         return data.thumbnail_url || data.thumbnail_url_with_play_button || `https://vumbnail.com/${id}.jpg`;
@@ -165,7 +173,11 @@ export async function getVideoThumbnail(url) {
     // Try the oEmbed endpoint which works for public videos
     try {
       const videoUrl = id.startsWith('http') ? id : `https://${id}`;
-      const response = await fetch(`https://www.facebook.com/plugins/video/oembed.json/?url=${encodeURIComponent(videoUrl)}`);
+      const response = await retryWithBackoff(
+        () => fetchWithTimeout(`https://www.facebook.com/plugins/video/oembed.json/?url=${encodeURIComponent(videoUrl)}`, {}, 15000),
+        2,
+        500
+      );
       if (response.ok) {
         const data = await response.json();
         return data.thumbnail_url || '';

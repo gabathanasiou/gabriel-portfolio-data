@@ -99,29 +99,41 @@ export function getLabelFromUrl(url) {
 }
 
 /**
- * Retry a function with exponential backoff
+ * Retry a function with exponential backoff, jitter and Retry-After support.
+ *
  * @param {Function} fn - Async function to retry
- * @param {number} maxRetries - Maximum number of retries
- * @param {number} initialDelay - Initial delay in milliseconds
+ * @param {number} maxRetries - Maximum number of attempts
+ * @param {number} initialDelay - Base delay in milliseconds
+ * @param {object} options
+ * @param {(error: Error) => boolean} options.shouldRetry - Stop early for non-retryable errors
+ * @param {number} options.jitter - Fraction of the delay to randomise (default 0.2)
  * @returns {Promise<any>}
  */
-export async function retryWithBackoff(fn, maxRetries = 3, initialDelay = 1000) {
+export async function retryWithBackoff(fn, maxRetries = 3, initialDelay = 1000, options = {}) {
+  const { shouldRetry = () => true, jitter = 0.2 } = options;
   let lastError;
-  
+
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
       return await fn();
     } catch (error) {
       lastError = error;
-      
-      if (attempt < maxRetries - 1) {
-        const delay = initialDelay * Math.pow(2, attempt);
-        console.warn(`Attempt ${attempt + 1} failed, retrying in ${delay}ms...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+
+      if (attempt >= maxRetries - 1 || !shouldRetry(error)) {
+        break;
       }
+
+      const retryAfterMs = Number(error.retryAfterMs) ||
+        (Number(error.retryAfter) > 0 ? Number(error.retryAfter) * 1000 : 0);
+      const base = retryAfterMs > 0 ? retryAfterMs : initialDelay * Math.pow(2, attempt);
+      const factor = 1 + (Math.random() * 2 - 1) * jitter;
+      const delay = Math.max(0, Math.round(base * factor));
+
+      console.warn(`Attempt ${attempt + 1} failed, retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
-  
+
   throw lastError;
 }
 

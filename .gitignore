@@ -5,5 +5,8 @@ node_modules/
 directing/
 postproduction/
 cloudinary-mapping.json
+__test_temp__/
+scripts/instagram-studio-data-backup.json
+scripts/instagram-studio-data.json
 
 docs/SCHEMA-FULL.local.md

@@ -1,6 +1,7 @@
 # Airtable → Portfolio Data Schema Reference
 
-> **Auto-generated from live Airtable Metadata API** on 2026-03-06.
+> **Read this before** mapping a new Airtable field or changing the output shape.
+> **Status:** current — auto-generated from the live Airtable Metadata API on 2026-03-06.
 > Base ID: `appLKDqYcLzFsfafU`
 
 This document maps every Airtable field to its corresponding output in `portfolio-data.json`.
@@ -159,7 +160,34 @@ Images are synced to Cloudinary using a **check-then-upload** strategy:
    - Projects: `portfolio-projects-{recordId}-{galleryIndex}`
    - Journal: `portfolio-journal-{recordId}`
    - Settings: `portfolio-config-{portfolioId}-{type}` (types: logo, favicon, showreel, profile, defaultOg)
-2. For each image, `checkImageExists(publicId)` queries the Cloudinary API
-3. If found → use existing URL (skip upload)
-4. If not found → `uploadToCloudinary(airtableUrl, publicId)` uploads at original quality
-5. Mapping saved to `cloudinary-mapping.json` at repo root
+2. Uploads store the Airtable attachment id in the asset's Cloudinary context.
+3. For each image, `checkImageExists(publicId)` queries the Cloudinary API.
+4. If found **and** the stored attachment id matches → use the existing URL (skip upload).
+   A different attachment id — or no metadata on a pre-migration asset — re-uploads
+   over the same public id with `invalidate: true`, so a replaced or reordered gallery
+   image can never serve the old picture.
+5. Uploads convert non-web sources. A HEIC/HEIF or TIFF attachment — or an existing
+   asset stored in one of those formats — is uploaded with `format: 'jpg'`: Chrome,
+   Firefox and Edge cannot decode them, so a raw HEIC delivery URL is a broken image
+   outside Safari.
+6. Mapping saved to `cloudinary-mapping.json` at repo root (published copy contains
+   published records only and no titles).
+7. Delivery URLs are always browser-safe: a non-web Cloudinary URL is rewritten to an
+   `f_jpg,w_1600` transformation at the output boundary as a last line of defence.
+
+---
+
+## Historical exposure (accepted — roadmap #13)
+
+`docs/airtable-schema.json` was deleted in `e4ca46f`, but the blob is still readable at
+`53796f7` / `e4ca46f^`: 59,583 bytes of field names, formulas and select choices,
+including rate, invoice and client-contact **field names**. It contains no records, no
+PII values and no credentials.
+
+This is **accepted** rather than rewritten: a `git filter-repo` rewrite would change
+every commit SHA, break every clone and require force-pushing protected `main` for a
+low-severity exposure with no live data. The mitigation is a pre-commit hook that
+refuses to stage the file again — install it once per clone with
+`npm run hooks:install` (`.githooks/pre-commit`). Public documentation keeps field
+semantics here; the full dump stays local (`docs/SCHEMA-FULL.local.md`, gitignored).
+

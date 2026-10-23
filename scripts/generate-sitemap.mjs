@@ -9,6 +9,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { escapeXml, sanitizeDomain } from './lib/sanitize.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,12 +38,18 @@ function loadPortfolioData() {
   }
 }
 
-function generateSitemap(portfolioData) {
+export function generateSitemap(portfolioData) {
   const { config, projects, posts: articles } = portfolioData;
-  const domain = config.domain || 'example.com';
+  const domain = sanitizeDomain(config.domain) || 'example.com';
   const baseUrl = `https://${domain}`;
   const hasJournal = config.hasJournal !== false;
   const currentDate = new Date().toISOString().split('T')[0];
+  const lastmodOf = (value) => {
+    const candidate = String(value || '').substring(0, 10);
+    return /^\d{4}-\d{2}-\d{2}$/.test(candidate) && !Number.isNaN(Date.parse(candidate))
+      ? candidate
+      : currentDate;
+  };
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
@@ -69,19 +76,19 @@ function generateSitemap(portfolioData) {
   // Projects
   projects.forEach(project => {
     const year = project.year || '';
-    const lastmod = year ? `${year}-01-01` : currentDate;
+    const lastmod = lastmodOf(year ? `${year}-01-01` : currentDate);
     const isNarrative = project.type === 'Narrative';
     const isFeatured = project.isFeatured;
     const priority = isNarrative ? '0.9' : (isFeatured ? '0.8' : '0.7');
 
-    xml += `  <url>\n    <loc>${baseUrl}/work/${project.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
+    xml += `  <url>\n    <loc>${baseUrl}/work/${escapeXml(project.slug)}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
   });
 
   // Journal posts (only if enabled and articles exist)
   if (hasJournal && articles && articles.length > 0) {
     articles.forEach(article => {
-      const lastmod = article.date ? article.date.substring(0, 10) : currentDate;
-      xml += `  <url>\n    <loc>${baseUrl}/journal/${article.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+      const lastmod = lastmodOf(article.date ? article.date.substring(0, 10) : currentDate);
+      xml += `  <url>\n    <loc>${baseUrl}/journal/${escapeXml(article.slug)}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
     });
   }
 
@@ -89,8 +96,8 @@ function generateSitemap(portfolioData) {
   return xml;
 }
 
-function generateMinimalSitemap(domain, hasJournal) {
-  const baseUrl = `https://${domain}`;
+export function generateMinimalSitemap(domain, hasJournal) {
+  const baseUrl = `https://${sanitizeDomain(domain) || 'example.com'}`;
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -151,4 +158,6 @@ async function main() {
   }
 }
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
+  main();
+}

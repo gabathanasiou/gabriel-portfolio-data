@@ -5,9 +5,17 @@ name: Sync Data & Static Files
 # 2. Fetches data from Airtable ONCE for both directing & postproduction (5 API calls)
 # 3. Syncs new images to Cloudinary (cache-first, only uploads genuinely new images)
 # 4. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) per domain
-# 5. Pushes artifacts to the dedicated 'data' branch → jsDelivr CDN auto-updates
+# 5. Appends the artifacts to the dedicated 'data' branch → jsDelivr CDN auto-updates
+#
+# The job split is deliberate: `build` holds the provider secrets but can only
+# read the repo; `deploy` can write to `data` but holds no provider secrets.
 
 on:
+  # Weekly safety net: the Airtable webhook has historically never fired, and
+  # GitHub disables schedules after ~60 days of repo inactivity — re-enable
+  # from the Actions tab if a run stops appearing.
+  schedule:
+    - cron: '0 6 * * 1'
   repository_dispatch:
     types: [airtable-webhook-sync]
   workflow_dispatch:
@@ -16,33 +24,46 @@ on:
         description: 'Reason for sync (optional)'
         required: false
         default: 'Manual content sync'
+      rollback:
+        description: 'Rollback: tag or commit SHA to restore (leave blank for a normal sync)'
+        required: false
+        default: ''
 
+# Least privilege by default; deploy/rollback widen this per job.
 permissions:
-  contents: write
+  contents: read
+
+# Never run two publishes at once: the older run must not finish last and
+# overwrite newer data. Queue instead of cancelling a run in progress.
+concurrency:
+  group: sync-data
+  cancel-in-progress: false
 
 jobs:
-  sync:
+  build:
+    if: ${{ !inputs.rollback }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Restore Cloudinary mapping cache
         run: |
           echo "📦 Downloading existing Cloudinary mapping from data branch..."
-          curl -sL "https://cdn.jsdelivr.net/gh/gabathanasiou/gabriel-portfolio-data@data/cloudinary-mapping.json" \
+          curl -sL --max-time 30 --retry 2 "https://cdn.jsdelivr.net/gh/gabathanasiou/gabriel-portfolio-data@data/cloudinary-mapping.json" \
             -o cloudinary-mapping.json 2>/dev/null || echo "{}" > cloudinary-mapping.json
           if [ -s cloudinary-mapping.json ] && python3 -c "import json; json.load(open('cloudinary-mapping.json'))" 2>/dev/null; then
             echo "✅ Loaded existing mapping ($(wc -c < cloudinary-mapping.json | tr -d ' ') bytes)"
@@ -50,6 +71,20 @@ jobs:
             echo "ℹ️ No existing mapping found, starting fresh"
             echo '{"generatedAt":"","projects":[],"journal":[],"config":{"images":[]}}' > cloudinary-mapping.json
           fi
+
+      - name: Restore previous published snapshots
+        run: |
+          # Used by the publish gate to detect empty/misconfigured payloads and
+          # abrupt count drops. Absent on the very first publish.
+          mkdir -p ../previous
+          for mode in directing postproduction; do
+            mkdir -p "../previous/$mode"
+            curl -sfL --max-time 30 --retry 2 "https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY@data/$mode/portfolio-data.json" \
+              -o "../previous/$mode/portfolio-data.json" \
+              || { echo "ℹ️ No previous $mode snapshot"; rm -f "../previous/$mode/portfolio-data.json"; }
+          done
+          # Flag long-stale automation in the log, but never block the healing run.
+          node scripts/check-freshness.mjs --dir ../previous --max-age-days 14 --warn-only
 
       - name: Sync all portfolio data & images
         env:
@@ -64,71 +99,148 @@ jobs:
           npm run sync:all
           echo "✅ All portfolio data synced!"
 
-      - name: Sync Instagram Studio (optional)
-        env:
-          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN || secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-        run: |
-          echo "📸 Attempting Instagram Studio sync..."
-          if [ -f "scripts/instagram-studio-data-backup.json" ] && [ -f "scripts/upload-instagram-data.mjs" ]; then
-            node scripts/upload-instagram-data.mjs
-          else
-            echo "ℹ️ Skipping Instagram Studio Upload: Backup file or script missing."
-          fi
+      - name: Publish gate
+        run: node scripts/check-publish.mjs --previous ../previous
 
-      - name: Check for changes
-        id: check_changes
-        run: |
-          # Check if the generated files exist and have content
-          if [ -d "directing" ] || [ -d "postproduction" ] || [ -f "cloudinary-mapping.json" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "✅ Data generated"
-          else
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "ℹ️ No data detected"
-          fi
+      - name: Freshness check
+        # sync-data preserves old files when credentials are missing; publishing
+        # that would silently republish stale data.
+        run: node scripts/check-freshness.mjs --dir . --max-age-days 2
+
+      - name: Upload publish artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: portfolio-artifacts
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            directing/
+            postproduction/
+            cloudinary-mapping.json
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Download publish artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: portfolio-artifacts
+          path: .
 
       - name: Deploy Data to 'data' branch
-        if: steps.check_changes.outputs.changed == 'true'
+        id: publish
         run: |
-          # 1. Prepare artifact stage
+          # 1. Prepare the artifact stage (build output plus the data branch's
+          #    own .gitignore, so a later checkout of `data` cannot stage secrets)
+          rm -rf ../stage
           mkdir -p ../stage
-          [ -d "directing" ] && cp -r directing ../stage/
-          [ -d "postproduction" ] && cp -r postproduction ../stage/
-          [ -f "cloudinary-mapping.json" ] && cp cloudinary-mapping.json ../stage/
-          
-          # 2. Switch to a fresh orphan branch
-          git checkout --orphan data-branch
-          git rm -rf .
-          
-          # 3. Copy artifacts back
-          cp -r ../stage/* .
-          
-          # 4. Explicitly add only what we want
-          git add -f directing/ postproduction/ cloudinary-mapping.json
-          
-          # 5. Commit and push
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git commit -m "chore: full data & static sync [ci skip] (clean)"
-          git push -f origin data-branch:data
-          echo "✅ Data branch updated successfully (Artifacts only)"
+          if [ -d "directing" ]; then cp -r directing ../stage/; fi
+          if [ -d "postproduction" ]; then cp -r postproduction ../stage/; fi
+          if [ -f "cloudinary-mapping.json" ]; then cp cloudinary-mapping.json ../stage/; fi
+          cp .github/data-branch.gitignore ../stage/.gitignore
+
+          # 2. Refuse to publish anything that is not a generated artifact.
+          #    Fails on .env*, node_modules/, SCHEMA-FULL.local.md or any
+          #    path outside directing/, postproduction/, cloudinary-mapping.json.
+          node scripts/guard-data-branch.mjs ../stage
+
+          # 3. Append the publish to the existing `data` history and tag it.
+          #    No force-push: history is kept for `git revert` and rollback.
+          #    `changed` is a real content comparison, not a directory-exists check.
+          node scripts/publish-data.mjs publish --stage ../stage --github-output "$GITHUB_OUTPUT"
 
       - name: Purge jsDelivr Cache
-        if: steps.check_changes.outputs.changed == 'true'
+        if: steps.publish.outputs.changed == 'true'
         run: |
           echo "⏳ Waiting 30s for CDN propagation before purging..."
           sleep 30
           echo "🧹 Purging jsDelivr cache..."
           # Directing
-          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/portfolio-data.json"
-          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/sitemap.xml"
-          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/portfolio-data.json"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/sitemap.xml"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
           # Post-Production
-          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
-          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
-          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
           echo "✅ Cache purged for all static files"
+
+  rollback:
+    if: ${{ inputs.rollback != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+
+      # Restores the artifacts from <ref> as a NEW commit on `data`, so the
+      # rollback is append-only and can itself be rolled back.
+      - name: Restore 'data' to the requested snapshot
+        run: node scripts/publish-data.mjs rollback --ref "${{ inputs.rollback }}"
+
+      - name: Purge jsDelivr Cache
+        run: |
+          echo "⏳ Waiting 30s for CDN propagation before purging..."
+          sleep 30
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/portfolio-data.json"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/sitemap.xml"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
+          echo "✅ Cache purged for all static files"
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK: ${{ secrets.SYNC_ALERT_WEBHOOK }}
+        run: |
+          if [ -z "$ALERT_WEBHOOK" ]; then
+            echo "::warning::Rollback failed and SYNC_ALERT_WEBHOOK is not set — no external alert sent."
+            exit 0
+          fi
+          curl -sS --max-time 15 -X POST "$ALERT_WEBHOOK" \
+            -H 'Content-Type: application/json' \
+            -d "{\"text\":\"Portfolio data rollback failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"
+
+  notify:
+    needs: [build, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Notify on failure
+        env:
+          ALERT_WEBHOOK: ${{ secrets.SYNC_ALERT_WEBHOOK }}
+        run: |
+          if [ -z "$ALERT_WEBHOOK" ]; then
+            echo "::warning::Sync failed and SYNC_ALERT_WEBHOOK is not set — no external alert sent."
+            exit 0
+          fi
+          curl -sS --max-time 15 -X POST "$ALERT_WEBHOOK" \
+            -H 'Content-Type: application/json' \
+            -d "{\"text\":\"Portfolio data sync failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"

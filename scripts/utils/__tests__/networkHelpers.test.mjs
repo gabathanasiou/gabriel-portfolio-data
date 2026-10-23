@@ -200,7 +200,8 @@ describe('networkHelpers', () => {
         .mockRejectedValueOnce(new Error('fail 2'))
         .mockResolvedValue('success');
       
-      const promise = retryWithBackoff(fn, 3, 100);
+      // jitter: 0 keeps the delays exact for this assertion
+      const promise = retryWithBackoff(fn, 3, 100, { jitter: 0 });
       
       await vi.advanceTimersByTimeAsync(100); // First retry after 100ms
       await vi.advanceTimersByTimeAsync(200); // Second retry after 200ms

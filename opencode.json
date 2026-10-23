@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "airtable": {
+        "type": "remote",
+        "url": "https://mcp.airtable.com/mcp"
+      },
+      "cloudinary": {
+        "type": "remote",
+        "url": "https://asset-management.mcp.cloudinary.com/mcp"
+      }
+    }
+  }
+}
