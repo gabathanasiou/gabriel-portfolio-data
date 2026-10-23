@@ -19,7 +19,7 @@
 | Credential | Where | Notes |
 |---|---|---|
 | Airtable PAT | airtable.com → Developer hub → Personal access tokens | Create the new token scoped to the base with **read-only** access, delete the old one |
-| Cloudinary API key/secret | Cloudinary console → Settings → API Keys | Generate the new pair, delete the old; scope the key to upload if the plan supports it |
+| Cloudinary API key/secret | Cloudinary console → Settings → API Keys | Generate the new pair, delete the old; the key needs **read** (Admin API lookups) and **upload/create** — not delete |
 | GitHub token / SSH key | github.com → Settings → Developer settings | Revoke old tokens/keys, issue new ones; check Settings → Sessions |
 | `SYNC_ALERT_WEBHOOK` | Slack/other | Re-create the webhook URL if it appeared in logs |
 

@@ -64,8 +64,13 @@ item below. Work top-down; P1 before the next publish.
   dropped and `.env.local` is mode 600; the dormant Instagram uploader (and its always-
   skipped workflow step) was removed as dead code under #12; no `.env*` is reachable
   from any ref.
-- **Remaining (owner):** rotate the Airtable PAT and the Cloudinary key/secret at the
-  next window, then re-check secret scanning.
+- **Rotation:** new Airtable PAT and Cloudinary key verified (read, upload, CDN
+  invalidate), pushed to the Actions secrets on 2026-10-23; the legacy
+  `AIRTABLE_API_KEY` secret was deleted; secret scanning is still `0`. A local sync
+  then published the artifacts to `data` (`data-20261023-153040-bfadd6d`) to prove the
+  whole path.
+- **Remaining (owner):** delete the old Airtable token and the old Cloudinary key in
+  the two consoles, then close this item.
 - **Verify:** `git stash list` is empty; no `.env*` blob is reachable from any ref;
   `SECURITY.md` exists; the Instagram script refuses a payload containing
   `accessToken` (unit test).
