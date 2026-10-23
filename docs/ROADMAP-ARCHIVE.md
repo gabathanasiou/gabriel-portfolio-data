@@ -27,3 +27,4 @@ never renumber or reuse.**
 | 12 | Repo hygiene batch | deleted 11 unreferenced .ts twins + Instagram uploader/step; untracked .DS_Store; removed run_log.txt; LICENSE; .env.example; scripts/utils/helpers/textHelpers.mjs (normalizeTitle); .github/workflows/sync-data.yml |
 | 13 | Decide and document the historical schema exposure | docs/SCHEMA.md (historical exposure accepted); .githooks/pre-commit; package.json (hooks:install); AGENTS.md |
 | 15 | Convert non-web image originals at ingest | scripts/utils/cloudinary/cloudinaryHelpers.mjs (format predicate + URL rewrite); scripts/lib/sync-logic.mjs (convert at upload, replacement rule, cache skip, output rewrite); scripts/utils/__tests__/image-format.test.mjs |
+| 10 | Credential hygiene and disclosure process | SECURITY.md; docs/SECURITY-RUNBOOK.md; .env.local (mode 600); GitHub Actions secrets (AIRTABLE_TOKEN, CLOUDINARY_API_KEY/SECRET); legacy AIRTABLE_API_KEY secret deleted; owner revoked old provider credentials |

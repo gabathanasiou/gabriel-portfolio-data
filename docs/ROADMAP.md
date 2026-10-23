@@ -39,45 +39,13 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 7 | ✔ Harden CI supply chain and protect branches | F-04, F-12 | M |
 | **P2** | 8 | ✔ Make the test suite runnable and gated | F-13 | S |
 | **P2** | 9 | ✔ Retain publish history and add rollback | F-11 | S–M |
-| **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
+| **P2** | 10 | ✔ Credential hygiene and disclosure process | F-15, F-09 | S |
 | **P3** | 11 | ✔ Slug uniqueness and non-Latin titles | F-16 | S |
 | **P3** | 12 | ✔ Repo hygiene batch | CODE-06, CODE-09, hardening | S |
 | **P3** | 13 | ✔ Decide and document the historical schema exposure | F-10 | M |
 
 ✔ = closed; the row stays here as the audit-coverage map, details in
 `docs/ROADMAP-ARCHIVE.md`.
-
-## 10. Credential hygiene and disclosure process (`[~]`)
-
-- **Priority:** P2
-- **Request:** Live credentials sit in `.env.local` (mode 644) and an identical copy in
-  a local `stash@{1}`; there is no `SECURITY.md`, rotation/incident runbook, or private
-  disclosure channel. The dormant Instagram uploader would publish a raw asset
-  containing an `accessToken` if its input file were restored
-  (`scripts/upload-instagram-data.mjs:47-76`).
-- **Approach:** Rotate the Airtable and Cloudinary credentials; `git stash clear`; move
-  secrets to Keychain/1Password; add `SECURITY.md` with a contact and response
-  commitment; write a one-page stolen-laptop/rotation runbook. Fix or remove the
-  Instagram uploader: strip `instagram.accessToken`, use `access_mode: 'authenticated'`,
-  clean up in `finally`, gitignore both filenames.
-- **Done:** `SECURITY.md` + `docs/SECURITY-RUNBOOK.md`; the secret-bearing stash was
-  dropped and `.env.local` is mode 600; the dormant Instagram uploader (and its always-
-  skipped workflow step) was removed as dead code under #12; no `.env*` is reachable
-  from any ref.
-- **Rotation:** new Airtable PAT and Cloudinary key verified (read, upload, CDN
-  invalidate), pushed to the Actions secrets on 2026-10-23; the legacy
-  `AIRTABLE_API_KEY` secret was deleted; secret scanning is still `0`. A local sync
-  then published the artifacts to `data` (`data-20261023-153040-bfadd6d`) to prove the
-  whole path.
-- **Remaining (owner):** delete the old Airtable token and the old Cloudinary key in
-  the two consoles, then close this item.
-- **Verify:** `git stash list` is empty; no `.env*` blob is reachable from any ref;
-  `SECURITY.md` exists; the Instagram script refuses a payload containing
-  `accessToken` (unit test).
-- **Audit:** F-15, F-09 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** S
-
-**Relations**: none.
 
 ## 14. Evaluate Cloudflare R2 + Images as the image delivery upgrade (`[ ]`)
 
