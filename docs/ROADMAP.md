@@ -30,47 +30,22 @@ item below. Work top-down; P1 before the next publish.
 
 | Priority | # | Item | Audit findings | Effort |
 |---|---|---|---|---|
-| **P1** | 1 | Fix the data-branch hotfix procedure and credential exposure | F-05 | S |
-| **P1** | 2 | Sanitize CMS values at every output boundary | F-02, F-14 | M |
-| **P2** | 3 | Stop leaking unpublished work in public artifacts | F-01 | S |
+| **P1** | 1 | ✔ Fix the data-branch hotfix procedure and credential exposure | F-05 | S |
+| **P1** | 2 | ✔ Sanitize CMS values at every output boundary | F-02, F-14 | M |
+| **P2** | 3 | ✔ Stop leaking unpublished work in public artifacts | F-01 | S |
 | **P2** | 4 | Make the publish path fail-safe | F-03, F-06, F-17 | M |
 | **P2** | 5 | Key the Cloudinary cache by attachment identity | F-07 | M |
 | **P2** | 6 | Restore automated sync and add freshness/alerting | F-08, F-18 | M |
 | **P2** | 7 | Harden CI supply chain and protect branches | F-04, F-12 | M |
-| **P2** | 8 | Make the test suite runnable and gated | F-13 | S |
+| **P2** | 8 | ✔ Make the test suite runnable and gated | F-13 | S |
 | **P2** | 9 | Retain publish history and add rollback | F-11 | S–M |
 | **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
 | **P3** | 11 | Slug uniqueness and non-Latin titles | F-16 | S |
 | **P3** | 12 | Repo hygiene batch | CODE-06, CODE-09, hardening | S |
 | **P3** | 13 | Decide and document the historical schema exposure | F-10 | M |
 
-## 2. Sanitize CMS values at every output boundary (`[ ]`)
-
-- **Priority:** P1 — before the next publish
-- **Request:** Airtable journal `Content` flows verbatim into `portfolio-data.json`
-  (`scripts/lib/sync-logic.mjs:435,461`) and the frontend renders it with
-  `dangerouslySetInnerHTML` (`../gabriel-portfolio/src/components/views/BlogPostView.tsx:144`);
-  `parseMarkdown` also interpolates link destinations unescaped
-  (`../gabriel-portfolio/src/utils/markdown.ts:21`). The Airtable `Domain` setting is
-  interpolated unescaped into `sitemap.xml`/`robots.txt`
-  (`scripts/generate-sitemap.mjs:43`, `scripts/generate-robots.mjs:39`).
-- **Approach:**
-  - Add an allowlist sanitizer for journal HTML in the pipeline (tags/attributes,
-    `javascript:`/`data:` rejection) and unit-test it; `escapeHtml` in
-    `scripts/utils/helpers/textHelpers.mjs:68` currently has no callers.
-  - Escape all interpolated values in the sitemap/robots generators; validate `Domain`
-    as a hostname and strip CR/LF from robots directives.
-  - Frontend (separate repo): render with DOMPurify or a safe markdown renderer and add
-    a CSP. Keep the pipeline sanitizer even after the frontend fix — the `data` branch is
-    a second writer.
-- **Verify:** Unit tests with `<img src=x onerror=…>`, `[click](javascript:…)`,
-  `</loc>` and a newline in `Domain` → no script/XML survives. Manual frontend check:
-  a hostile payload in a draft post renders as text.
-- **Audit:** F-02, F-14 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** M
-
-**Relations**: depends on #8 for the automated test runner; the frontend half lives in
-`../gabriel-portfolio`.
+✔ = closed; the row stays here as the audit-coverage map, details in
+`docs/ROADMAP-ARCHIVE.md`.
 
 ## 4. Make the publish path fail-safe (`[ ]`)
 
