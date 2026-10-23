@@ -11,11 +11,8 @@ name: Sync Data & Static Files
 # read the repo; `deploy` can write to `data` but holds no provider secrets.
 
 on:
-  # Weekly safety net: the Airtable webhook has historically never fired, and
-  # GitHub disables schedules after ~60 days of repo inactivity — re-enable
-  # from the Actions tab if a run stops appearing.
-  schedule:
-    - cron: '0 6 * * 1'
+  # Manual + optional Airtable webhook only: every run costs Airtable API
+  # calls, so the owner triggers it deliberately.
   repository_dispatch:
     types: [airtable-webhook-sync]
   workflow_dispatch:
