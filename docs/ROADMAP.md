@@ -38,7 +38,7 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 6 | Restore automated sync and add freshness/alerting | F-08, F-18 | M |
 | **P2** | 7 | Harden CI supply chain and protect branches | F-04, F-12 | M |
 | **P2** | 8 | ✔ Make the test suite runnable and gated | F-13 | S |
-| **P2** | 9 | Retain publish history and add rollback | F-11 | S–M |
+| **P2** | 9 | ✔ Retain publish history and add rollback | F-11 | S–M |
 | **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
 | **P3** | 11 | Slug uniqueness and non-Latin titles | F-16 | S |
 | **P3** | 12 | Repo hygiene batch | CODE-06, CODE-09, hardening | S |
@@ -130,24 +130,6 @@ item below. Work top-down; P1 before the next publish.
 - **Effort:** M
 
 **Relations**: none.
-
-## 9. Retain publish history and add rollback (`[ ]`)
-
-- **Priority:** P2
-- **Request:** Every publish is a new orphan commit force-pushed to `data`
-  (`.github/workflows/sync-data.yml:104,117`); there is no diff, no `git revert`, no
-  retained snapshot and no one-click rollback. The previous head is recoverable only if
-  someone recorded its SHA.
-- **Approach:** Commit on top of `data` instead of orphaning it, or tag each publish and
-  retain N snapshots as artifacts; add a `rollback` `workflow_dispatch` input; update
-  `docs/MAINTENANCE.md` to match.
-- **Verify:** `git log origin/data` has more than one commit; a rollback dispatch
-  restores a prior tag in a scratch test; the audit's "no in-branch history" note no
-  longer applies.
-- **Audit:** F-11 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** S–M
-
-**Relations**: supersedes the rollback half of #1.
 
 ## 10. Credential hygiene and disclosure process (`[ ]`)
 

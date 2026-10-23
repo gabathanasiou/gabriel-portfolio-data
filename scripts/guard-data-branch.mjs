@@ -12,8 +12,7 @@
  * matches a secret/dependency pattern. It is used twice:
  *
  *   - by the sync workflow, on the staged artifact directory before publish;
- *   - by the maintainer, on the throwaway worktree used for an emergency
- *     hotfix (see docs/MAINTENANCE.md).
+ *   - by scripts/publish-data.mjs, on the staged index before it commits.
  *
  * Usage:
  *   node scripts/guard-data-branch.mjs [dir]   # walk a directory (default: .)
@@ -25,6 +24,9 @@
 import fs from 'fs';
 import path from 'path';
 import { execFileSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
 
 /** Everything the published `data` branch is allowed to contain. */
 const ALLOWED_FILES = new Set(['cloudinary-mapping.json', '.gitignore']);
@@ -49,7 +51,7 @@ function isAllowed(file) {
   return ALLOWED_FILES.has(file) || ALLOWED_DIRS.some((dir) => file.startsWith(dir));
 }
 
-function walk(dir) {
+export function walk(dir) {
   const root = path.resolve(dir);
   if (!fs.existsSync(root)) {
     throw new Error(`Directory not found: ${root}`);
@@ -74,16 +76,18 @@ function walk(dir) {
   return files;
 }
 
-function stagedFiles() {
+export function stagedFiles(cwd = process.cwd()) {
   // The full index, not just the diff: this answers "what would the next
   // commit contain", which is what matters before a push.
   const out = execFileSync('git', ['ls-files', '--cached', '-z'], {
+    cwd,
     encoding: 'utf8'
   });
   return out.split('\0').filter(Boolean).map(normalize);
 }
 
-function check(files) {
+/** Every problem with a candidate file list; empty means safe to publish. */
+export function findViolations(files) {
   const failures = [];
 
   for (const file of files) {
@@ -117,7 +121,7 @@ function main() {
     process.exit(2);
   }
 
-  const failures = check(files);
+  const failures = findViolations(files);
 
   if (failures.length > 0) {
     console.error(`[guard-data] ❌ Refusing to publish: ${failures.length} unsafe path(s) in ${source}.`);
@@ -131,4 +135,6 @@ function main() {
   console.log(`[guard-data] ✅ ${files.length} path(s) in ${source} — artifacts only, no secrets.`);
 }
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
+  main();
+}

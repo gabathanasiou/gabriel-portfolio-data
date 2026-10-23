@@ -27,6 +27,9 @@ the checkout, and stage explicit paths only. **Never `git add .`** — `data` ca
 application source, and its own `.gitignore` is a safety net, not a substitute for
 careful staging.
 
+`data` has ordinary append-only history: every publish is a commit with a `data-*` tag,
+so a hotfix is a normal commit on top (no force-push).
+
 1.  **Create a throwaway worktree** (from the main checkout on `main`):
     ```bash
     git fetch origin data
@@ -71,6 +74,31 @@ Pushing to the `main` branch **never** triggers a data sync. Syncs are only trig
 - **Manual Triggers** (`workflow_dispatch` in GitHub Actions)
 
 You can safely update scripts, documentation, or configuration in `main` without affecting the live production data.
+
+---
+
+## ⏪ Rolling Back a Publish
+
+Every publish is tagged on the `data` branch as
+`data-YYYYMMDD-HHMMSS-<short-sha>` (the commit also carries a readable message), so
+there is no need to have saved a SHA by hand.
+
+1.  **List the snapshots**:
+    ```bash
+    git fetch --tags origin data
+    git tag --list 'data-*' --sort=-creatordate | head -20
+    git log --oneline origin/data | head -20
+    ```
+2.  **Roll back from GitHub** (recommended): **Actions → "Sync Data & Static Files" →
+    Run workflow**, put a tag or commit SHA in the **rollback** field, leave `reason`
+    alone, and run it. The workflow restores the artifact files from that snapshot as a
+    **new commit** on `data` and purges jsDelivr. Because history is append-only, the
+    rollback can itself be rolled back or reverted.
+3.  **Or from a checkout**: `git revert <sha> && git push origin HEAD:data` — a normal
+    revert commit, no force-push.
+
+The sync workflow never force-pushes; if another run published in the meantime the push
+is rejected and the job fails rather than overwriting newer data.
 
 ---
 

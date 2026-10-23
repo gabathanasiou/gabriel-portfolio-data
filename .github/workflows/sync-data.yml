@@ -16,12 +16,17 @@ on:
         description: 'Reason for sync (optional)'
         required: false
         default: 'Manual content sync'
+      rollback:
+        description: 'Rollback: tag or commit SHA to restore (leave blank for a normal sync)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
 
 jobs:
   sync:
+    if: ${{ !inputs.rollback }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -94,8 +99,8 @@ jobs:
       - name: Deploy Data to 'data' branch
         if: steps.check_changes.outputs.changed == 'true'
         run: |
-          # 1. Prepare artifact stage (build output plus the data branch's own
-          #    .gitignore, so a later checkout of `data` cannot stage secrets)
+          # 1. Prepare the artifact stage (build output plus the data branch's
+          #    own .gitignore, so a later checkout of `data` cannot stage secrets)
           rm -rf ../stage
           mkdir -p ../stage
           if [ -d "directing" ]; then cp -r directing ../stage/; fi
@@ -108,22 +113,9 @@ jobs:
           #    path outside directing/, postproduction/, cloudinary-mapping.json.
           node scripts/guard-data-branch.mjs ../stage
 
-          # 3. Switch to a fresh orphan branch
-          git checkout --orphan data-branch
-          git rm -rf .
-
-          # 4. Copy artifacts back (`src/.` also copies dotfiles)
-          cp -r ../stage/. .
-
-          # 5. Explicitly add only what we want — never `git add .`
-          git add -f directing/ postproduction/ cloudinary-mapping.json .gitignore
-
-          # 6. Commit and push
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git commit -m "chore: full data & static sync [ci skip] (clean)"
-          git push -f origin data-branch:data
-          echo "✅ Data branch updated successfully (Artifacts only)"
+          # 3. Append the publish to the existing `data` history and tag it.
+          #    No force-push: history is kept for `git revert` and rollback.
+          node scripts/publish-data.mjs publish --stage ../stage
 
       - name: Purge jsDelivr Cache
         if: steps.check_changes.outputs.changed == 'true'
@@ -136,6 +128,38 @@ jobs:
           curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/sitemap.xml"
           curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
           # Post-Production
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
+          echo "✅ Cache purged for all static files"
+
+  rollback:
+    if: ${{ inputs.rollback != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # Restores the artifacts from <ref> as a NEW commit on `data`, so the
+      # rollback is append-only and can itself be rolled back.
+      - name: Restore 'data' to the requested snapshot
+        run: node scripts/publish-data.mjs rollback --ref "${{ inputs.rollback }}"
+
+      - name: Purge jsDelivr Cache
+        run: |
+          echo "⏳ Waiting 30s for CDN propagation before purging..."
+          sleep 30
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/portfolio-data.json"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/sitemap.xml"
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
           curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
           curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
           curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"

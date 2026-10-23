@@ -9,6 +9,7 @@
     "sync:robots": "PORTFOLIO_MODE=directing node scripts/generate-robots.mjs && PORTFOLIO_MODE=postproduction node scripts/generate-robots.mjs",
     "sync:all": "npm run sync:data && npm run sync:sitemap && npm run sync:robots",
     "guard:data": "node scripts/guard-data-branch.mjs",
+    "publish:data": "node scripts/publish-data.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "roadmap": "node scripts/roadmap.mjs",

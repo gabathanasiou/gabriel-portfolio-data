@@ -59,8 +59,9 @@ changing the pipeline.
   `docs/MAINTENANCE.md` and stages explicit artifact paths only.
 - Secrets live in GitHub Actions secrets (CI) and `.env.local` (local only). Never log
   them, and do not put a provider token in a `VITE_`-prefixed variable.
-- The published `data` branch is force-pushed by CI and is the live site: treat a change
-  to the workflow as a production change.
+- The published `data` branch is the live site: treat a change to the workflow as a
+  production change. Publishes are append-only commits tagged `data-*`; restore one with
+  the workflow's `rollback` input (`docs/MAINTENANCE.md`).
 - Do not hand-edit the `data` branch; the guarded worktree procedure in
   `docs/MAINTENANCE.md` is the only exception.
 
