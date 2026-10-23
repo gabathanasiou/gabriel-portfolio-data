@@ -42,7 +42,7 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
 | **P3** | 11 | ✔ Slug uniqueness and non-Latin titles | F-16 | S |
 | **P3** | 12 | ✔ Repo hygiene batch | CODE-06, CODE-09, hardening | S |
-| **P3** | 13 | Decide and document the historical schema exposure | F-10 | M |
+| **P3** | 13 | ✔ Decide and document the historical schema exposure | F-10 | M |
 
 ✔ = closed; the row stays here as the audit-coverage map, details in
 `docs/ROADMAP-ARCHIVE.md`.
@@ -71,24 +71,6 @@ item below. Work top-down; P1 before the next publish.
   `accessToken` (unit test).
 - **Audit:** F-15, F-09 — `docs/audits/2026-10-23-security-audit.md`
 - **Effort:** S
-
-**Relations**: none.
-
-## 13. Decide and document the historical schema exposure (`[ ]`)
-
-- **Priority:** P3
-- **Request:** `docs/airtable-schema.json` was deleted in `e4ca46f` ("contains business
-  fields") but remains public at `53796f7`/`e4ca46f^`: 59,583 bytes of field names,
-  formulas and select choices including rate, invoice and client-contact fields. No
-  records, PII values or credentials.
-- **Approach:** Choose one: rewrite history with `git filter-repo` (0 forks) and ask
-  GitHub Support to purge cached views; or accept and document the residual exposure in
-  `docs/SCHEMA.md`. Either way, add a pre-commit guard for business-schema files.
-- **Verify:** The decision is recorded; `git log --all -- docs/airtable-schema.json`
-  either finds nothing or the documented acceptance note exists; a commit attempting to
-  add the file is blocked.
-- **Audit:** F-10 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** M
 
 **Relations**: none.
 

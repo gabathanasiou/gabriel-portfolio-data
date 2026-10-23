@@ -1,0 +1,20 @@
+#!/bin/sh
+# Refuse to commit business-schema dumps, local schema notes and env files.
+#
+# The private schema dump was deleted but remains in history (roadmap #13,
+# accepted exposure). This hook stops a new copy from being committed.
+# Install once per clone: npm run hooks:install
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+
+protected=$(printf '%s\n' "$staged" \
+  | grep -Ev '(^|/)\.env\.example$' \
+  | grep -E '(^|/)\.env|(^|/)SCHEMA-FULL\.local\.md$|^docs/airtable-schema\.json$|instagram-studio-data.*\.json$' \
+  || true)
+
+if [ -n "$protected" ]; then
+  echo "pre-commit: refusing to commit protected file(s):" >&2
+  printf '  %s\n' "$protected" >&2
+  echo "See docs/SCHEMA.md (historical exposure) and docs/MAINTENANCE.md." >&2
+  exit 1
+fi

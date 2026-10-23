@@ -67,6 +67,8 @@ changing the pipeline.
 - `main` is protected: land changes through a PR (the CI `test` check must pass; no
   direct pushes, force-pushes or deletions). `data` accepts fast-forward publishes
   only — no force-push, no deletion.
+- Run `npm run hooks:install` once per clone: the pre-commit hook blocks business-schema
+  dumps, `SCHEMA-FULL.local.md` and env files (see `docs/SCHEMA.md`).
 
 ## Rules
 

@@ -25,3 +25,4 @@ never renumber or reuse.**
 | 7 | Harden CI supply chain and protect branches | .github/workflows/sync-data.yml (split jobs, SHA pins, least privilege); .github/workflows/ci.yml (SHA pins, .nvmrc); .nvmrc; package.json (engines); GitHub branch protection on main + data |
 | 11 | Slug uniqueness and non-Latin titles | scripts/lib/airtable-helpers.mjs (makeContentSlug); scripts/lib/sync-logic.mjs; scripts/lib/publish-gate.mjs (duplicateSlugs); scripts/utils/__tests__/slug-content.test.mjs; scripts/utils/__tests__/publish-gate.test.mjs |
 | 12 | Repo hygiene batch | deleted 11 unreferenced .ts twins + Instagram uploader/step; untracked .DS_Store; removed run_log.txt; LICENSE; .env.example; scripts/utils/helpers/textHelpers.mjs (normalizeTitle); .github/workflows/sync-data.yml |
+| 13 | Decide and document the historical schema exposure | docs/SCHEMA.md (historical exposure accepted); .githooks/pre-commit; package.json (hooks:install); AGENTS.md |

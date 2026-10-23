@@ -12,6 +12,7 @@
     "publish:data": "node scripts/publish-data.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "hooks:install": "git config core.hooksPath .githooks",
     "roadmap": "node scripts/roadmap.mjs",
     "roadmap:check": "node scripts/roadmap.mjs check",
     "lint:docs": "node scripts/check-doc-budget.mjs",
