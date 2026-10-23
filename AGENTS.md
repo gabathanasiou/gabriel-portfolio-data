@@ -18,6 +18,17 @@ changing the pipeline.
 - `npm run lint:docs` — doc-budget + roadmap hygiene (`npm run lint` runs it)
 - There is no `dev` or `build` command. Do not invent one.
 
+## MCP servers (project)
+
+`opencode.json` configures two remote MCP servers, both OAuth (no secrets in the file):
+
+- `airtable` — official Airtable MCP (bases and records).
+- `cloudinary` — official Cloudinary asset-management MCP.
+
+After a fresh setup, run `/mcps`, pick each server and sign in; `opencode mcp list`
+should then report `connected`. Keep the Airtable grant read-only unless a task needs
+writes. These are for content/asset work — they cannot rotate API credentials.
+
 ## Roadmap — the required workflow
 
 - `docs/ROADMAP.md` holds **open items only** (`[ ]` / `[~]`), led by a priority queue.
