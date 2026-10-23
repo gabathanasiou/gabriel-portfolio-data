@@ -13,7 +13,12 @@ import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 import { getVideoThumbnail } from '../utils/videoHelpers.mjs';
 import { normalizeTitle, calculateReadingTime, parseCreditsText } from '../utils/helpers/textHelpers.mjs';
-import { uploadToCloudinary, checkImageExists } from '../utils/cloudinary/cloudinaryHelpers.mjs';
+import {
+    uploadToCloudinary,
+    checkImageExists,
+    needsWebSafeConversion,
+    toWebSafeImageUrl
+} from '../utils/cloudinary/cloudinaryHelpers.mjs';
 import { retryWithBackoff, isNetworkError } from '../utils/helpers/networkHelpers.mjs';
 import { sanitizeJournalContent, sanitizeDomain } from './sanitize.mjs';
 import {
@@ -207,7 +212,7 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
     const configImages = Object.fromEntries(
         (cloudinaryMapping?.config?.images || [])
             .filter(img => (img.portfolioId || '').toLowerCase() === portfolioMode.toLowerCase())
-            .map(img => [img.type, img.cloudinaryUrl])
+            .map(img => [img.type, toWebSafeImageUrl(img.cloudinaryUrl, img.format)])
     );
 
     // Helper: resolve attachment URL with Cloudinary override
@@ -413,7 +418,9 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
         const galleryAttachments = f['Gallery'] || f['Gallery (Image)'] || [];
         const gallery = galleryAttachments.map((att, idx) => {
             const cloudinaryImg = cloudinaryMap[record.id]?.[idx];
-            if (cloudinaryImg?.cloudinaryUrl) return cloudinaryImg.cloudinaryUrl;
+            if (cloudinaryImg?.cloudinaryUrl) {
+                return toWebSafeImageUrl(cloudinaryImg.cloudinaryUrl, cloudinaryImg.format);
+            }
             if (verbose) console.warn(`[sync] ⚠️ Missing Cloudinary URL for "${title}" gallery[${idx}]`);
             return att.url;
         });
@@ -488,7 +495,9 @@ function processJournal(records, cloudinaryMapping, verbose) {
         const coverAttachments = f['Cover Image'] || [];
         const airtableUrl = coverAttachments[0]?.url || '';
         const cloudinaryImg = cloudinaryMap[record.id]?.[0];
-        const imageUrl = cloudinaryImg?.cloudinaryUrl || airtableUrl;
+        const imageUrl = cloudinaryImg?.cloudinaryUrl
+            ? toWebSafeImageUrl(cloudinaryImg.cloudinaryUrl, cloudinaryImg.format)
+            : airtableUrl;
 
         if (!cloudinaryImg?.cloudinaryUrl && airtableUrl && verbose) {
             console.warn(`[sync] ⚠️ Missing Cloudinary URL for journal "${title}"`);
@@ -545,6 +554,7 @@ export function needsReplacement(existing, airtableId) {
     if (!existing) return null;
     if (!existing.airtableId) return 'no attachment metadata (legacy upload)';
     if (existing.airtableId !== airtableId) return `attachment ${existing.airtableId} → ${airtableId}`;
+    if (needsWebSafeConversion(existing.format)) return `non-web format (${existing.format})`;
     return null;
 }
 
@@ -586,24 +596,24 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
     // ── Build cache from existing mapping ──
     // Key: "publicId::airtableId" → cached image entry
     const cache = new Map();
+    // Non-web-safe assets (HEIC/TIFF) are deliberately not cached: they must
+    // fall through to the API check so this run converts them in place.
+    const cacheable = (img) =>
+        Boolean(img.publicId && img.cloudinaryUrl && img.airtableId) &&
+        !needsWebSafeConversion(img.format);
+
     for (const project of (existingMapping?.projects || [])) {
         for (const img of (project.images || [])) {
-            if (img.publicId && img.cloudinaryUrl && img.airtableId) {
-                cache.set(`${img.publicId}::${img.airtableId}`, img);
-            }
+            if (cacheable(img)) cache.set(`${img.publicId}::${img.airtableId}`, img);
         }
     }
     for (const post of (existingMapping?.journal || [])) {
         for (const img of (post.images || [])) {
-            if (img.publicId && img.cloudinaryUrl && img.airtableId) {
-                cache.set(`${img.publicId}::${img.airtableId}`, img);
-            }
+            if (cacheable(img)) cache.set(`${img.publicId}::${img.airtableId}`, img);
         }
     }
     for (const img of (existingMapping?.config?.images || [])) {
-        if (img.publicId && img.cloudinaryUrl && img.airtableId) {
-            cache.set(`${img.publicId}::${img.airtableId}`, img);
-        }
+        if (cacheable(img)) cache.set(`${img.publicId}::${img.airtableId}`, img);
     }
     log(`📦 Loaded ${cache.size} cached Cloudinary entries`);
 
@@ -617,7 +627,9 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
     let uploaded = 0, cached = 0, checkedAndFound = 0;
 
     // Helper: resolve a single image (cache → API check → upload)
-    async function resolveImage(publicId, airtableId, airtableUrl, title, label) {
+    // `sourceFormat` is the Airtable attachment MIME type; when it is HEIC/TIFF
+    // (or the existing asset is), the upload is converted to JPEG.
+    async function resolveImage(publicId, airtableId, airtableUrl, title, label, sourceFormat = '') {
         // 1. Check local cache first (instant, no API call)
         const cacheKey = `${publicId}::${airtableId}`;
         const cachedEntry = cache.get(cacheKey);
@@ -655,8 +667,13 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
         if (!airtableUrl) {
             throw new Error(`Attachment ${airtableId} for "${title}" has no source URL`);
         }
+        const convertToJpg = needsWebSafeConversion(sourceFormat) || needsWebSafeConversion(existing?.format);
         const result = await retryWithBackoff(async () => {
-            const uploadedResult = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title, airtableId });
+            const uploadedResult = await uploadToCloudinary(cloudinary, airtableUrl, publicId, {
+                title,
+                airtableId,
+                format: convertToJpg ? 'jpg' : undefined
+            });
             if (!uploadedResult.success) {
                 const error = new Error(uploadedResult.error || `Upload failed for ${publicId}`);
                 error.status = uploadedResult.status;
@@ -683,7 +700,7 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
         for (let i = 0; i < gallery.length; i++) {
             const attachment = gallery[i];
             const publicId = `portfolio-projects-${record.id}-${i}`;
-            const resolved = await resolveImage(publicId, attachment.id, attachment.url, title, `[${i}]`);
+            const resolved = await resolveImage(publicId, attachment.id, attachment.url, title, `[${i}]`, attachment.type);
             projectEntry.images.push({ index: i, ...resolved });
         }
 
@@ -699,7 +716,7 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
 
         if (cover) {
             const publicId = `portfolio-journal-${record.id}`;
-            const resolved = await resolveImage(publicId, cover.id, cover.url, title, '');
+            const resolved = await resolveImage(publicId, cover.id, cover.url, title, '', cover.type);
             postEntry.images.push({ index: 0, ...resolved });
         }
 
@@ -723,7 +740,7 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
             const attachment = (f[item.field] || [])[0];
             if (attachment) {
                 const publicId = `portfolio-config-${portfolioId}-${item.type}`;
-                const resolved = await resolveImage(publicId, attachment.id, attachment.url, portfolioId, `(${item.type})`);
+                const resolved = await resolveImage(publicId, attachment.id, attachment.url, portfolioId, `(${item.type})`, attachment.type);
                 newMapping.config.images.push({
                     type: item.type,
                     portfolioId,

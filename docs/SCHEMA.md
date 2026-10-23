@@ -166,8 +166,14 @@ Images are synced to Cloudinary using a **check-then-upload** strategy:
    A different attachment id — or no metadata on a pre-migration asset — re-uploads
    over the same public id with `invalidate: true`, so a replaced or reordered gallery
    image can never serve the old picture.
-5. Mapping saved to `cloudinary-mapping.json` at repo root (published copy contains
+5. Uploads convert non-web sources. A HEIC/HEIF or TIFF attachment — or an existing
+   asset stored in one of those formats — is uploaded with `format: 'jpg'`: Chrome,
+   Firefox and Edge cannot decode them, so a raw HEIC delivery URL is a broken image
+   outside Safari.
+6. Mapping saved to `cloudinary-mapping.json` at repo root (published copy contains
    published records only and no titles).
+7. Delivery URLs are always browser-safe: a non-web Cloudinary URL is rewritten to an
+   `f_jpg,w_1600` transformation at the output boundary as a last line of defence.
 
 ---
 

@@ -6,6 +6,74 @@
 import { CLOUDINARY_PRESETS, CLOUDINARY_CONFIG } from './cloudinaryConfig.mjs';
 
 /**
+ * Formats a browser can decode in an <img> without a plugin.
+ *
+ * HEIC/HEIF (the default on Apple photos) and TIFF are fine as *inputs* —
+ * Cloudinary decodes them — but Safari is the only mainstream browser that
+ * renders them natively. Chrome, Firefox and Edge show a broken image.
+ */
+export const WEB_SAFE_IMAGE_FORMATS = new Set(['jpg', 'png', 'webp', 'avif', 'gif', 'svg']);
+
+const FORMAT_ALIASES = { jpeg: 'jpg', tif: 'tiff', heif: 'heic' };
+
+/**
+ * Normalize a format or MIME type to a bare Cloudinary-style format name.
+ * @param {string} format - e.g. 'image/HEIC', '.tif', 'jpeg'
+ * @returns {string} e.g. 'heic', 'tiff', 'jpg'
+ */
+export const normalizeImageFormat = (format) =>
+  String(format || '')
+    .toLowerCase()
+    .trim()
+    .replace(/^image\//, '')
+    .replace(/\+xml$/, '')
+    .replace(/^\./, '')
+    .replace(/^(jpeg|tif|heif)$/, (alias) => FORMAT_ALIASES[alias]);
+
+/**
+ * True when the format must be converted before a browser can display it.
+ * Empty/unknown input is left alone: only a known bad format is a problem.
+ */
+export const needsWebSafeConversion = (format) => {
+  const normalized = normalizeImageFormat(format);
+  return normalized !== '' && !WEB_SAFE_IMAGE_FORMATS.has(normalized);
+};
+
+const CLOUDINARY_UPLOAD_URL = /^(https?:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(.*)$/i;
+const NON_WEB_EXTENSION = /\.(?:heic|heif|tiff?)$/i;
+const TRANSFORM_PARAM = /^(?:f|w|h|q|c|g|dpr|ar|e|b|r|t|o|x|y|z|l|u|ac|af|if|fl|dn|dl|pg|sp|vc|vs|cs|cd|co|bo|du|so|eo|br|fps|ki)_/i;
+
+/**
+ * Make a stored image URL web-safe without re-uploading.
+ *
+ * A raw Cloudinary URL for a HEIC asset (`/image/upload/v123/name.heic`) is
+ * served as `image/heic`. Inserting an `f_jpg` transformation makes Cloudinary
+ * decode it and deliver JPEG instead. URLs that already carry a transformation,
+ * or are not Cloudinary upload URLs, are returned unchanged.
+ *
+ * @param {string} url - Stored image URL
+ * @param {string} [format] - Known asset format (needed when the URL has no extension)
+ * @returns {string} A browser-safe URL
+ */
+export const toWebSafeImageUrl = (url, format = '') => {
+  if (!url) return '';
+
+  const match = String(url).match(CLOUDINARY_UPLOAD_URL);
+  if (!match) return url;
+
+  const [, base, rest] = match;
+  if (!rest) return url;
+
+  const firstSegment = rest.split('/')[0];
+  if (firstSegment.includes(',') || TRANSFORM_PARAM.test(firstSegment)) return url;
+
+  const path = rest.split('?')[0];
+  if (!NON_WEB_EXTENSION.test(path) && !needsWebSafeConversion(format)) return url;
+
+  return `${base}f_jpg,w_1600,c_limit,q_85/${rest}`;
+};
+
+/**
  * Delivery transformation presets (NOT used for upload)
  * These define the quality and size variants available at delivery time.
  * Images are uploaded at original quality and transformed on-demand via URL parameters.
@@ -56,17 +124,21 @@ export const generateEagerTransformations = () => {
  * @param {Object} options - Upload options
  * @param {string} options.title - Image title (for metadata)
  * @param {boolean} options.overwrite - Whether to overwrite existing (default: true)
+ * @param {string} [options.format] - Output format. Set to 'jpg' for non-web sources
+ *   (HEIC/HEIF/TIFF) so the stored asset is browser-decodable.
  * @returns {Promise<Object>} Upload result with success status and metadata
  */
 export const uploadToCloudinary = async (cloudinary, imageUrl, publicId, options = {}) => {
   const {
     title = '',
     airtableId = '',
-    overwrite = true
+    overwrite = true,
+    format = ''
   } = options;
 
-  // Upload original image without any transformations
-  // Transformations happen at delivery time only
+  // Upload at original quality; delivery-time transformations still apply.
+  // A non-empty `format` converts a source browsers cannot decode (HEIC/TIFF)
+  // into a web-safe asset at rest.
   const uploadOptions = {
     public_id: publicId,
     folder: '', // Already in public_id
@@ -76,6 +148,10 @@ export const uploadToCloudinary = async (cloudinary, imageUrl, publicId, options
     // record id + index), so the CDN copy must be invalidated on overwrite.
     invalidate: overwrite
   };
+
+  if (format) {
+    uploadOptions.format = format;
+  }
 
   // Attachment identity is stored on the asset so a later run can tell a
   // genuinely unchanged image from a replaced one that reused the same slot.
