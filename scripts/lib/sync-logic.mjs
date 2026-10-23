@@ -36,6 +36,25 @@ import {
 // ═══════════════════════════════════════════════════════════════
 
 /**
+ * Whether a Projects record can appear in a portfolio (status + role filter).
+ * Shared by the portfolio processor and the image-sync scope so the two can
+ * never disagree about what is published.
+ */
+export function isProjectVisible(fields, displayStatusField, allowedRoles = []) {
+    const displayStatus = fields?.[displayStatusField] || '';
+    if (!displayStatus || displayStatus === 'Hidden') return false;
+
+    if (allowedRoles.length > 0) {
+        const roleField = fields?.['Role'] || null;
+        if (!roleField) return false;
+        const projectRoles = Array.isArray(roleField) ? roleField : [roleField];
+        if (!projectRoles.some(role => allowedRoles.includes(role))) return false;
+    }
+
+    return true;
+}
+
+/**
  * Unified sync: fetch once, process both portfolios, write both files.
  *
  * @param {Object} config
@@ -85,8 +104,26 @@ export async function syncPortfolios(config) {
     log('✅ Built lookup maps');
 
     // ── Step 3: Sync images to Cloudinary (check-then-upload) ──
+    // Only records that can actually appear in a portfolio need images: the
+    // published mapping is filtered to them (#3), so syncing hidden records
+    // would re-check (and, after the attachment-identity migration, re-upload)
+    // every unpublished image on each run.
+    const displayStatusFieldFor = (mode) => mode === 'postproduction' ? 'Display Status (Post)' : 'Display Status';
     const existingMapping = loadCloudinaryMapping(outputDir);
-    const updatedMapping = await syncImagesToCloudinary(projectRecords, journalRecords, settingsRecords, existingMapping, verbose);
+    const visibilityByMode = portfolioModes.map(mode => ({
+        field: displayStatusFieldFor(mode),
+        roles: (processConfig(settingsRecords, existingMapping, mode, verbose).allowedRoles || [])
+    }));
+    const visibleProjectRecords = projectRecords.filter(record => {
+        const f = record.fields || {};
+        return visibilityByMode.some(v => isProjectVisible(f, v.field, v.roles));
+    });
+    const publishedJournalRecords = journalRecords.filter(record =>
+        (record.fields?.['Status'] || '') === 'Published'
+    );
+    log(`✅ Image sync scope: ${visibleProjectRecords.length}/${projectRecords.length} projects, ${publishedJournalRecords.length}/${journalRecords.length} journal`);
+
+    const updatedMapping = await syncImagesToCloudinary(visibleProjectRecords, publishedJournalRecords, settingsRecords, existingMapping, verbose);
 
     if (!skipFileWrites && updatedMapping) {
         saveCloudinaryMapping(outputDir, updatedMapping);
@@ -346,17 +383,12 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
     for (const record of records) {
         const f = record.fields || {};
 
-        // ── Visibility filter ──
-        const displayStatus = f[displayStatusField] || '';
-        if (!displayStatus || displayStatus === 'Hidden') continue;
+        // ── Visibility filter (shared with the image-sync scope) ──
+        if (!isProjectVisible(f, displayStatusField, allowedRoles)) continue;
 
-        // ── Role filter ──
+        // ── Role field (also used for owner/cross-site credits) ──
         const roleField = f['Role'] || null;
-        if (allowedRoles.length > 0) {
-            if (!roleField) continue;
-            const projectRoles = Array.isArray(roleField) ? roleField : [roleField];
-            if (!projectRoles.some(r => allowedRoles.includes(r))) continue;
-        }
+        const displayStatus = f[displayStatusField] || '';
 
         // ── Core fields ──
         const rawTitle = f['Name'] || 'Untitled';
