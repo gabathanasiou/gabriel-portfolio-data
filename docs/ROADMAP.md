@@ -47,7 +47,7 @@ item below. Work top-down; P1 before the next publish.
 ✔ = closed; the row stays here as the audit-coverage map, details in
 `docs/ROADMAP-ARCHIVE.md`.
 
-## 10. Credential hygiene and disclosure process (`[ ]`)
+## 10. Credential hygiene and disclosure process (`[~]`)
 
 - **Priority:** P2
 - **Request:** Live credentials sit in `.env.local` (mode 644) and an identical copy in
@@ -60,6 +60,12 @@ item below. Work top-down; P1 before the next publish.
   commitment; write a one-page stolen-laptop/rotation runbook. Fix or remove the
   Instagram uploader: strip `instagram.accessToken`, use `access_mode: 'authenticated'`,
   clean up in `finally`, gitignore both filenames.
+- **Done:** `SECURITY.md` + `docs/SECURITY-RUNBOOK.md`; the secret-bearing stash was
+  dropped and `.env.local` is mode 600; the Instagram uploader strips credentials,
+  uploads authenticated, cleans up in `finally`, and refuses a token-bearing payload
+  (test). No `.env*` is reachable from any ref.
+- **Remaining (owner):** rotate the Airtable PAT and the Cloudinary key/secret at the
+  next window, then re-check secret scanning.
 - **Verify:** `git stash list` is empty; no `.env*` blob is reachable from any ref;
   `SECURITY.md` exists; the Instagram script refuses a payload containing
   `accessToken` (unit test).
