@@ -61,18 +61,27 @@ export const generateEagerTransformations = () => {
 export const uploadToCloudinary = async (cloudinary, imageUrl, publicId, options = {}) => {
   const {
     title = '',
+    airtableId = '',
     overwrite = true
   } = options;
-  
+
   // Upload original image without any transformations
   // Transformations happen at delivery time only
   const uploadOptions = {
     public_id: publicId,
     folder: '', // Already in public_id
     resource_type: 'image',
-    overwrite
-    // NO format, quality, or eager transformations
+    overwrite,
+    // A replaced image keeps its public ID (the frontend builds URLs from
+    // record id + index), so the CDN copy must be invalidated on overwrite.
+    invalidate: overwrite
   };
+
+  // Attachment identity is stored on the asset so a later run can tell a
+  // genuinely unchanged image from a replaced one that reused the same slot.
+  if (airtableId) {
+    uploadOptions.context = `airtableId=${airtableId}`;
+  }
   
   try {
     const result = await cloudinary.uploader.upload(imageUrl, uploadOptions);
@@ -111,13 +120,15 @@ export const isCloudinaryNotFound = (error) =>
  */
 export const checkImageExists = async (cloudinary, publicId) => {
   try {
-    const result = await cloudinary.api.resource(publicId, { resource_type: 'image' });
+    const result = await cloudinary.api.resource(publicId, { resource_type: 'image', context: true });
     return {
       exists: true,
       publicId: result.public_id,
       cloudinaryUrl: result.secure_url,
       format: result.format,
-      size: result.bytes
+      size: result.bytes,
+      // Set on upload (see uploadToCloudinary); null for pre-existing assets.
+      airtableId: result.context?.custom?.airtableId || null
     };
   } catch (error) {
     if (isCloudinaryNotFound(error)) {

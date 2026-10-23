@@ -30,7 +30,8 @@ describe('checkImageExists', () => {
       publicId: 'portfolio-projects-rec1-0',
       cloudinaryUrl: 'https://res.cloudinary.com/x/p.jpg',
       format: 'jpg',
-      size: 1234
+      size: 1234,
+      airtableId: null
     });
   });
 

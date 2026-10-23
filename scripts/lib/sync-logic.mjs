@@ -528,6 +528,24 @@ function isRetryableCloudinaryError(error) {
         isNetworkError(error);
 }
 
+/**
+ * Can an existing Cloudinary asset be reused for this attachment?
+ *
+ * Public IDs are positional (`portfolio-projects-<recordId>-<index>`) because
+ * the frontend builds URLs from record id + index. So the asset's stored
+ * attachment metadata is the only thing that distinguishes "unchanged" from
+ * "the owner replaced this image". No metadata means a pre-migration asset:
+ * re-upload it once to stamp the identity.
+ *
+ * @returns {string|null} why a re-upload is needed, or null to reuse
+ */
+export function needsReplacement(existing, airtableId) {
+    if (!existing) return null;
+    if (!existing.airtableId) return 'no attachment metadata (legacy upload)';
+    if (existing.airtableId !== airtableId) return `attachment ${existing.airtableId} → ${airtableId}`;
+    return null;
+}
+
 function configureCloudinarySdk() {
     const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.VITE_CLOUDINARY_CLOUD_NAME;
     const apiKey = process.env.CLOUDINARY_API_KEY;
@@ -613,7 +631,8 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
             1000,
             { shouldRetry: isRetryableCloudinaryError }
         );
-        if (existing) {
+        const replacementReason = needsReplacement(existing, airtableId);
+        if (existing && !replacementReason) {
             log(`   ⏭️ Exists (API): ${title} ${label}`);
             checkedAndFound++;
             return {
@@ -624,13 +643,18 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
             };
         }
 
-        // 3. Not in Cloudinary — upload (retry transient failures)
-        log(`   📤 Uploading: ${title} ${label}`);
+        // 3. Missing, or the same slot now holds a different attachment —
+        //    upload over it so the stale picture can never be reused.
+        if (replacementReason) {
+            log(`   ♻️ Replacing (${replacementReason}): ${title} ${label}`);
+        } else {
+            log(`   📤 Uploading: ${title} ${label}`);
+        }
         if (!airtableUrl) {
             throw new Error(`Attachment ${airtableId} for "${title}" has no source URL`);
         }
         const result = await retryWithBackoff(async () => {
-            const uploadedResult = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title });
+            const uploadedResult = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title, airtableId });
             if (!uploadedResult.success) {
                 const error = new Error(uploadedResult.error || `Upload failed for ${publicId}`);
                 error.status = uploadedResult.status;
