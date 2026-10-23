@@ -40,7 +40,7 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 8 | ✔ Make the test suite runnable and gated | F-13 | S |
 | **P2** | 9 | ✔ Retain publish history and add rollback | F-11 | S–M |
 | **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
-| **P3** | 11 | Slug uniqueness and non-Latin titles | F-16 | S |
+| **P3** | 11 | ✔ Slug uniqueness and non-Latin titles | F-16 | S |
 | **P3** | 12 | Repo hygiene batch | CODE-06, CODE-09, hardening | S |
 | **P3** | 13 | Decide and document the historical schema exposure | F-10 | M |
 
@@ -73,22 +73,6 @@ item below. Work top-down; P1 before the next publish.
 - **Effort:** S
 
 **Relations**: none.
-
-## 11. Slug uniqueness and non-Latin titles (`[ ]`)
-
-- **Priority:** P3
-- **Request:** `makeSlug` calls `slugify` only (`scripts/lib/airtable-helpers.mjs:136-140`);
-  `makeUniqueSlug` exists but is used only by tests. Duplicate titles produce duplicate
-  `/work/<slug>` URLs and duplicate sitemap entries; CJK/Arabic/Hebrew titles all become
-  `untitled` (`scripts/utils/generators/slugify.mjs:16,24`). Current data has 0 collisions.
-- **Approach:** Call `makeUniqueSlug` with a per-run `Set` and the record ID as fallback;
-  transliterate or suffix non-Latin slugs; assert uniqueness before writing.
-- **Verify:** Fixture with two identical titles and a Japanese title → unique, non-empty
-  slugs; sitemap has no duplicate `<loc>`.
-- **Audit:** F-16 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** S
-
-**Relations**: relates to #8 (add the fixture there).
 
 ## 12. Repo hygiene batch (`[ ]`)
 

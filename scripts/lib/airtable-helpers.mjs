@@ -7,7 +7,7 @@
 
 import { getVideoId } from '../utils/videoHelpers.mjs';
 import { parseCreditsText as parseCreditsTextShared } from '../utils/helpers/textHelpers.mjs';
-import { slugify } from '../utils/generators/slugify.mjs';
+import { slugify, makeUniqueSlug } from '../utils/generators/slugify.mjs';
 import {
   fetchWithTimeout,
   retryWithBackoff,
@@ -162,6 +162,31 @@ export function makeSlug(base) {
   const slug = slugify(base);
   // Limit to 80 chars for backward compatibility
   return slug.slice(0, 80) || 'item';
+}
+
+/**
+ * A slug that is unique within one portfolio (audit F-16).
+ *
+ * Duplicate titles used to produce duplicate `/work/<slug>` URLs and duplicate
+ * sitemap entries. A title with no Latin characters slugifies to `untitled`,
+ * which would also collide, so those get the record id as a suffix unless the
+ * author literally called it "Untitled".
+ *
+ * @param {string} title
+ * @param {Set<string>} usedSlugs - mutated with the returned slug
+ * @param {string} recordId
+ */
+export function makeContentSlug(title, usedSlugs, recordId) {
+  const base = makeSlug(title);
+  const isTransliterationFailure = base === 'untitled' &&
+    String(title || '').trim().toLowerCase() !== 'untitled';
+
+  if (isTransliterationFailure) {
+    const suffix = String(recordId || '').replace(/[^a-z0-9]/gi, '').slice(0, 6).toLowerCase();
+    return makeUniqueSlug(`untitled-${suffix}`, usedSlugs);
+  }
+
+  return makeUniqueSlug(base, usedSlugs, recordId);
 }
 
 /**

@@ -11,11 +11,12 @@ function makePayload(mode, count = 10, overrides = {}) {
     },
     projects: Array.from({ length: count }, (_, i) => ({
       id: `rec${mode}${i}`,
+      slug: `${mode}-project-${i}`,
       heroImage: 'https://res.cloudinary.com/demo/image/upload/v1/p.jpg',
       gallery: ['https://res.cloudinary.com/demo/image/upload/v1/g.jpg']
     })),
     posts: mode === 'directing'
-      ? [{ id: 'recPost', imageUrl: 'https://res.cloudinary.com/demo/image/upload/v1/c.jpg' }]
+      ? [{ id: 'recPost', slug: 'the-post', imageUrl: 'https://res.cloudinary.com/demo/image/upload/v1/c.jpg' }]
       : [],
     ...overrides,
     config: {
@@ -68,6 +69,18 @@ describe('validatePayload', () => {
     payload.projects[0].heroImage = 'https://v5.airtableusercontent.com/att123/expiring';
     const errors = validatePayload('directing', payload);
     expect(errors.join('\n')).toMatch(/Airtable image URL at projects\[0\]\.heroImage/);
+  });
+
+  it('refuses duplicate project slugs', () => {
+    const payload = makePayload('directing');
+    payload.projects[1].slug = payload.projects[0].slug;
+    expect(validatePayload('directing', payload).join('\n')).toMatch(/duplicate project slug/);
+  });
+
+  it('refuses duplicate post slugs', () => {
+    const payload = makePayload('directing');
+    payload.posts.push({ ...payload.posts[0] });
+    expect(validatePayload('directing', payload).join('\n')).toMatch(/duplicate post slug/);
   });
 
   it('refuses an abrupt project count drop', () => {

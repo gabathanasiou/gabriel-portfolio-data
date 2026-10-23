@@ -19,7 +19,7 @@ import { sanitizeJournalContent, sanitizeDomain } from './sanitize.mjs';
 import {
     fetchAirtableTable,
     parseExternalLinks,
-    makeSlug,
+    makeContentSlug,
     normalizeProjectType,
     resolveProductionCompany,
     resolveAwards
@@ -336,6 +336,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
     });
 
     const projects = [];
+    const usedSlugs = new Set();
 
     for (const record of records) {
         const f = record.fields || {};
@@ -438,7 +439,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
 
         projects.push({
             id: record.id,
-            slug: makeSlug(title),
+            slug: makeContentSlug(title, usedSlugs, record.id),
             title, type, kinds, genre, productionCompany, client,
             year, releaseDate, workDate, description,
             isFeatured, isHero, heroImage, gallery,
@@ -471,6 +472,7 @@ function processJournal(records, cloudinaryMapping, verbose) {
     });
 
     const posts = [];
+    const usedSlugs = new Set();
 
     for (const record of records) {
         const f = record.fields || {};
@@ -502,7 +504,7 @@ function processJournal(records, cloudinaryMapping, verbose) {
 
         posts.push({
             id: record.id,
-            slug: makeSlug(title),
+            slug: makeContentSlug(title, usedSlugs, record.id),
             title, date, status: 'Published',
             content, excerpt, readingTime, imageUrl,
             tags, relatedProjectId, relatedLinks,

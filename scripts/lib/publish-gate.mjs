@@ -63,6 +63,21 @@ export function findAirtableUrls(payload) {
   );
 }
 
+/** Slugs that appear more than once in a list (duplicate URLs / sitemap entries). */
+export function duplicateSlugs(items) {
+  const seen = new Set();
+  const duplicates = new Set();
+
+  for (const item of items || []) {
+    const slug = item?.slug;
+    if (typeof slug !== 'string' || slug === '') continue;
+    if (seen.has(slug)) duplicates.add(slug);
+    seen.add(slug);
+  }
+
+  return [...duplicates];
+}
+
 function checkDrop(kind, current, previous, errors) {
   if (!previous || !Array.isArray(previous)) return;
 
@@ -114,6 +129,13 @@ export function validatePayload(mode, payload, previous = null) {
 
   for (const { path, value } of findAirtableUrls(payload)) {
     errors.push(`${mode}: expiring Airtable image URL at ${path} (${value.slice(0, 60)}…)`);
+  }
+
+  for (const slug of duplicateSlugs(projects)) {
+    errors.push(`${mode}: duplicate project slug "${slug}" — /work/${slug} would collide`);
+  }
+  for (const slug of duplicateSlugs(posts)) {
+    errors.push(`${mode}: duplicate post slug "${slug}" — /journal/${slug} would collide`);
   }
 
   if (previous) {
