@@ -14,6 +14,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import { getVideoThumbnail } from '../utils/videoHelpers.mjs';
 import { normalizeTitle, calculateReadingTime, parseCreditsText } from '../utils/helpers/textHelpers.mjs';
 import { uploadToCloudinary, checkImageExists } from '../utils/cloudinary/cloudinaryHelpers.mjs';
+import { retryWithBackoff, isNetworkError } from '../utils/helpers/networkHelpers.mjs';
 import { sanitizeJournalContent, sanitizeDomain } from './sanitize.mjs';
 import {
     fetchAirtableTable,
@@ -520,6 +521,13 @@ function processJournal(records, cloudinaryMapping, verbose) {
 // Cloudinary Sync (check-then-upload)
 // ═══════════════════════════════════════════════════════════════
 
+/** Retry rate limits, 5xx and network failures; never 401/403/404. */
+function isRetryableCloudinaryError(error) {
+    return error?.status === 429 ||
+        (typeof error?.status === 'number' && error.status >= 500) ||
+        isNetworkError(error);
+}
+
 function configureCloudinarySdk() {
     const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.VITE_CLOUDINARY_CLOUD_NAME;
     const apiKey = process.env.CLOUDINARY_API_KEY;
@@ -598,8 +606,13 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
             return cachedEntry;
         }
 
-        // 2. Not in cache — check Cloudinary API
-        const existing = await checkImageExists(cloudinary, publicId);
+        // 2. Not in cache — check Cloudinary API (retry transient failures)
+        const existing = await retryWithBackoff(
+            () => checkImageExists(cloudinary, publicId),
+            3,
+            1000,
+            { shouldRetry: isRetryableCloudinaryError }
+        );
         if (existing) {
             log(`   ⏭️ Exists (API): ${title} ${label}`);
             checkedAndFound++;
@@ -611,15 +624,20 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
             };
         }
 
-        // 3. Not in Cloudinary — upload
+        // 3. Not in Cloudinary — upload (retry transient failures)
         log(`   📤 Uploading: ${title} ${label}`);
         if (!airtableUrl) {
             throw new Error(`Attachment ${airtableId} for "${title}" has no source URL`);
         }
-        const result = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title });
-        if (!result.success) {
-            throw new Error(`Cloudinary upload failed for ${publicId}: ${result.error}`);
-        }
+        const result = await retryWithBackoff(async () => {
+            const uploadedResult = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title });
+            if (!uploadedResult.success) {
+                const error = new Error(uploadedResult.error || `Upload failed for ${publicId}`);
+                error.status = uploadedResult.status;
+                throw error;
+            }
+            return uploadedResult;
+        }, 3, 2000, { shouldRetry: isRetryableCloudinaryError });
         uploaded++;
         return {
             publicId: result.publicId,

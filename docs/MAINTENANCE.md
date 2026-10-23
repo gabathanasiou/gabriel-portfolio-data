@@ -118,6 +118,27 @@ is rejected and the job fails rather than overwriting newer data.
 
 ---
 
+## 🔔 Automation and Alerts
+
+- **Schedule:** the workflow runs every Monday at 06:00 UTC as a safety net. GitHub
+  disables scheduled workflows after ~60 days without repository activity — if runs
+  stop appearing, open the Actions tab and re-enable the workflow.
+- **Airtable webhook:** the historical webhook never fired, which is why the schedule
+  exists. To wire it up, an Airtable automation must POST to
+  `https://api.github.com/repos/gabathanasiou/gabriel-portfolio-data/dispatches` with
+  `{"event_type":"airtable-webhook-sync"}` and a fine-grained token allowed to create
+  repository dispatches. Verify by checking that a new run lists
+  `repository_dispatch` as its trigger.
+- **Failure alerts:** set the `SYNC_ALERT_WEBHOOK` repository secret to a
+  Slack-compatible incoming webhook (any endpoint accepting `{"text": "..."}`). Failed
+  syncs and rollbacks POST the run URL. Without the secret only GitHub's default
+  failure email is sent.
+- **Freshness:** after a sync, the workflow refuses to publish when `lastUpdated` is
+  older than 2 days — `sync-data` preserves existing files when credentials are
+  missing, and republishing them silently would hide the breakage.
+
+---
+
 ## 🔄 Local Development & Testing
 
 ### Skip Syncing Locally

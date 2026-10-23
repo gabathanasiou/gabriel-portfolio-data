@@ -35,7 +35,7 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 3 | ✔ Stop leaking unpublished work in public artifacts | F-01 | S |
 | **P2** | 4 | ✔ Make the publish path fail-safe | F-03, F-06, F-17 | M |
 | **P2** | 5 | Key the Cloudinary cache by attachment identity | F-07 | M |
-| **P2** | 6 | Restore automated sync and add freshness/alerting | F-08, F-18 | M |
+| **P2** | 6 | ✔ Restore automated sync and add freshness/alerting | F-08, F-18 | M |
 | **P2** | 7 | Harden CI supply chain and protect branches | F-04, F-12 | M |
 | **P2** | 8 | ✔ Make the test suite runnable and gated | F-13 | S |
 | **P2** | 9 | ✔ Retain publish history and add rollback | F-11 | S–M |
@@ -63,27 +63,6 @@ item below. Work top-down; P1 before the next publish.
 - **Effort:** M
 
 **Relations**: none.
-
-## 6. Restore automated sync and add freshness/alerting (`[ ]`)
-
-- **Priority:** P2 — before the next publish
-- **Request:** The Airtable webhook has never fired (13/13 runs are manual; last publish
-  2026-03-07, 230 days stale), and there is no schedule, freshness check or failure
-  notification. Third-party calls have no timeout or retry
-  (`airtable-helpers.mjs:27-47`; `retryWithBackoff` is unused outside tests).
-- **Approach:**
-  - Add a weekly `schedule` fallback; verify and document the Airtable webhook.
-  - Add a freshness check (`lastUpdated` older than N days → fail + alert) and an
-    `if: failure()` notification step.
-  - Wrap Airtable, Cloudinary and oEmbed calls in `fetchWithTimeout` +
-    `retryWithBackoff` with jitter and `Retry-After`; add `--max-time` to the
-    mapping-download/purge `curl` calls.
-- **Verify:** A scheduled run lands without manual dispatch; a forced 429 is retried;
-  a stale `lastUpdated` fails the check; a failed run produces a notification.
-- **Audit:** F-08, F-18 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** M
-
-**Relations**: shares the workflow with #4; do them in the same pass.
 
 ## 7. Harden CI supply chain and protect branches (`[ ]`)
 

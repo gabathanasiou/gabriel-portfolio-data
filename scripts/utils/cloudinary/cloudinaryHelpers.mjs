@@ -88,7 +88,8 @@ export const uploadToCloudinary = async (cloudinary, imageUrl, publicId, options
     console.error(`Failed to upload ${publicId}:`, error.message);
     return {
       success: false,
-      error: error.message
+      error: error.message,
+      status: error?.error?.http_code ?? error?.http_code
     };
   }
 };
@@ -123,7 +124,9 @@ export const checkImageExists = async (cloudinary, publicId) => {
       return null;
     }
     const code = error?.error?.http_code ?? error?.http_code ?? 'unknown';
-    throw new Error(`Cloudinary lookup failed for ${publicId} (HTTP ${code}): ${error.message}`);
+    const wrapped = new Error(`Cloudinary lookup failed for ${publicId} (HTTP ${code}): ${error.message}`);
+    wrapped.status = typeof code === 'number' ? code : undefined;
+    throw wrapped;
   }
 };
 

@@ -8,9 +8,40 @@
 import { getVideoId } from '../utils/videoHelpers.mjs';
 import { parseCreditsText as parseCreditsTextShared } from '../utils/helpers/textHelpers.mjs';
 import { slugify } from '../utils/generators/slugify.mjs';
+import {
+  fetchWithTimeout,
+  retryWithBackoff,
+  isRateLimitError,
+  isNetworkError
+} from '../utils/helpers/networkHelpers.mjs';
+
+const AIRTABLE_TIMEOUT_MS = 30000;
+const AIRTABLE_MAX_ATTEMPTS = 4;
+
+/** Retry rate limits, transient network failures and 5xx — never 401/403/404. */
+export function isRetryableAirtableError(error) {
+  return isRateLimitError(error) ||
+    isNetworkError(error) ||
+    (typeof error?.status === 'number' && error.status >= 500);
+}
+
+async function fetchAirtablePage(url, token) {
+  const res = await fetchWithTimeout(url, {
+    headers: { Authorization: `Bearer ${token}` }
+  }, AIRTABLE_TIMEOUT_MS);
+
+  if (res.ok) return res;
+
+  const error = new Error(`Airtable request failed: ${res.status} ${res.statusText}`);
+  error.status = res.status;
+  error.isRateLimit = res.status === 429;
+  const retryAfter = Number(res.headers.get('retry-after'));
+  if (retryAfter > 0) error.retryAfterMs = retryAfter * 1000;
+  throw error;
+}
 
 /**
- * Fetch all records from an Airtable table with pagination support
+ * Fetch all records from a table, paginating and retrying transient failures.
  * @param {string} tableName - Name of the Airtable table
  * @param {string} sortField - Field to sort by (optional)
  * @param {string} token - Airtable API token
@@ -28,18 +59,12 @@ export async function fetchAirtableTable(tableName, sortField, token, baseId) {
     const offsetParam = offset ? `&offset=${offset}` : '';
     const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}?${sortParam}${offsetParam}`;
 
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    if (!res.ok) {
-      if (res.status === 429) {
-        const error = new Error(`Rate limit exceeded for ${tableName}`);
-        error.isRateLimit = true;
-        throw error;
-      }
-      throw new Error(`Failed to fetch ${tableName}: ${res.status} ${res.statusText}`);
-    }
+    const res = await retryWithBackoff(
+      () => fetchAirtablePage(url, token),
+      AIRTABLE_MAX_ATTEMPTS,
+      1000,
+      { shouldRetry: isRetryableAirtableError }
+    );
 
     const data = await res.json();
     allRecords = allRecords.concat(data.records || []);

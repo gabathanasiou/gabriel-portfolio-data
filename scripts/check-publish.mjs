@@ -51,7 +51,7 @@ function main() {
       payloads[mode] = readJson(path.join(options.dir, mode, 'portfolio-data.json'));
 
       if (options.previous) {
-        const previousFile = path.join(options.previous, `${mode}.json`);
+        const previousFile = path.join(options.previous, mode, 'portfolio-data.json');
         if (fs.existsSync(previousFile) && fs.statSync(previousFile).size > 0) {
           try {
             previousByMode[mode] = readJson(previousFile);
