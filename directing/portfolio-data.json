@@ -1,6 +1,112 @@
 {
   "projects": [
     {
+      "id": "recgWVx00Ohc1ibZQ",
+      "slug": "caroline-andrew-soft-hours",
+      "title": "Caroline Andrew Soft Hours",
+      "type": "Commercial",
+      "kinds": [
+        "Fashion Film"
+      ],
+      "genre": [],
+      "productionCompany": "PATCHWORK FILMS STUDIO LIMITED",
+      "client": "Caroline Andrew",
+      "year": "2026",
+      "releaseDate": "",
+      "workDate": "2026-07-15",
+      "description": "A social-first campaign exploring Caroline Andrew’s approach to weddings and bridal fashion through a series of four short documentary-style films featuring Caroline and her peers.",
+      "isFeatured": false,
+      "isHero": false,
+      "heroImage": "",
+      "gallery": [],
+      "videoUrl": "",
+      "additionalVideos": [],
+      "awards": [],
+      "credits": [
+        {
+          "role": "Director",
+          "name": "Gabriel Athanasiou"
+        },
+        {
+          "role": "Editor",
+          "name": "Lemon Post",
+          "isCrossSite": true,
+          "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Colourist",
+          "name": "Lemon Post",
+          "isCrossSite": true,
+          "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "DP",
+          "name": "Jessie Jing"
+        },
+        {
+          "role": "1st AD",
+          "name": "Nikos Papathanasiou"
+        },
+        {
+          "role": "Stylist",
+          "name": "Nikky Athan"
+        },
+        {
+          "role": "Styling Assistant",
+          "name": "Simona"
+        }
+      ],
+      "externalLinks": [],
+      "relatedArticleId": "recmF88y6wE2Xfw4f"
+    },
+    {
+      "id": "rect1U2BX7CGsCa0J",
+      "slug": "caroline-andrew-june",
+      "title": "Caroline Andrew June",
+      "type": "Commercial",
+      "kinds": [
+        "Social"
+      ],
+      "genre": [],
+      "productionCompany": "PATCHWORK FILMS STUDIO LIMITED",
+      "client": "Caroline Andrew",
+      "year": "2026",
+      "releaseDate": "",
+      "workDate": "2026-06-12",
+      "description": "A social-first campaign of four summer fashion films for Caroline Andrew, combining photography and video to capture a youthful take on timeless style and the old-money aesthetic.",
+      "isFeatured": false,
+      "isHero": false,
+      "heroImage": "",
+      "gallery": [],
+      "videoUrl": "",
+      "additionalVideos": [],
+      "awards": [],
+      "credits": [
+        {
+          "role": "Director",
+          "name": "Gabriel Athanasiou"
+        },
+        {
+          "role": "Editor",
+          "name": "Lemon Post",
+          "isCrossSite": true,
+          "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Colourist",
+          "name": "Lemon Post",
+          "isCrossSite": true,
+          "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "DP",
+          "name": "Jessie Jing"
+        }
+      ],
+      "externalLinks": [],
+      "relatedArticleId": null
+    },
+    {
       "id": "recnbZVXssWnqzk63",
       "slug": "kitt-medical-x-medical-tracker-partnership-video",
       "title": "Kitt Medical X Medical Tracker Partnership Video",
@@ -17,12 +123,12 @@
       "description": "A video announcing the partnership bewteen Kitt Medical, a defibralator but for allergies, and Medical Tracker, a digital accident book for schools and more.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715880/portfolio-projects-recnbZVXssWnqzk63-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768609/portfolio-projects-recnbZVXssWnqzk63-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715880/portfolio-projects-recnbZVXssWnqzk63-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715880/portfolio-projects-recnbZVXssWnqzk63-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715881/portfolio-projects-recnbZVXssWnqzk63-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715882/portfolio-projects-recnbZVXssWnqzk63-3.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768609/portfolio-projects-recnbZVXssWnqzk63-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768611/portfolio-projects-recnbZVXssWnqzk63-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768613/portfolio-projects-recnbZVXssWnqzk63-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768615/portfolio-projects-recnbZVXssWnqzk63-3.jpg"
       ],
       "videoUrl": "https://vimeo.com/1142566993/aebf7a6fc6?share=copy&fl=sv&fe=ci",
       "additionalVideos": [],
@@ -179,7 +285,7 @@
     {
       "id": "recvC2kbUF9Dh5h6f",
       "slug": "talon-pipesnug-fluesnug",
-      "title": "Talon: Pipesnug & Fluesnug",
+      "title": "Talon: PipeSnug & FlueSnug",
       "type": "Commercial",
       "kinds": [
         "Commercial"
@@ -214,7 +320,7 @@
     {
       "id": "recryV8jTtQDWLB9B",
       "slug": "squid-campaign-2025",
-      "title": "Squid Campaign 2025",
+      "title": "SQUID Campaign 2025",
       "type": "Commercial",
       "kinds": [
         "Campaign"
@@ -228,11 +334,11 @@
       "description": "After a successful collaboration with SQUID the year before, I was commissioned to lead their 2025 crowdfunding campaign. We traveled to Dublin to capture the story behind SQUID, meeting with the founders and crafting a dynamic video that blends motion graphics, live action, and animation. The video highlights SQUID’s innovative approach to digital loyalty cards and introduces Wave, their new feature designed to reward users seamlessly through purchases. The goal was to create an engaging and compelling piece to drive the campaign forward - and we did just that.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715884/portfolio-projects-recryV8jTtQDWLB9B-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768630/portfolio-projects-recryV8jTtQDWLB9B-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715884/portfolio-projects-recryV8jTtQDWLB9B-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715885/portfolio-projects-recryV8jTtQDWLB9B-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715886/portfolio-projects-recryV8jTtQDWLB9B-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768630/portfolio-projects-recryV8jTtQDWLB9B-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768631/portfolio-projects-recryV8jTtQDWLB9B-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768633/portfolio-projects-recryV8jTtQDWLB9B-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/1058682269/f0dc76ee99",
       "additionalVideos": [],
@@ -253,6 +359,10 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
         }
       ],
       "externalLinks": [],
@@ -261,7 +371,7 @@
     {
       "id": "recEt255eoOGfQFij",
       "slug": "the-big-mini-adventure-challenge",
-      "title": "The Big Mini Adventure Challenge",
+      "title": "THE BIG MINI Adventure Challenge",
       "type": "Commercial",
       "kinds": [
         "Campaign"
@@ -304,7 +414,7 @@
     {
       "id": "recGacwW665mArUly",
       "slug": "squid-campaign-2024",
-      "title": "Squid Campaign 2024",
+      "title": "SQUID Campaign 2024",
       "type": "Commercial",
       "kinds": [
         "Promo"
@@ -318,12 +428,12 @@
       "description": "For this project, I was commissioned to create a campaign for SQUID, a company that replaces traditional loyalty cards with a seamless digital system, benefiting both consumers and businesses. The goal was to present the platform in a natural, engaging way, highlighting its advantages from the perspectives of both users and business owners.\n\nA unique aspect of the campaign was having the main narrator actively participate in the story as a business owner, making the message feel more authentic and relatable. We also integrated animated graphics to enhance the storytelling, which I personally storyboarded. ",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715888/portfolio-projects-recGacwW665mArUly-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768475/portfolio-projects-recGacwW665mArUly-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715888/portfolio-projects-recGacwW665mArUly-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715889/portfolio-projects-recGacwW665mArUly-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715890/portfolio-projects-recGacwW665mArUly-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715891/portfolio-projects-recGacwW665mArUly-3.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768475/portfolio-projects-recGacwW665mArUly-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768476/portfolio-projects-recGacwW665mArUly-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768478/portfolio-projects-recGacwW665mArUly-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768480/portfolio-projects-recGacwW665mArUly-3.jpg"
       ],
       "videoUrl": "https://vimeo.com/924693982/c6f1951d6c",
       "additionalVideos": [],
@@ -346,7 +456,7 @@
     {
       "id": "recURzloIju3xMoDR",
       "slug": "health-lottery-whish",
-      "title": "Health Lottery Whish",
+      "title": "Health Lottery WHISH",
       "type": "Commercial",
       "kinds": [
         "Charity Film"
@@ -362,11 +472,11 @@
       "description": "WHISH (Whitby Hidden Impairment Supported Help) is a wonderful space where parents and children with hidden impairments can engage in various activities together.\n\nFor this project, we took a documentary-style approach, following a day at the facility and capturing heartfelt testimonials from parents. It was incredibly moving to witness the impact of WHISH firsthand and to highlight the importance of this community. Plus, we got to play with a big snake - which was an unexpected but fun bonus!",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715892/portfolio-projects-recURzloIju3xMoDR-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768537/portfolio-projects-recURzloIju3xMoDR-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715892/portfolio-projects-recURzloIju3xMoDR-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715893/portfolio-projects-recURzloIju3xMoDR-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715894/portfolio-projects-recURzloIju3xMoDR-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768537/portfolio-projects-recURzloIju3xMoDR-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768538/portfolio-projects-recURzloIju3xMoDR-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768540/portfolio-projects-recURzloIju3xMoDR-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/883315464/0850d50bbe",
       "additionalVideos": [],
@@ -383,7 +493,7 @@
     {
       "id": "recYUzFwdDdiIHdd6",
       "slug": "gilley-uk",
-      "title": "Gilley Uk",
+      "title": "Gilley UK",
       "type": "Commercial",
       "kinds": [
         "Campaign"
@@ -416,6 +526,14 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
+        },
+        {
+          "role": "Director of Photography",
+          "name": "Ani Kruntcheva"
         }
       ],
       "externalLinks": [],
@@ -424,7 +542,7 @@
     {
       "id": "recVlqGrss78joP5t",
       "slug": "restspace",
-      "title": "Restspace",
+      "title": "RestSpace",
       "type": "Commercial",
       "kinds": [
         "Commercial"
@@ -438,11 +556,11 @@
       "description": "For RestSpace, I was commissioned to create a video campaign showcasing their innovative sleeping booths designed to help employees recharge during the workday. After exploring several concepts, we landed on a dynamic POV-style approach, immersing viewers in the firsthand experience of using RestSpace.\n\nTo achieve the look of a seamless one-take, we mounted a RED Komodo camera directly onto the lead actor’s head - an exciting yet challenging process that required close collaboration. Since the actor essentially became the cinematographer, we worked together to ensure every moment was captured effectively. Choreographing movement through space, managing lighting shifts, and coordinating a large cast added to the complexity, but ultimately, we created a visually engaging and immersive commercial.\n\nIt was a unique project, both technically and creatively, and a rewarding challenge to bring to life.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715895/portfolio-projects-recVlqGrss78joP5t-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768546/portfolio-projects-recVlqGrss78joP5t-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715895/portfolio-projects-recVlqGrss78joP5t-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715896/portfolio-projects-recVlqGrss78joP5t-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715897/portfolio-projects-recVlqGrss78joP5t-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768546/portfolio-projects-recVlqGrss78joP5t-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768548/portfolio-projects-recVlqGrss78joP5t-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768550/portfolio-projects-recVlqGrss78joP5t-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/1051931785",
       "additionalVideos": [],
@@ -482,12 +600,12 @@
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715898/portfolio-projects-recloUQzk1n5hFU57-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764715898/portfolio-projects-recloUQzk1n5hFU57-0.jpg",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715899/portfolio-projects-recloUQzk1n5hFU57-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715900/portfolio-projects-recloUQzk1n5hFU57-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715901/portfolio-projects-recloUQzk1n5hFU57-3.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715901/portfolio-projects-recloUQzk1n5hFU57-4.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715902/portfolio-projects-recloUQzk1n5hFU57-5.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715903/portfolio-projects-recloUQzk1n5hFU57-6.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768597/portfolio-projects-recloUQzk1n5hFU57-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768598/portfolio-projects-recloUQzk1n5hFU57-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768600/portfolio-projects-recloUQzk1n5hFU57-3.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768603/portfolio-projects-recloUQzk1n5hFU57-4.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768605/portfolio-projects-recloUQzk1n5hFU57-5.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768606/portfolio-projects-recloUQzk1n5hFU57-6.jpg"
       ],
       "videoUrl": "[Hero Film ]https://vimeo.com/1142554337/2bcca34bfa, https://vimeo.com/881242794/e394444e54, https://vimeo.com/1142559159/775b0a967e, https://vimeo.com/1142556328/757b0c762f",
       "additionalVideos": [],
@@ -524,12 +642,12 @@
       "description": "We created the launch video for Sports Analytics School, a unique platform where football fans learn programming by analyzing real-time match data, almost like a game itself. The challenge was to showcase both the excitement of football and the learning process, while integrating key stats in a way that felt dynamic and engaging.\n\nOur approach blended real people enjoying the sport with motion graphics and stock footage, capturing the energy of both the game and the analytical process. Balancing storytelling with data visualization was tricky, but we found a rhythm that made it all work. A fun project that merges sports, tech, and education into an exciting experience!",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715905/portfolio-projects-recAhJUVXiAJyvOAK-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768462/portfolio-projects-recAhJUVXiAJyvOAK-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715905/portfolio-projects-recAhJUVXiAJyvOAK-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715906/portfolio-projects-recAhJUVXiAJyvOAK-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715906/portfolio-projects-recAhJUVXiAJyvOAK-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715907/portfolio-projects-recAhJUVXiAJyvOAK-3.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768462/portfolio-projects-recAhJUVXiAJyvOAK-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768463/portfolio-projects-recAhJUVXiAJyvOAK-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768465/portfolio-projects-recAhJUVXiAJyvOAK-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768466/portfolio-projects-recAhJUVXiAJyvOAK-3.jpg"
       ],
       "videoUrl": "https://vimeo.com/911185728/a934cb9990",
       "additionalVideos": [],
@@ -552,7 +670,7 @@
     {
       "id": "recfCKTEcmpkSWxsg",
       "slug": "fraqua-vive",
-      "title": "Fraqua Vive",
+      "title": "Fraqua VIVE",
       "type": "Commercial",
       "kinds": [
         "TVC"
@@ -637,6 +755,14 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
+        },
+        {
+          "role": "Director of Photography",
+          "name": "Ronan O'Loughlin"
         }
       ],
       "externalLinks": [],
@@ -659,14 +785,14 @@
       "description": "I was commissioned to direct an investor’s pitch video for Greenwich Peninsula, one of Europe’s largest regeneration projects, transforming 150 acres of former industrial land in North Greenwich, London, into a vibrant riverside community.\n\nOur goal was to showcase the dynamic lifestyle within the development and the rich history of the area. We employed aerial videography to capture the impressive architecture and the Peninsula’s integration into London’s skyline. The video featured interviews and testimonials, adopting a documentary-style format inspired by popular streaming platforms, to authentically convey the project’s vision and appeal.\n\nThis project was particularly exciting as it allowed us to delve into the transformation of a significant London area, highlighting contributions from renowned architects and planners. The experience of exploring the site’s evolution and future potential was both enlightening and inspiring.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715909/portfolio-projects-recaNFE1fKkSZnYTy-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768558/portfolio-projects-recaNFE1fKkSZnYTy-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715909/portfolio-projects-recaNFE1fKkSZnYTy-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715910/portfolio-projects-recaNFE1fKkSZnYTy-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715911/portfolio-projects-recaNFE1fKkSZnYTy-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715912/portfolio-projects-recaNFE1fKkSZnYTy-3.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715913/portfolio-projects-recaNFE1fKkSZnYTy-4.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715914/portfolio-projects-recaNFE1fKkSZnYTy-5.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768558/portfolio-projects-recaNFE1fKkSZnYTy-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768560/portfolio-projects-recaNFE1fKkSZnYTy-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768561/portfolio-projects-recaNFE1fKkSZnYTy-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768563/portfolio-projects-recaNFE1fKkSZnYTy-3.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768565/portfolio-projects-recaNFE1fKkSZnYTy-4.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768566/portfolio-projects-recaNFE1fKkSZnYTy-5.jpg"
       ],
       "videoUrl": "https://vimeo.com/864584365",
       "additionalVideos": [],
@@ -729,6 +855,14 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
+        },
+        {
+          "role": "Director of Photography",
+          "name": "Ronan O'Loughlin"
         }
       ],
       "externalLinks": [],
@@ -737,7 +871,7 @@
     {
       "id": "recfez0UpZ2DYKOd3",
       "slug": "losbros-impossible-to-resist",
-      "title": "Losbros Impossible To Resist",
+      "title": "LosBros Impossible To Resist",
       "type": "Commercial",
       "kinds": [
         "Commercial"
@@ -753,11 +887,11 @@
       "description": "For this ad, I directed a fun, fast-paced film for LosBros, centered around the tagline Impossible to Resist. The concept? Two stranded bikers in the middle of nowhere, trying everything to hitch a ride - only to fail spectacularly. But the moment they crack open a LosBros drink, a stunning girl stops instantly. Just when they think their luck has turned, she swipes their drinks and drives off, leaving them in shock.\n\nThe whole project was designed to be run-and-gun, embracing playful physical comedy, exaggerated expressions, and dynamic zooms—inspired by directors like Edgar Wright. With no dialogue, the humor relied purely on performance and visual storytelling. Coming from a comedy background, I loved working with the actress to fine-tune every reaction and beat.\n\nA light, energetic shoot with a sharp comedic twist - exactly what makes LosBros impossible to resist.",
       "isFeatured": true,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715915/portfolio-projects-recfez0UpZ2DYKOd3-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768585/portfolio-projects-recfez0UpZ2DYKOd3-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715915/portfolio-projects-recfez0UpZ2DYKOd3-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715917/portfolio-projects-recfez0UpZ2DYKOd3-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715918/portfolio-projects-recfez0UpZ2DYKOd3-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768585/portfolio-projects-recfez0UpZ2DYKOd3-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768587/portfolio-projects-recfez0UpZ2DYKOd3-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768588/portfolio-projects-recfez0UpZ2DYKOd3-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/808454484",
       "additionalVideos": [],
@@ -833,6 +967,14 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
+        },
+        {
+          "role": "Director of Photography",
+          "name": "Ronan O'Loughlin"
         }
       ],
       "externalLinks": [],
@@ -855,10 +997,10 @@
       "description": "I directed the investor pitch video for The Textile Building, a landmark Victorian warehouse in Newark-on-Trent undergoing transformation into 39 modern apartments. \n\nThe project presented the unique challenge of showcasing an unfinished building, which we addressed by integrating architectural renderings, aerial footage of the surrounding area, and interviews with the architects and developers. This approach effectively conveyed the vision and potential of the development to prospective investors.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715922/portfolio-projects-recGP4lK31t7NWk1i-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768472/portfolio-projects-recGP4lK31t7NWk1i-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715922/portfolio-projects-recGP4lK31t7NWk1i-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715923/portfolio-projects-recGP4lK31t7NWk1i-1.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768472/portfolio-projects-recGP4lK31t7NWk1i-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768473/portfolio-projects-recGP4lK31t7NWk1i-1.jpg"
       ],
       "videoUrl": "https://vimeo.com/872351947",
       "additionalVideos": [],
@@ -895,9 +1037,9 @@
       "description": "I was commissioned to direct a docu-style testimonial video for Daughters United, a UK-based charity dedicated to empowering women who have faced marginalization or mistreatment. The film captures the raw and powerful stories of the women involved, sharing their experiences and the impact of the support they’ve received. Through simple yet heartfelt testimonials, the video highlights the charity’s mission of fostering confidence, connection, and transformation. The strength of these women, combined with the authenticity of their voices, made this project particularly meaningful.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715924/portfolio-projects-recoaqKTgrqmy2gsW-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768616/portfolio-projects-recoaqKTgrqmy2gsW-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715924/portfolio-projects-recoaqKTgrqmy2gsW-0.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768616/portfolio-projects-recoaqKTgrqmy2gsW-0.jpg"
       ],
       "videoUrl": "https://vimeo.com/862503878",
       "additionalVideos": [],
@@ -925,7 +1067,7 @@
       "year": "2022",
       "releaseDate": "2022-11-28",
       "workDate": "2022-11-28",
-      "description": "",
+      "description": "A fashion campaign for Diesel built around self-expression, attitude and individuality, using an energetic visual style to match the brand's identity.",
       "isFeatured": true,
       "isHero": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603755/portfolio-projects-recEegt54sIu0M5ib-0.jpg",
@@ -1080,7 +1222,7 @@
     {
       "id": "rec5Tles2ludfUSpq",
       "slug": "wakecup-a-serene-autumn-escape",
-      "title": "Wakecup – A Serene Autumn Escape",
+      "title": "WakeCup – A Serene Autumn Escape",
       "type": "Commercial",
       "kinds": [
         "Commercial"
@@ -1094,11 +1236,11 @@
       "description": "A project I created for WakeUp, WakeCup is a simple yet peaceful concept featuring their water bottle/thermos. The idea was to capture the feeling of a crisp autumn hike in the UK – someone enjoying a quiet moment in nature with their drink in hand. Serene, atmospheric, and effortless, the project was all about embracing the small joys of being outdoors. A fun and refreshing shoot that kept things minimal yet meaningful.",
       "isFeatured": true,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715926/portfolio-projects-rec5Tles2ludfUSpq-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768433/portfolio-projects-rec5Tles2ludfUSpq-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715926/portfolio-projects-rec5Tles2ludfUSpq-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715927/portfolio-projects-rec5Tles2ludfUSpq-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715928/portfolio-projects-rec5Tles2ludfUSpq-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768433/portfolio-projects-rec5Tles2ludfUSpq-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768434/portfolio-projects-rec5Tles2ludfUSpq-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768436/portfolio-projects-rec5Tles2ludfUSpq-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/775976148",
       "additionalVideos": [],
@@ -1119,6 +1261,10 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
         }
       ],
       "externalLinks": [],
@@ -1143,11 +1289,11 @@
       "description": "I was commissioned to create a promotional video for Dyas, a London-based fashion brand that collaborates with artists for each of their clothing lines. This project focused on Juna, a talented collage artist, exploring her creative process - from inspiration to artwork- and how her designs are transformed into textiles and clothing. The video had a documentary-style approach, which made it an especially engaging and rewarding experience for me.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715929/portfolio-projects-recuJ26waUmWS1gX5-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768641/portfolio-projects-recuJ26waUmWS1gX5-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715929/portfolio-projects-recuJ26waUmWS1gX5-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715931/portfolio-projects-recuJ26waUmWS1gX5-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715932/portfolio-projects-recuJ26waUmWS1gX5-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768641/portfolio-projects-recuJ26waUmWS1gX5-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768643/portfolio-projects-recuJ26waUmWS1gX5-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768645/portfolio-projects-recuJ26waUmWS1gX5-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/743094724",
       "additionalVideos": [],
@@ -1162,6 +1308,14 @@
           "name": "Lemon Post",
           "isCrossSite": true,
           "externalUrl": "https://lemonpost.studio"
+        },
+        {
+          "role": "Producer",
+          "name": "John Mouratis"
+        },
+        {
+          "role": "Director of Photography",
+          "name": "Ronan O'Loughlin"
         }
       ],
       "externalLinks": [],
@@ -1192,7 +1346,7 @@
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603764/portfolio-projects-recP0DyB35ZBY85Kb-0.jpg",
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603766/portfolio-projects-recP0DyB35ZBY85Kb-1.jpg",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764603768/portfolio-projects-recP0DyB35ZBY85Kb-2.tiff"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768504/portfolio-projects-recP0DyB35ZBY85Kb-2.jpg"
       ],
       "videoUrl": "https://youtu.be/tFeQXRbIpmA",
       "additionalVideos": [],
@@ -1535,12 +1689,12 @@
       "description": "The second film in the futuristic distopian universe of Underhill West.",
       "isFeatured": true,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715936/portfolio-projects-rec9d8M9kuWPnzbmt-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768448/portfolio-projects-rec9d8M9kuWPnzbmt-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715936/portfolio-projects-rec9d8M9kuWPnzbmt-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715937/portfolio-projects-rec9d8M9kuWPnzbmt-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715938/portfolio-projects-rec9d8M9kuWPnzbmt-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715939/portfolio-projects-rec9d8M9kuWPnzbmt-3.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768448/portfolio-projects-rec9d8M9kuWPnzbmt-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768450/portfolio-projects-rec9d8M9kuWPnzbmt-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768452/portfolio-projects-rec9d8M9kuWPnzbmt-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768453/portfolio-projects-rec9d8M9kuWPnzbmt-3.jpg"
       ],
       "videoUrl": "https://www.youtube.com/watch?v=z0ypUWmTByk",
       "additionalVideos": [],
@@ -1608,13 +1762,13 @@
       "year": "2018",
       "releaseDate": "",
       "workDate": "2018-01-06",
-      "description": "",
+      "description": "A music video built around the feeling of losing yourself, combining performance and cinematic imagery to create a playful and atmospheric visual world.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715940/portfolio-projects-rec4GWEg9Fzqz1vPk-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768429/portfolio-projects-rec4GWEg9Fzqz1vPk-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715940/portfolio-projects-rec4GWEg9Fzqz1vPk-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715941/portfolio-projects-rec4GWEg9Fzqz1vPk-1.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768429/portfolio-projects-rec4GWEg9Fzqz1vPk-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768431/portfolio-projects-rec4GWEg9Fzqz1vPk-1.jpg"
       ],
       "videoUrl": "https://www.youtube.com/watch?v=xLPnSsTXZYs",
       "additionalVideos": [],
@@ -1650,12 +1804,12 @@
       "year": "2017",
       "releaseDate": "",
       "workDate": "2017-09-29",
-      "description": "",
+      "description": "A short narrative project centred around its titular character, using an intimate and character-driven approach to storytelling.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715942/portfolio-projects-recn0dqWz39TpCHNV-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768608/portfolio-projects-recn0dqWz39TpCHNV-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715942/portfolio-projects-recn0dqWz39TpCHNV-0.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768608/portfolio-projects-recn0dqWz39TpCHNV-0.jpg"
       ],
       "videoUrl": "",
       "additionalVideos": [],
@@ -1672,7 +1826,7 @@
     {
       "id": "recATtGUGhcvzTcvf",
       "slug": "tedx-university-of-macedonia",
-      "title": "Tedx University Of Macedonia",
+      "title": "TEDx University Of Macedonia",
       "type": "Commercial",
       "kinds": [
         "TVC"
@@ -1686,10 +1840,10 @@
       "description": "I was commissioned to create a promotion video for the TEDx event happening at the University of Macedonia, Thessaloniki, Greece.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715943/portfolio-projects-recATtGUGhcvzTcvf-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768455/portfolio-projects-recATtGUGhcvzTcvf-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715943/portfolio-projects-recATtGUGhcvzTcvf-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715944/portfolio-projects-recATtGUGhcvzTcvf-1.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768455/portfolio-projects-recATtGUGhcvzTcvf-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768457/portfolio-projects-recATtGUGhcvzTcvf-1.jpg"
       ],
       "videoUrl": "https://vimeo.com/526959473/24a1347b49",
       "additionalVideos": [],
@@ -1733,14 +1887,14 @@
       "year": "2017",
       "releaseDate": "",
       "workDate": "2017-06-14",
-      "description": "",
+      "description": "A music video exploring themes of choice and uncertainty through cinematic imagery and performance.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715945/portfolio-projects-recd275WjHjPT0I5L-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768577/portfolio-projects-recd275WjHjPT0I5L-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715945/portfolio-projects-recd275WjHjPT0I5L-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715946/portfolio-projects-recd275WjHjPT0I5L-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715947/portfolio-projects-recd275WjHjPT0I5L-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768577/portfolio-projects-recd275WjHjPT0I5L-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768579/portfolio-projects-recd275WjHjPT0I5L-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768580/portfolio-projects-recd275WjHjPT0I5L-2.jpg"
       ],
       "videoUrl": "",
       "additionalVideos": [],
@@ -1771,13 +1925,13 @@
       "description": "My first ever proper Music Promo and the first film in the distopian future universe of Underhill West.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715948/portfolio-projects-recqKmuvw2HTSqEcA-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768618/portfolio-projects-recqKmuvw2HTSqEcA-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715948/portfolio-projects-recqKmuvw2HTSqEcA-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715948/portfolio-projects-recqKmuvw2HTSqEcA-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715949/portfolio-projects-recqKmuvw2HTSqEcA-2.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715951/portfolio-projects-recqKmuvw2HTSqEcA-3.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715952/portfolio-projects-recqKmuvw2HTSqEcA-4.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768618/portfolio-projects-recqKmuvw2HTSqEcA-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768619/portfolio-projects-recqKmuvw2HTSqEcA-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768621/portfolio-projects-recqKmuvw2HTSqEcA-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768622/portfolio-projects-recqKmuvw2HTSqEcA-3.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768624/portfolio-projects-recqKmuvw2HTSqEcA-4.jpg"
       ],
       "videoUrl": "https://www.youtube.com/watch?v=5oyvbsD7Uk8",
       "additionalVideos": [],
@@ -1840,7 +1994,7 @@
     {
       "id": "recXjyQW0bFtMSlM0",
       "slug": "aiz-eitz",
-      "title": "Aiz Eitz",
+      "title": "AIZ EITZ",
       "type": "Narrative",
       "kinds": [
         "Short Film"
@@ -1969,11 +2123,11 @@
       "description": "Earth and the forces of nature are fighting to survive from human demolition.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715955/portfolio-projects-recdMqD8kOcLfYIK5-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768581/portfolio-projects-recdMqD8kOcLfYIK5-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715955/portfolio-projects-recdMqD8kOcLfYIK5-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715956/portfolio-projects-recdMqD8kOcLfYIK5-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715957/portfolio-projects-recdMqD8kOcLfYIK5-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768581/portfolio-projects-recdMqD8kOcLfYIK5-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768583/portfolio-projects-recdMqD8kOcLfYIK5-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768584/portfolio-projects-recdMqD8kOcLfYIK5-2.jpg"
       ],
       "videoUrl": "https://vimeo.com/365960702/d469f3ae51",
       "additionalVideos": [],
@@ -2022,6 +2176,10 @@
         {
           "role": "Director",
           "name": "Gabriel Athanasiou"
+        },
+        {
+          "role": "Director of Photography",
+          "name": "Anastasia Theodosi"
         }
       ],
       "externalLinks": [],
@@ -2047,11 +2205,11 @@
       "description": "What happens when a suicidal man makes friends at his ultimate moment?",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715958/portfolio-projects-recbu0Ed9jwyB5Y5G-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768572/portfolio-projects-recbu0Ed9jwyB5Y5G-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715958/portfolio-projects-recbu0Ed9jwyB5Y5G-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715959/portfolio-projects-recbu0Ed9jwyB5Y5G-1.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715960/portfolio-projects-recbu0Ed9jwyB5Y5G-2.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768572/portfolio-projects-recbu0Ed9jwyB5Y5G-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768574/portfolio-projects-recbu0Ed9jwyB5Y5G-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768576/portfolio-projects-recbu0Ed9jwyB5Y5G-2.jpg"
       ],
       "videoUrl": "https://www.youtube.com/watch?v=sXNI5YDbehk",
       "additionalVideos": [],
@@ -2085,9 +2243,9 @@
       "description": "Aris finds out the secret of life, written in a small pink notebook.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715961/portfolio-projects-rec3gxVcxcaIaaamx-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768393/portfolio-projects-rec3gxVcxcaIaaamx-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715961/portfolio-projects-rec3gxVcxcaIaaamx-0.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768393/portfolio-projects-rec3gxVcxcaIaaamx-0.jpg"
       ],
       "videoUrl": "https://vimeo.com/365961981/4c19e43bb3",
       "additionalVideos": [],
@@ -2224,10 +2382,10 @@
       "description": "My first short film from when I was at the second year of highschool. ",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715963/portfolio-projects-recg9WSEULv8TImuh-0.heic",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768590/portfolio-projects-recg9WSEULv8TImuh-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715963/portfolio-projects-recg9WSEULv8TImuh-0.heic",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1764715965/portfolio-projects-recg9WSEULv8TImuh-1.heic"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768590/portfolio-projects-recg9WSEULv8TImuh-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1792768591/portfolio-projects-recg9WSEULv8TImuh-1.jpg"
       ],
       "videoUrl": "",
       "additionalVideos": [],
@@ -2317,7 +2475,7 @@
     "lastModified": "2025-12-04T11:07:57.000Z"
   },
   "portfolioMode": "directing",
-  "lastUpdated": "2026-03-07T01:04:41.699Z",
+  "lastUpdated": "2026-10-23T15:29:34.684Z",
   "version": "2.0",
   "source": "sync-logic"
 }
