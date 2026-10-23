@@ -77,6 +77,22 @@ You can safely update scripts, documentation, or configuration in `main` without
 
 ---
 
+## 🛡️ Publish Gate
+
+Nothing reaches the `data` branch until `scripts/check-publish.mjs` approves the
+generated payload. It refuses a publish when:
+
+- a portfolio has **0 projects**, or its journal is enabled with no posts;
+- the `Domain` is missing or not a bare hostname;
+- a portfolio's Settings row is missing (which shows up as a `portfolioId` mismatch);
+- an **expiring Airtable image URL** is still in the JSON (Cloudinary upload failed);
+- the project/post count dropped by more than half against the last published JSON.
+
+A red gate means **nothing was published** — the previous snapshot is intact. Fix the
+Airtable base (or the Cloudinary credentials) and re-run the workflow.
+
+---
+
 ## ⏪ Rolling Back a Publish
 
 Every publish is tagged on the `data` branch as

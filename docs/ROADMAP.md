@@ -33,7 +33,7 @@ item below. Work top-down; P1 before the next publish.
 | **P1** | 1 | ✔ Fix the data-branch hotfix procedure and credential exposure | F-05 | S |
 | **P1** | 2 | ✔ Sanitize CMS values at every output boundary | F-02, F-14 | M |
 | **P2** | 3 | ✔ Stop leaking unpublished work in public artifacts | F-01 | S |
-| **P2** | 4 | Make the publish path fail-safe | F-03, F-06, F-17 | M |
+| **P2** | 4 | ✔ Make the publish path fail-safe | F-03, F-06, F-17 | M |
 | **P2** | 5 | Key the Cloudinary cache by attachment identity | F-07 | M |
 | **P2** | 6 | Restore automated sync and add freshness/alerting | F-08, F-18 | M |
 | **P2** | 7 | Harden CI supply chain and protect branches | F-04, F-12 | M |
@@ -46,32 +46,6 @@ item below. Work top-down; P1 before the next publish.
 
 ✔ = closed; the row stays here as the audit-coverage map, details in
 `docs/ROADMAP-ARCHIVE.md`.
-
-## 4. Make the publish path fail-safe (`[ ]`)
-
-- **Priority:** P2 — before the next publish
-- **Request:** Three ways the last good publish can be overwritten: (a) Cloudinary
-  failures are swallowed and the gallery falls back to expiring Airtable URLs
-  (`scripts/utils/cloudinary/cloudinaryHelpers.mjs:87-120`,
-  `scripts/lib/sync-logic.mjs:367-372,580-583`); (b) the "Check for changes" gate is
-  always true and nothing validates an empty/misconfigured payload
-  (`.github/workflows/sync-data.yml:82-92`, `sync-logic.mjs:146-155,259-273`); (c) two
-  runs can overlap and the older one can win (no `concurrency`, `git push -f` at `:117`).
-- **Approach:**
-  - Treat only 404 as "image missing"; fail (or hold the previous JSON) on
-    401/403/429/5xx and on any upload failure; never emit an Airtable attachment URL.
-  - Add a publish gate: non-zero projects/posts, both Settings rows present, valid
-    hostname, and abort on an abrupt count drop vs the previous JSON.
-  - Replace the vacuous change check with a real content check.
-  - Add `concurrency: {group: sync-data, cancel-in-progress: false}` and use
-    `--force-with-lease` plus a `lastUpdated` compare-and-swap.
-- **Verify:** Simulate an empty Airtable response and a revoked Cloudinary key in a dry
-  run → job fails and the `data` branch is unchanged. Two overlapping dispatches → the
-  second waits/aborts instead of overwriting a newer publish.
-- **Audit:** F-03, F-06, F-17 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** M
-
-**Relations**: depends on #9 for the last-good snapshot it compares against.
 
 ## 5. Key the Cloudinary cache by attachment identity (`[ ]`)
 

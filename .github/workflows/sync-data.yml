@@ -24,6 +24,12 @@ on:
 permissions:
   contents: write
 
+# Never run two publishes at once: the older run must not finish last and
+# overwrite newer data. Queue instead of cancelling a run in progress.
+concurrency:
+  group: sync-data
+  cancel-in-progress: false
+
 jobs:
   sync:
     if: ${{ !inputs.rollback }}
@@ -56,6 +62,17 @@ jobs:
             echo '{"generatedAt":"","projects":[],"journal":[],"config":{"images":[]}}' > cloudinary-mapping.json
           fi
 
+      - name: Restore previous published snapshots
+        run: |
+          # Used by the publish gate to detect empty/misconfigured payloads and
+          # abrupt count drops. Absent on the very first publish.
+          mkdir -p ../previous
+          for mode in directing postproduction; do
+            curl -sfL --max-time 30 "https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY@data/$mode/portfolio-data.json" \
+              -o "../previous/$mode.json" \
+              || { echo "ℹ️ No previous $mode snapshot"; rm -f "../previous/$mode.json"; }
+          done
+
       - name: Sync all portfolio data & images
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN || secrets.AIRTABLE_API_KEY }}
@@ -68,6 +85,9 @@ jobs:
           echo "🔄 Syncing all portfolio data (single Airtable fetch)..."
           npm run sync:all
           echo "✅ All portfolio data synced!"
+
+      - name: Publish gate
+        run: node scripts/check-publish.mjs --previous ../previous
 
       - name: Sync Instagram Studio (optional)
         env:
@@ -84,20 +104,8 @@ jobs:
             echo "ℹ️ Skipping Instagram Studio Upload: Backup file or script missing."
           fi
 
-      - name: Check for changes
-        id: check_changes
-        run: |
-          # Check if the generated files exist and have content
-          if [ -d "directing" ] || [ -d "postproduction" ] || [ -f "cloudinary-mapping.json" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "✅ Data generated"
-          else
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "ℹ️ No data detected"
-          fi
-
       - name: Deploy Data to 'data' branch
-        if: steps.check_changes.outputs.changed == 'true'
+        id: publish
         run: |
           # 1. Prepare the artifact stage (build output plus the data branch's
           #    own .gitignore, so a later checkout of `data` cannot stage secrets)
@@ -115,10 +123,11 @@ jobs:
 
           # 3. Append the publish to the existing `data` history and tag it.
           #    No force-push: history is kept for `git revert` and rollback.
-          node scripts/publish-data.mjs publish --stage ../stage
+          #    `changed` is a real content comparison, not a directory-exists check.
+          node scripts/publish-data.mjs publish --stage ../stage --github-output "$GITHUB_OUTPUT"
 
       - name: Purge jsDelivr Cache
-        if: steps.check_changes.outputs.changed == 'true'
+        if: steps.publish.outputs.changed == 'true'
         run: |
           echo "⏳ Waiting 30s for CDN propagation before purging..."
           sleep 30

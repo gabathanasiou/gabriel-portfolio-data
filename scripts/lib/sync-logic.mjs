@@ -586,7 +586,7 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
         config: { images: [] },
     };
 
-    let uploaded = 0, cached = 0, checkedAndFound = 0, failed = 0;
+    let uploaded = 0, cached = 0, checkedAndFound = 0;
 
     // Helper: resolve a single image (cache → API check → upload)
     async function resolveImage(publicId, airtableId, airtableUrl, title, label) {
@@ -613,19 +613,20 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
 
         // 3. Not in Cloudinary — upload
         log(`   📤 Uploading: ${title} ${label}`);
-        const result = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title });
-        if (result.success) {
-            uploaded++;
-            return {
-                publicId: result.publicId,
-                cloudinaryUrl: result.cloudinaryUrl,
-                airtableId,
-                format: result.format, size: result.size,
-            };
-        } else {
-            failed++;
-            return { publicId, cloudinaryUrl: '', airtableId, error: result.error };
+        if (!airtableUrl) {
+            throw new Error(`Attachment ${airtableId} for "${title}" has no source URL`);
         }
+        const result = await uploadToCloudinary(cloudinary, airtableUrl, publicId, { title });
+        if (!result.success) {
+            throw new Error(`Cloudinary upload failed for ${publicId}: ${result.error}`);
+        }
+        uploaded++;
+        return {
+            publicId: result.publicId,
+            cloudinaryUrl: result.cloudinaryUrl,
+            airtableId,
+            format: result.format, size: result.size,
+        };
     }
 
     // ── Project gallery images ──
@@ -688,8 +689,8 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
         }
     }
 
-    const total = cached + checkedAndFound + uploaded + failed;
-    log(`✅ Cloudinary sync: ${cached} cached, ${checkedAndFound} verified via API, ${uploaded} uploaded, ${failed} failed (${total} total)`);
+    const total = cached + checkedAndFound + uploaded;
+    log(`✅ Cloudinary sync: ${cached} cached, ${checkedAndFound} verified via API, ${uploaded} uploaded (${total} total)`);
     return newMapping;
 }
 

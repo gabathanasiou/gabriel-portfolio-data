@@ -208,6 +208,7 @@ function parseArgs(argv) {
     else if (arg === '--ref') options.ref = rest[++i];
     else if (arg === '--remote') options.remote = rest[++i];
     else if (arg === '--branch') options.branch = rest[++i];
+    else if (arg === '--github-output') options.githubOutput = rest[++i];
     else throw new Error(`unknown argument: ${arg}`);
   }
   return options;
@@ -228,6 +229,10 @@ function main() {
       : options.command === 'rollback'
         ? rollbackData({ ref: options.ref, remote: options.remote, branch: options.branch })
         : (() => { throw new Error('usage: publish-data.mjs <publish --stage DIR | rollback --ref REF>'); })();
+
+    if (options.githubOutput && typeof result.changed === 'boolean') {
+      fs.appendFileSync(options.githubOutput, `changed=${result.changed}\ntag=${result.tag || ''}\n`);
+    }
 
     console.log(JSON.stringify(result));
   } catch (error) {

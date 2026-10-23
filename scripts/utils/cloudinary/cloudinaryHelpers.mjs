@@ -93,12 +93,20 @@ export const uploadToCloudinary = async (cloudinary, imageUrl, publicId, options
   }
 };
 
+/** 404 is the only Cloudinary error that means "image is missing". */
+export const isCloudinaryNotFound = (error) =>
+  error?.error?.http_code === 404 || error?.http_code === 404 || error?.statusCode === 404;
+
 /**
  * Check if an image already exists in Cloudinary by public_id
- * 
+ *
+ * A missing image (404) returns null. Every other failure — bad credentials
+ * (401/403), rate limiting (429), a 5xx — is thrown: silently treating it as
+ * "missing" would re-upload and then fall back to expiring Airtable URLs.
+ *
  * @param {Object} cloudinary - Configured Cloudinary instance
  * @param {string} publicId - Public ID to check
- * @returns {Promise<Object|null>} Resource info if exists, null if not
+ * @returns {Promise<Object|null>} Resource info if exists, null if missing
  */
 export const checkImageExists = async (cloudinary, publicId) => {
   try {
@@ -111,13 +119,11 @@ export const checkImageExists = async (cloudinary, publicId) => {
       size: result.bytes
     };
   } catch (error) {
-    // 404 means image doesn't exist - that's expected
-    if (error.error?.http_code === 404 || error.http_code === 404) {
+    if (isCloudinaryNotFound(error)) {
       return null;
     }
-    // Log other errors but don't throw - treat as "doesn't exist"
-    console.warn(`[cloudinary] Warning checking ${publicId}:`, error.message);
-    return null;
+    const code = error?.error?.http_code ?? error?.http_code ?? 'unknown';
+    throw new Error(`Cloudinary lookup failed for ${publicId} (HTTP ${code}): ${error.message}`);
   }
 };
 
