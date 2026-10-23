@@ -120,11 +120,11 @@ is rejected and the job fails rather than overwriting newer data.
 
 ## 🔔 Automation and Alerts
 
-- **Schedule:** the workflow runs every Monday at 06:00 UTC as a safety net. GitHub
-  disables scheduled workflows after ~60 days without repository activity — if runs
-  stop appearing, open the Actions tab and re-enable the workflow.
-- **Airtable webhook:** the historical webhook never fired, which is why the schedule
-  exists. To wire it up, an Airtable automation must POST to
+- **Triggers:** manual `workflow_dispatch` only (plus `repository_dispatch` if you
+  ever wire the Airtable webhook). There is deliberately **no schedule** — each run
+  spends Airtable API calls, so runs are deliberate.
+- **Airtable webhook:** never fired historically. To wire it up, an Airtable
+  automation must POST to
   `https://api.github.com/repos/gabathanasiou/gabriel-portfolio-data/dispatches` with
   `{"event_type":"airtable-webhook-sync"}` and a fine-grained token allowed to create
   repository dispatches. Verify by checking that a new run lists

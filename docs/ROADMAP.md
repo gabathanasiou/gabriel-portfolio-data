@@ -88,3 +88,4 @@ item below. Work top-down; P1 before the next publish.
 id); otherwise #5 stands alone. Supersedes the earlier Cloudinary-vs-Supabase question —
 Supabase was rejected on price and shape (no transformation CDN, runtime dependency for
 a static site).
+
