@@ -36,7 +36,7 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 4 | ✔ Make the publish path fail-safe | F-03, F-06, F-17 | M |
 | **P2** | 5 | ✔ Key the Cloudinary cache by attachment identity | F-07 | M |
 | **P2** | 6 | ✔ Restore automated sync and add freshness/alerting | F-08, F-18 | M |
-| **P2** | 7 | Harden CI supply chain and protect branches | F-04, F-12 | M |
+| **P2** | 7 | ✔ Harden CI supply chain and protect branches | F-04, F-12 | M |
 | **P2** | 8 | ✔ Make the test suite runnable and gated | F-13 | S |
 | **P2** | 9 | ✔ Retain publish history and add rollback | F-11 | S–M |
 | **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
@@ -46,26 +46,6 @@ item below. Work top-down; P1 before the next publish.
 
 ✔ = closed; the row stays here as the audit-coverage map, details in
 `docs/ROADMAP-ARCHIVE.md`.
-
-## 7. Harden CI supply chain and protect branches (`[ ]`)
-
-- **Priority:** P2
-- **Request:** One job holds `contents: write`, the Airtable PAT and the Cloudinary
-  secret while running `npm ci || npm install`; actions are pinned to mutable major tags;
-  `main` and `data` are unprotected
-  (`.github/workflows/sync-data.yml:20-21,28,34,40,56-60,69-73`). CI runs EOL Node 20
-  with no `engines`/`.nvmrc` (`:36`).
-- **Approach:** Pin actions to commit SHAs; split read-only build from a minimal-secret
-  deploy; `persist-credentials: false`; use `npm ci` alone; protect `main` and `data`
-  with rulesets; move to Node 24/26 with `engines` + `.nvmrc`; make the Airtable token
-  read-only and scope the Cloudinary key to upload.
-- **Verify:** `gh api .../branches/main/protection` is no longer 404; a direct push to
-  `main` is rejected; the workflow diff shows SHA pins; CI `node -v` is 24/26; a
-  dependency install without a lockfile fails.
-- **Audit:** F-04, F-12 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** M
-
-**Relations**: none.
 
 ## 10. Credential hygiene and disclosure process (`[ ]`)
 

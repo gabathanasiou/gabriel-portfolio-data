@@ -5,7 +5,10 @@ name: Sync Data & Static Files
 # 2. Fetches data from Airtable ONCE for both directing & postproduction (5 API calls)
 # 3. Syncs new images to Cloudinary (cache-first, only uploads genuinely new images)
 # 4. Generates static files (portfolio-data.json, sitemap.xml, robots.txt) per domain
-# 5. Pushes artifacts to the dedicated 'data' branch → jsDelivr CDN auto-updates
+# 5. Appends the artifacts to the dedicated 'data' branch → jsDelivr CDN auto-updates
+#
+# The job split is deliberate: `build` holds the provider secrets but can only
+# read the repo; `deploy` can write to `data` but holds no provider secrets.
 
 on:
   # Weekly safety net: the Airtable webhook has historically never fired, and
@@ -26,8 +29,9 @@ on:
         required: false
         default: ''
 
+# Least privilege by default; deploy/rollback widen this per job.
 permissions:
-  contents: write
+  contents: read
 
 # Never run two publishes at once: the older run must not finish last and
 # overwrite newer data. Queue instead of cancelling a run in progress.
@@ -36,24 +40,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  sync:
+  build:
     if: ${{ !inputs.rollback }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Restore Cloudinary mapping cache
         run: |
@@ -117,6 +122,41 @@ jobs:
             echo "ℹ️ Skipping Instagram Studio Upload: Backup file or script missing."
           fi
 
+      - name: Upload publish artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: portfolio-artifacts
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            directing/
+            postproduction/
+            cloudinary-mapping.json
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Download publish artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: portfolio-artifacts
+          path: .
+
       - name: Deploy Data to 'data' branch
         id: publish
         run: |
@@ -155,33 +195,22 @@ jobs:
           curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
           echo "✅ Cache purged for all static files"
 
-      - name: Notify on failure
-        if: failure()
-        env:
-          ALERT_WEBHOOK: ${{ secrets.SYNC_ALERT_WEBHOOK }}
-        run: |
-          if [ -z "$ALERT_WEBHOOK" ]; then
-            echo "::warning::Sync failed and SYNC_ALERT_WEBHOOK is not set — no external alert sent."
-            exit 0
-          fi
-          curl -sS --max-time 15 -X POST "$ALERT_WEBHOOK" \
-            -H 'Content-Type: application/json' \
-            -d "{\"text\":\"Portfolio data sync failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"
-
   rollback:
     if: ${{ inputs.rollback != '' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '24'
+          node-version-file: '.nvmrc'
 
       # Restores the artifacts from <ref> as a NEW commit on `data`, so the
       # rollback is append-only and can itself be rolled back.
@@ -212,3 +241,21 @@ jobs:
           curl -sS --max-time 15 -X POST "$ALERT_WEBHOOK" \
             -H 'Content-Type: application/json' \
             -d "{\"text\":\"Portfolio data rollback failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"
+
+  notify:
+    needs: [build, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Notify on failure
+        env:
+          ALERT_WEBHOOK: ${{ secrets.SYNC_ALERT_WEBHOOK }}
+        run: |
+          if [ -z "$ALERT_WEBHOOK" ]; then
+            echo "::warning::Sync failed and SYNC_ALERT_WEBHOOK is not set — no external alert sent."
+            exit 0
+          fi
+          curl -sS --max-time 15 -X POST "$ALERT_WEBHOOK" \
+            -H 'Content-Type: application/json' \
+            -d "{\"text\":\"Portfolio data sync failed: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"

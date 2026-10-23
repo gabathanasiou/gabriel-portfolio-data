@@ -64,6 +64,9 @@ changing the pipeline.
   the workflow's `rollback` input (`docs/MAINTENANCE.md`).
 - Do not hand-edit the `data` branch; the guarded worktree procedure in
   `docs/MAINTENANCE.md` is the only exception.
+- `main` is protected: land changes through a PR (the CI `test` check must pass; no
+  direct pushes, force-pushes or deletions). `data` accepts fast-forward publishes
+  only — no force-push, no deletion.
 
 ## Rules
 
