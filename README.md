@@ -51,7 +51,7 @@ cloudinary-mapping.json      # Image cache for published records only (no titles
 
 ```bash
 npm install
-# Configure .env.local with Airtable and Cloudinary credentials
+# Copy .env.example to .env.local and fill in the credentials
 npm run sync:all        # Full sync: data + sitemaps + robots
 npm run sync:data       # Just the JSON data files
 npm run sync:sitemap    # Just the sitemaps

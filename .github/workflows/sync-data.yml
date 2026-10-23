@@ -107,21 +107,6 @@ jobs:
         # that would silently republish stale data.
         run: node scripts/check-freshness.mjs --dir . --max-age-days 2
 
-      - name: Sync Instagram Studio (optional)
-        env:
-          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN || secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-        run: |
-          echo "📸 Attempting Instagram Studio sync..."
-          if [ -f "scripts/instagram-studio-data-backup.json" ] && [ -f "scripts/upload-instagram-data.mjs" ]; then
-            node scripts/upload-instagram-data.mjs
-          else
-            echo "ℹ️ Skipping Instagram Studio Upload: Backup file or script missing."
-          fi
-
       - name: Upload publish artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:

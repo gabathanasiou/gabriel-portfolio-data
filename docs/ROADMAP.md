@@ -41,7 +41,7 @@ item below. Work top-down; P1 before the next publish.
 | **P2** | 9 | ✔ Retain publish history and add rollback | F-11 | S–M |
 | **P2** | 10 | Credential hygiene and disclosure process | F-15, F-09 | S |
 | **P3** | 11 | ✔ Slug uniqueness and non-Latin titles | F-16 | S |
-| **P3** | 12 | Repo hygiene batch | CODE-06, CODE-09, hardening | S |
+| **P3** | 12 | ✔ Repo hygiene batch | CODE-06, CODE-09, hardening | S |
 | **P3** | 13 | Decide and document the historical schema exposure | F-10 | M |
 
 ✔ = closed; the row stays here as the audit-coverage map, details in
@@ -61,32 +61,15 @@ item below. Work top-down; P1 before the next publish.
   Instagram uploader: strip `instagram.accessToken`, use `access_mode: 'authenticated'`,
   clean up in `finally`, gitignore both filenames.
 - **Done:** `SECURITY.md` + `docs/SECURITY-RUNBOOK.md`; the secret-bearing stash was
-  dropped and `.env.local` is mode 600; the Instagram uploader strips credentials,
-  uploads authenticated, cleans up in `finally`, and refuses a token-bearing payload
-  (test). No `.env*` is reachable from any ref.
+  dropped and `.env.local` is mode 600; the dormant Instagram uploader (and its always-
+  skipped workflow step) was removed as dead code under #12; no `.env*` is reachable
+  from any ref.
 - **Remaining (owner):** rotate the Airtable PAT and the Cloudinary key/secret at the
   next window, then re-check secret scanning.
 - **Verify:** `git stash list` is empty; no `.env*` blob is reachable from any ref;
   `SECURITY.md` exists; the Instagram script refuses a payload containing
   `accessToken` (unit test).
 - **Audit:** F-15, F-09 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** S
-
-**Relations**: none.
-
-## 12. Repo hygiene batch (`[ ]`)
-
-- **Priority:** P3
-- **Request:** 11 unreferenced TypeScript files (2,225 lines), three tracked `.DS_Store`
-  files, a 466-line `run_log.txt`, no `LICENSE` despite `"license": "ISC"`, and
-  `normalizeTitle` mangling acronyms/brands ("TEDx"→"Tedx", "Gilley UK"→"Gilley Uk").
-- **Approach:** Delete the `.ts` twins and the dead Instagram step/script; `git rm
-  --cached` the `.DS_Store` files; delete `run_log.txt`; add a `LICENSE`; stop
-  lower-casing the whole title (trim only, or a smart title-case with exceptions).
-- **Verify:** `git ls-files | rg 'DS_Store|run_log'` → 0; `rg` finds no imports of the
-  deleted `.ts` files; `npm run sync:data` still produces the same project set; titles
-  keep their casing.
-- **Audit:** CODE-06, CODE-09 — `docs/audits/2026-10-23-security-audit.md`
 - **Effort:** S
 
 **Relations**: none.
