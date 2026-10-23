@@ -25,7 +25,7 @@ postproduction/
 ├── portfolio-data.json      # Post-production portfolio data
 ├── sitemap.xml
 └── robots.txt
-cloudinary-mapping.json      # Shared image cache (publicId → URL)
+cloudinary-mapping.json      # Image cache for published records only (no titles)
 .gitignore                   # Secret-only guard for checkouts of this branch
 ```
 

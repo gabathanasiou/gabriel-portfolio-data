@@ -72,27 +72,6 @@ item below. Work top-down; P1 before the next publish.
 **Relations**: depends on #8 for the automated test runner; the frontend half lives in
 `../gabriel-portfolio`.
 
-## 3. Stop leaking unpublished work in public artifacts (`[ ]`)
-
-- **Priority:** P2 — before the next publish
-- **Request:** `cloudinary-mapping.json` is built for every Projects record before the
-  visibility filter (`scripts/lib/sync-logic.mjs:587-600`, filter at `:297-299`) and
-  published to the `data` branch (`.github/workflows/sync-data.yml:101,111`). It exposes
-  216 titles, of which 117 appear in neither portfolio.
-- **Approach:**
-  - Filter the published mapping with the same visibility/role rules as the JSON, and
-    drop `title` from the public artifact entirely.
-  - Keep the full cache in a private Actions artifact or secret store if it is needed for
-    warm starts.
-  - Add a regression test asserting `mapping IDs ⊆ published IDs`.
-  - If the titles are confidential, purge the current `data` history and CDN cache.
-- **Verify:** Set difference between mapping and published portfolios = 0. Fetch the
-  public mapping from jsDelivr and confirm only published IDs and no `title` field.
-- **Audit:** F-01 — `docs/audits/2026-10-23-security-audit.md`
-- **Effort:** S
-
-**Relations**: relates to #4 (same mapping file) and #8 (test).
-
 ## 4. Make the publish path fail-safe (`[ ]`)
 
 - **Priority:** P2 — before the next publish

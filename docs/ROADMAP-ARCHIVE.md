@@ -16,3 +16,4 @@ never renumber or reuse.**
 |---|---|---|
 | 1 | Fix the data-branch hotfix procedure and credential exposure | docs/MAINTENANCE.md; scripts/guard-data-branch.mjs; .github/data-branch.gitignore; .github/workflows/sync-data.yml; package.json (guard:data) |
 | 8 | Make the test suite runnable and gated | vitest.config.mjs; package.json (test scripts); .github/workflows/ci.yml; docs/TESTING.md; scripts/utils/__tests__/ (120 cases) |
+| 3 | Stop leaking unpublished work in public artifacts | scripts/lib/sync-logic.mjs (buildPublishedMapping); scripts/utils/__tests__/mapping-filter.test.mjs; README.md |

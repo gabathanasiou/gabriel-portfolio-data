@@ -135,7 +135,51 @@ export async function syncPortfolios(config) {
     }
 
     log(`\n🎉 Sync complete! (${results.apiCalls} API calls for all portfolios)`);
+
+    // ── Step 5: Publish only what is actually public ──
+    // The full mapping is a private warm cache; the copy pushed to the public
+    // `data` branch must contain published records only and no titles.
+    const publishedProjectIds = new Set(
+        Object.values(results.portfolios).flatMap(p => p.projects.map(project => project.id))
+    );
+    const publishedJournalIds = new Set(
+        Object.values(results.portfolios).flatMap(p => (p.journal || []).map(post => post.id))
+    );
+    const publishedMapping = buildPublishedMapping(mapping, publishedProjectIds, publishedJournalIds);
+
+    if (!skipFileWrites) {
+        saveCloudinaryMapping(outputDir, publishedMapping);
+        log(`✅ Published mapping: ${publishedMapping.projects.length}/${mapping.projects.length} projects, ${publishedMapping.journal.length}/${mapping.journal.length} journal`);
+    }
+
     return results;
+}
+
+/**
+ * Strip the Cloudinary mapping down to the public artifact: only records that
+ * appear in at least one published portfolio, and no titles (an unpublished
+ * project's title in this file is itself a leak — see audit F-01).
+ *
+ * @param {{projects: Array, journal: Array, config: {images: Array}}} mapping
+ * @param {Set<string>} publishedProjectIds
+ * @param {Set<string>} publishedJournalIds
+ */
+export function buildPublishedMapping(mapping, publishedProjectIds, publishedJournalIds) {
+    const keep = (entry) => ({
+        recordId: entry.recordId,
+        images: entry.images || []
+    });
+
+    return {
+        generatedAt: mapping.generatedAt || '',
+        projects: (mapping.projects || [])
+            .filter(entry => publishedProjectIds.has(entry.recordId))
+            .map(keep),
+        journal: (mapping.journal || [])
+            .filter(entry => publishedJournalIds.has(entry.recordId))
+            .map(keep),
+        config: { images: (mapping.config?.images || []).map(image => ({ ...image })) }
+    };
 }
 
 
