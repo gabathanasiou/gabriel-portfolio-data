@@ -20,13 +20,14 @@
       "description": "A Video Campaign for BYD, the Chinese EV brand. I was tasked to direct 3 social films in the vertical format that showcased the features of the new cars in a fun and engaging way. ",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": true,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795112620/portfolio-projects-recrxdeQc1Yo0LAMJ-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1795112620/portfolio-projects-recrxdeQc1Yo0LAMJ-0.jpg",
         "https://res.cloudinary.com/date24ay6/image/upload/v1795112621/portfolio-projects-recrxdeQc1Yo0LAMJ-1.jpg",
         "https://res.cloudinary.com/date24ay6/image/upload/v1795112623/portfolio-projects-recrxdeQc1Yo0LAMJ-2.jpg"
       ],
-      "videoUrl": "https://vimeo.com/1237694382/fd631de52e?fl=ls&fe=ec&share=copy, https://vimeo.com/1238078621/bcf2844c91?fl=ls&fe=ec&share=copy, https://vimeo.com/1238445487/51e1c738c5?fl=ls&fe=ec&share=copy",
+      "videoUrl": "",
       "additionalVideos": [],
       "awards": [],
       "credits": [
@@ -76,8 +77,14 @@
       "description": "A social-first campaign exploring Caroline Andrew’s approach to weddings and bridal fashion through a series of four short documentary-style films featuring Caroline and her peers.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://i.vimeocdn.com/video/2186370485-65ba3c66162f05e2fdaba393c785ba0c8f137aed4aa04d4c9803f44c843c4569-d_200x150?region=us",
-      "gallery": [],
+      "requestOnly": false,
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795119296/portfolio-projects-recgWVx00Ohc1ibZQ-0.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119296/portfolio-projects-recgWVx00Ohc1ibZQ-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119298/portfolio-projects-recgWVx00Ohc1ibZQ-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119299/portfolio-projects-recgWVx00Ohc1ibZQ-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119299/portfolio-projects-recgWVx00Ohc1ibZQ-3.jpg"
+      ],
       "videoUrl": "https://vimeo.com/1215246232/6d92722a6e?fl=ls&fe=ec&share=copy, https://vimeo.com/1215246233/db445d51bb?fl=ls&fe=ec&share=copy, https://vimeo.com/1215246234/56e5b28b9b?fl=ls&fe=ec&share=copy",
       "additionalVideos": [],
       "awards": [],
@@ -136,8 +143,11 @@
       "description": "A social-first campaign of four summer fashion films for Caroline Andrew, combining photography and video to capture a youthful take on timeless style and the old-money aesthetic.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://i.vimeocdn.com/video/2170319100-8e366eaecca2d3226e79adf470c0836f7187a154ca46545d88e02319f1c174d1-d_200x150?region=us",
-      "gallery": [],
+      "requestOnly": false,
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795119295/portfolio-projects-rect1U2BX7CGsCa0J-0.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119295/portfolio-projects-rect1U2BX7CGsCa0J-0.jpg"
+      ],
       "videoUrl": "https://vimeo.com/1202591972/1baf23d5a1?share=copy, https://vimeo.com/1202591973/5f89aea07f?share=copy, https://vimeo.com/1202591971/95f0114e52?share=copy, https://vimeo.com/1202591977/1c85b7193f?share=copy",
       "additionalVideos": [],
       "awards": [],
@@ -184,6 +194,7 @@
       "description": "A social-first campaign centred on Caroline Andrew’s new shop, exploring its history, design and identity through short documentary-style films featuring Caroline and her peers.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795112617/portfolio-projects-recPZOk0FARXV2oze-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1795112617/portfolio-projects-recPZOk0FARXV2oze-0.jpg",
@@ -226,6 +237,7 @@
       "description": "A campaing of 5 different food videos for M&S.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795112603/portfolio-projects-recd2lwZN8T4b1bZd-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1795112603/portfolio-projects-recd2lwZN8T4b1bZd-0.jpg",
@@ -276,6 +288,7 @@
       "description": "A promotional film for WAGO showcasing their custom solutions through a combination of product imagery, environments and practical applications.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845513/portfolio-projects-recLH9BnqHsx42zaS-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845513/portfolio-projects-recLH9BnqHsx42zaS-0.jpg",
@@ -316,6 +329,7 @@
       "description": "A video announcing the partnership bewteen Kitt Medical, a defibralator but for allergies, and Medical Tracker, a digital accident book for schools and more.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768609/portfolio-projects-recnbZVXssWnqzk63-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768609/portfolio-projects-recnbZVXssWnqzk63-0.jpg",
@@ -363,6 +377,7 @@
       "description": "An investor pitch film for Dye Lon Riverside, showcasing the development and communicating its vision and potential to prospective investors.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845584/portfolio-projects-recSAbOWE8DjJzcTA-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845584/portfolio-projects-recSAbOWE8DjJzcTA-0.jpg",
@@ -399,6 +414,7 @@
       "description": "A series of testimonial films for Medicus, featuring patients and their experiences at Wilmslow Health Centre. The films focus on creating authentic, personal stories that communicate the quality of care and patient experience.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845482/portfolio-projects-rec01thlhC4hHGRlS-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845482/portfolio-projects-rec01thlhC4hHGRlS-0.jpg",
@@ -440,6 +456,7 @@
       "description": "A promotional film for Anglia Ruskin University London, highlighting its postgraduate courses and the opportunities available to prospective students.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804873/portfolio-projects-rec4QdaV0qLrTR8fh-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804873/portfolio-projects-rec4QdaV0qLrTR8fh-0.jpg",
@@ -477,6 +494,7 @@
       "description": "A series of social films for the University of Central Lancashire, created to engage prospective students through short, energetic and accessible content.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845488/portfolio-projects-rec6QJGR1TLkMdoyA-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845488/portfolio-projects-rec6QJGR1TLkMdoyA-0.jpg",
@@ -514,6 +532,7 @@
       "description": "A commercial project built around the feeling of a relaxed Sunday, using warm and lifestyle-focused imagery.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804875/portfolio-projects-recq6VrQjKJKs9zkw-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804875/portfolio-projects-recq6VrQjKJKs9zkw-0.jpg",
@@ -554,6 +573,7 @@
       "description": "In a pristine 1950s suburb, a newlywed discovers cryptic puzzles in the daily newspaper that hint at a buried town secret and her husband’s past. As the clues unravel, so does her reality. The Newspaper is a suspenseful descent into appearances, trust, and the quiet power of uncovering the truth.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764425873/portfolio-projects-recNNKSzQAsbchpCi-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764425873/portfolio-projects-recNNKSzQAsbchpCi-0.jpg",
@@ -681,6 +701,7 @@
       "description": "After a successful collaboration with SQUID the year before, I was commissioned to lead their 2025 crowdfunding campaign. We traveled to Dublin to capture the story behind SQUID, meeting with the founders and crafting a dynamic video that blends motion graphics, live action, and animation. The video highlights SQUID’s innovative approach to digital loyalty cards and introduces Wave, their new feature designed to reward users seamlessly through purchases. The goal was to create an engaging and compelling piece to drive the campaign forward - and we did just that.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768630/portfolio-projects-recryV8jTtQDWLB9B-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768630/portfolio-projects-recryV8jTtQDWLB9B-0.jpg",
@@ -733,6 +754,7 @@
       "description": "A launch campaign for Neighbourly, introducing the brand through a series of engaging and accessible promotional films.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845664/portfolio-projects-recrN5Q2SUgDfQDSG-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845664/portfolio-projects-recrN5Q2SUgDfQDSG-0.jpg",
@@ -771,6 +793,7 @@
       "description": "A campaign film for ClientEarth exploring environmental issues in Asia and the organisation's work addressing them.",
       "isFeatured": true,
       "isHero": true,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804878/portfolio-projects-rectyZOMbe7eQSKbA-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804878/portfolio-projects-rectyZOMbe7eQSKbA-0.jpg",
@@ -811,6 +834,7 @@
       "description": "A series of promotional films for Anglia Ruskin University, created to showcase the university experience and encourage prospective students to attend its open days.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804882/portfolio-projects-recd04nWeAvqRXQwL-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804882/portfolio-projects-recd04nWeAvqRXQwL-0.jpg",
@@ -848,6 +872,7 @@
       "description": "A series of training videos for Kitt Medical, designed to make medical education clear, engaging and accessible.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845495/portfolio-projects-rec8E1EdrkPNVbB6B-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845495/portfolio-projects-rec8E1EdrkPNVbB6B-0.jpg",
@@ -888,6 +913,7 @@
       "description": "Commissioned by Time Out London in collaboration with MINI, this project brought to life two UGC-style videos highlighting MINI’s latest model in real-life adventures. The first video followed a family on a fun-filled trip to a farm, tackling challenges along the way, while the second captured a couple’s romantic getaway to Cambridge. Both pieces seamlessly integrated the car’s standout features into the narrative, keeping the aesthetic authentic and influencer-driven.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603736/portfolio-projects-recEt255eoOGfQFij-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603736/portfolio-projects-recEt255eoOGfQFij-0.jpg",
@@ -932,6 +958,7 @@
       "description": "A promotional film for Abbey Quay, showcasing the development and its architecture through cinematic imagery.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845526/portfolio-projects-recQ1KNF9qX94IbJm-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845526/portfolio-projects-recQ1KNF9qX94IbJm-0.jpg",
@@ -973,6 +1000,7 @@
       "description": "A series of fashion films exploring movement, styling and visual atmosphere through a more cinematic approach to fashion imagery.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804884/portfolio-projects-rec19YGt9NenvsOem-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804884/portfolio-projects-rec19YGt9NenvsOem-0.jpg",
@@ -1014,6 +1042,7 @@
       "description": "A music video for Rap in Paper and BZ, combining performance with a stylised visual approach.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845672/portfolio-projects-rectXO9dEji8WQuQM-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845672/portfolio-projects-rectXO9dEji8WQuQM-0.jpg",
@@ -1050,12 +1079,13 @@
       "description": "A narrative project exploring change and uncertainty through an atmospheric and visually driven story.",
       "isFeatured": true,
       "isHero": true,
-      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845688/portfolio-projects-recysqHltPj6bRNFD-0.jpg",
+      "requestOnly": false,
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795119290/portfolio-projects-recysqHltPj6bRNFD-0.jpg",
       "gallery": [
-        "https://res.cloudinary.com/date24ay6/image/upload/v1772845688/portfolio-projects-recysqHltPj6bRNFD-0.jpg",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1772845690/portfolio-projects-recysqHltPj6bRNFD-1.jpg",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1772845691/portfolio-projects-recysqHltPj6bRNFD-2.jpg",
-        "https://res.cloudinary.com/date24ay6/image/upload/v1772845695/portfolio-projects-recysqHltPj6bRNFD-3.jpg"
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119290/portfolio-projects-recysqHltPj6bRNFD-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119291/portfolio-projects-recysqHltPj6bRNFD-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119293/portfolio-projects-recysqHltPj6bRNFD-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795119294/portfolio-projects-recysqHltPj6bRNFD-3.jpg"
       ],
       "videoUrl": "[Official Trailer] https://www.youtube.com/watch?v=9Iu7p7WbmkM",
       "additionalVideos": [],
@@ -1122,6 +1152,7 @@
       "description": "For this project, I was commissioned to create a campaign for SQUID, a company that replaces traditional loyalty cards with a seamless digital system, benefiting both consumers and businesses. The goal was to present the platform in a natural, engaging way, highlighting its advantages from the perspectives of both users and business owners.\n\nA unique aspect of the campaign was having the main narrator actively participate in the story as a business owner, making the message feel more authentic and relatable. We also integrated animated graphics to enhance the storytelling, which I personally storyboarded. ",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768475/portfolio-projects-recGacwW665mArUly-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768475/portfolio-projects-recGacwW665mArUly-0.jpg",
@@ -1165,6 +1196,7 @@
       "description": "A promotional project showcasing UOBM and its work through clear and engaging visual storytelling.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845609/portfolio-projects-recWobs12nEl6SX1A-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845609/portfolio-projects-recWobs12nEl6SX1A-0.jpg",
@@ -1204,6 +1236,7 @@
       "description": "A promotional film for Shire Homecare, focusing on the people behind the service and the care they provide to their clients.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845490/portfolio-projects-rec6xJwCFvFpCPMgZ-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845490/portfolio-projects-rec6xJwCFvFpCPMgZ-0.jpg",
@@ -1240,6 +1273,7 @@
       "description": "A branded event film capturing the atmosphere, people and key moments of the event through a cinematic documentary approach.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://i.vimeocdn.com/video/2136701914-1b23aaeded3a3da0ee2e254595f4a9e512cb14ad2064208cba0ab50b6bb3a86f-d_295x166?region=us",
       "gallery": [],
       "videoUrl": "https://vimeo.com/889533159/edae4b50f1?share=copy",
@@ -1278,6 +1312,7 @@
       "description": "",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804889/portfolio-projects-recg8GIk3yfhudveK-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804889/portfolio-projects-recg8GIk3yfhudveK-0.jpg",
@@ -1319,6 +1354,7 @@
       "description": "A music video for Bugzy Malone, combining performance with cinematic imagery to create an energetic visual world around the track.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804890/portfolio-projects-recf9Th67D1qxRCzp-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804890/portfolio-projects-recf9Th67D1qxRCzp-0.jpg",
@@ -1360,6 +1396,7 @@
       "description": "An introduction film for Rap in Paper, combining performance, character and visual storytelling to establish the project's world.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845579/portfolio-projects-recRpwAmdmVWoal66-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845579/portfolio-projects-recRpwAmdmVWoal66-0.jpg",
@@ -1399,6 +1436,7 @@
       "description": "A series of films for Easol's Creators in Session podcast, capturing conversations with creatives and showcasing their stories and experiences.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845668/portfolio-projects-rectMqCkoDwqS9qks-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845668/portfolio-projects-rectMqCkoDwqS9qks-0.jpg",
@@ -1438,6 +1476,7 @@
       "description": "A promotional film for Embrace Building Wraps, showcasing their products and communicating their role within modern construction.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845502/portfolio-projects-recF2eOIxvOnQtunI-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845502/portfolio-projects-recF2eOIxvOnQtunI-0.jpg",
@@ -1475,6 +1514,7 @@
       "description": "We were commissioned by Gilley UK, to create a compelling campaign video for their Kickstarter launch, introducing their innovative umbrella. Our approach blended dynamic cinematography - locking the camera to the product for a unique perspective - with mixed-media elements, including product photography, to enhance engagement. The video showcased the umbrella seamlessly integrated into everyday life in London. The result? A highly successful campaign that exceeded expectations, raising £74,550 from 1,123 backers, far surpassing the initial £6,500 goal.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603740/portfolio-projects-recYUzFwdDdiIHdd6-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603740/portfolio-projects-recYUzFwdDdiIHdd6-0.jpg",
@@ -1527,6 +1567,7 @@
       "description": "For RestSpace, I was commissioned to create a video campaign showcasing their innovative sleeping booths designed to help employees recharge during the workday. After exploring several concepts, we landed on a dynamic POV-style approach, immersing viewers in the firsthand experience of using RestSpace.\n\nTo achieve the look of a seamless one-take, we mounted a RED Komodo camera directly onto the lead actor’s head - an exciting yet challenging process that required close collaboration. Since the actor essentially became the cinematographer, we worked together to ensure every moment was captured effectively. Choreographing movement through space, managing lighting shifts, and coordinating a large cast added to the complexity, but ultimately, we created a visually engaging and immersive commercial.\n\nIt was a unique project, both technically and creatively, and a rewarding challenge to bring to life.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768546/portfolio-projects-recVlqGrss78joP5t-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768546/portfolio-projects-recVlqGrss78joP5t-0.jpg",
@@ -1571,6 +1612,7 @@
       "description": "For Anglia Ruskin University London, we led a large-scale campaign to capture the essence of student life and academic excellence. The project included producing many testimonial videos for individual courses, three hero videos showcasing the university’s facilities, and a hero video where students shared their experiences in a single word.\n\nOver several days, we conducted interviews with students and professors while capturing high-quality B-roll footage of the campus. We also incorporated aerial videography to highlight the university’s environment from a fresh perspective. The result was a dynamic and engaging campaign that authentically represented the university’s spirit and offerings.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715898/portfolio-projects-recloUQzk1n5hFU57-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764715898/portfolio-projects-recloUQzk1n5hFU57-0.jpg",
@@ -1619,6 +1661,7 @@
       "description": "We created the launch video for Sports Analytics School, a unique platform where football fans learn programming by analyzing real-time match data, almost like a game itself. The challenge was to showcase both the excitement of football and the learning process, while integrating key stats in a way that felt dynamic and engaging.\n\nOur approach blended real people enjoying the sport with motion graphics and stock footage, capturing the energy of both the game and the analytical process. Balancing storytelling with data visualization was tricky, but we found a rhythm that made it all work. A fun project that merges sports, tech, and education into an exciting experience!",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768462/portfolio-projects-recAhJUVXiAJyvOAK-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768462/portfolio-projects-recAhJUVXiAJyvOAK-0.jpg",
@@ -1664,6 +1707,7 @@
       "description": "I was commissioned to direct a dynamic 15-second TV spot for Fraqua, a water bottle designed by professional boxer Frank Ripley. Despite his young age, Frank developed an innovative solution for boxers -allowing them to hydrate without removing their gloves, tackling a unique challenge in the sport.\n\nTo bring this to life, we focused on capturing Frank in action, highlighting the intensity of his training. We played with dramatic lighting and cinematic composition to emphasize the raw energy and focus of a professional boxer. The result? A visually striking and high-impact piece that reflects the spirit of Fraqua.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603745/portfolio-projects-recfCKTEcmpkSWxsg-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603745/portfolio-projects-recfCKTEcmpkSWxsg-0.jpg"
@@ -1708,6 +1752,7 @@
       "description": "In a future where the confines of society dictate how individuals live their lives, two strangers form an unexpected bond that leads them to take a daring risk in search of something more meaningful.\n\nMusic promo for the pop duo, Underhill West.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603747/portfolio-projects-rec2xl62i0mgEo1go-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603747/portfolio-projects-rec2xl62i0mgEo1go-0.jpg",
@@ -1765,6 +1810,7 @@
       "description": "I was commissioned to direct an investor’s pitch video for Greenwich Peninsula, one of Europe’s largest regeneration projects, transforming 150 acres of former industrial land in North Greenwich, London, into a vibrant riverside community.\n\nOur goal was to showcase the dynamic lifestyle within the development and the rich history of the area. We employed aerial videography to capture the impressive architecture and the Peninsula’s integration into London’s skyline. The video featured interviews and testimonials, adopting a documentary-style format inspired by popular streaming platforms, to authentically convey the project’s vision and appeal.\n\nThis project was particularly exciting as it allowed us to delve into the transformation of a significant London area, highlighting contributions from renowned architects and planners. The experience of exploring the site’s evolution and future potential was both enlightening and inspiring.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768558/portfolio-projects-recaNFE1fKkSZnYTy-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768558/portfolio-projects-recaNFE1fKkSZnYTy-0.jpg",
@@ -1810,6 +1856,7 @@
       "description": "A spec commercial created for Reebok, using movement and cinematic imagery to explore the energy and attitude associated with the brand.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://i.vimeocdn.com/video/1940194428-3c3deeefd7e9ab5491873d22235d59f3fa2c8444ec4921196bd8af7bc48bafd4-d_295x166?region=us",
       "gallery": [],
       "videoUrl": "https://vimeo.com/867724275?fl=pl&fe=sh",
@@ -1846,6 +1893,7 @@
       "description": "This ad for Lanique was all about comedy and good times. The tagline, Raise Your Spirits, set the tone for a fun and lighthearted approach. The concept? A guy who’s completely unprepared for his party, messing up everything along the way—until his friends arrive with a bottle of Lanique. Suddenly, the night turns around, and they end up having the time of their lives, proving that Lanique can quite literally save the day.\n\nAs someone with a strong comedy background, I loved working on this. The challenge was to create humor in a short time, relying on physical comedy and expressive reactions. With a tight shooting schedule, we had to be precise, but in the end, it all came together, and I’m really happy with the result!",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603752/portfolio-projects-recUyEFIYQJpikSMf-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603752/portfolio-projects-recUyEFIYQJpikSMf-0.jpg",
@@ -1903,6 +1951,7 @@
       "description": "For this ad, I directed a fun, fast-paced film for LosBros, centered around the tagline Impossible to Resist. The concept? Two stranded bikers in the middle of nowhere, trying everything to hitch a ride - only to fail spectacularly. But the moment they crack open a LosBros drink, a stunning girl stops instantly. Just when they think their luck has turned, she swipes their drinks and drives off, leaving them in shock.\n\nThe whole project was designed to be run-and-gun, embracing playful physical comedy, exaggerated expressions, and dynamic zooms—inspired by directors like Edgar Wright. With no dialogue, the humor relied purely on performance and visual storytelling. Coming from a comedy background, I loved working with the actress to fine-tune every reaction and beat.\n\nA light, energetic shoot with a sharp comedic twist - exactly what makes LosBros impossible to resist.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768585/portfolio-projects-recfez0UpZ2DYKOd3-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768585/portfolio-projects-recfez0UpZ2DYKOd3-0.jpg",
@@ -1959,6 +2008,7 @@
       "description": "I had the pleasure of creating a commercial for “Let’s Get Ready To Rumble” Energy, a dynamic beverage developed in collaboration with Hall of Fame boxing announcer Michael Buffer. This project was particularly exciting as it involved entirely practical effects, with no reliance on 3D animation.\n\nWe utilized a specialized macro probe lens, the Laowa 24mm f/14 2X Macro Probe, known for its unique ability to capture close-up shots with a wide-angle perspective.   This allowed us to achieve dynamic movements and intricate details, bringing the energy drink to life on screen.\n\nTo enhance the visual impact, we experimented with lighting techniques to simulate a stormy atmosphere, incorporating rain effects to evoke the brand’s energetic essence. I also took on the editing process, ensuring the final video conveyed the intended intensity and excitement. It was a fulfilling day in the studio, resulting in a commercial that I’m truly proud of.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764715919/portfolio-projects-recpC3ajparAtzTWT-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764715919/portfolio-projects-recpC3ajparAtzTWT-0.jpg",
@@ -2013,6 +2063,7 @@
       "description": "I directed the investor pitch video for The Textile Building, a landmark Victorian warehouse in Newark-on-Trent undergoing transformation into 39 modern apartments. \n\nThe project presented the unique challenge of showcasing an unfinished building, which we addressed by integrating architectural renderings, aerial footage of the surrounding area, and interviews with the architects and developers. This approach effectively conveyed the vision and potential of the development to prospective investors.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768472/portfolio-projects-recGP4lK31t7NWk1i-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768472/portfolio-projects-recGP4lK31t7NWk1i-0.jpg",
@@ -2054,6 +2105,7 @@
       "description": "A narrative project exploring a futuristic world and the characters living within it.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845647/portfolio-projects-recbj3XB6u7xf13Rn-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845647/portfolio-projects-recbj3XB6u7xf13Rn-0.jpg",
@@ -2091,6 +2143,7 @@
       "description": "A narrative film exploring its characters through a dark and visually driven story.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845656/portfolio-projects-recjSsXRCXyvCswZm-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845656/portfolio-projects-recjSsXRCXyvCswZm-0.jpg",
@@ -2152,6 +2205,7 @@
       "description": "A short narrative film exploring the emotional and physical aftermath of violence and its impact on those involved.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845497/portfolio-projects-recAaKj5qZKIkcYuc-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845497/portfolio-projects-recAaKj5qZKIkcYuc-0.jpg",
@@ -2188,6 +2242,7 @@
       "description": "A narrative project exploring its characters through a stylised and atmospheric visual approach.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845601/portfolio-projects-recVRARMRQf13RCRG-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845601/portfolio-projects-recVRARMRQf13RCRG-0.jpg",
@@ -2252,6 +2307,7 @@
       "description": "When a young girl struggles with self-identity and reaches out for help, she is thrown into a surreal world with bizarre encounters with herself to find out who she really is.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603758/portfolio-projects-recIJ0DCdjbQDSFsR-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603758/portfolio-projects-recIJ0DCdjbQDSFsR-0.jpg",
@@ -2384,6 +2440,7 @@
       "description": "A project I created for WakeUp, WakeCup is a simple yet peaceful concept featuring their water bottle/thermos. The idea was to capture the feeling of a crisp autumn hike in the UK – someone enjoying a quiet moment in nature with their drink in hand. Serene, atmospheric, and effortless, the project was all about embracing the small joys of being outdoors. A fun and refreshing shoot that kept things minimal yet meaningful.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768433/portfolio-projects-rec5Tles2ludfUSpq-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768433/portfolio-projects-rec5Tles2ludfUSpq-0.jpg",
@@ -2438,6 +2495,7 @@
       "description": "I was commissioned to create a promotional video for Dyas, a London-based fashion brand that collaborates with artists for each of their clothing lines. This project focused on Juna, a talented collage artist, exploring her creative process - from inspiration to artwork- and how her designs are transformed into textiles and clothing. The video had a documentary-style approach, which made it an especially engaging and rewarding experience for me.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768641/portfolio-projects-recuJ26waUmWS1gX5-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768641/portfolio-projects-recuJ26waUmWS1gX5-0.jpg",
@@ -2490,6 +2548,7 @@
       "description": "A Pepsi campaign featuring Nigerian artist Ayra Starr, combining performance, music and energetic imagery to capture the spirit of the brand.",
       "isFeatured": true,
       "isHero": true,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804895/portfolio-projects-recFxq0Le1WMdP2ep-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804895/portfolio-projects-recFxq0Le1WMdP2ep-0.jpg",
@@ -2526,6 +2585,7 @@
       "description": "A music video for Lola Audreys, using performance and cinematic imagery to create a playful and visually distinctive world around the track.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845588/portfolio-projects-recUDHJ7OvLgreTzJ-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845588/portfolio-projects-recUDHJ7OvLgreTzJ-0.jpg",
@@ -2563,6 +2623,7 @@
       "description": "A collection of wedding films capturing the atmosphere, emotions and personal moments of two couples across their wedding days.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://i.vimeocdn.com/video/1176560753-87ed6540289fb3797e8411037e116bfc415ee962fd7a92ebc150091f89251bce-d_295x166?region=us",
       "gallery": [],
       "videoUrl": "https://vimeo.com/568909917/a90f1715a3, https://vimeo.com/571293775/6e378ab399",
@@ -2595,6 +2656,7 @@
       "description": "A music video built around performance and fashion, combining energetic imagery with a playful visual style.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804897/portfolio-projects-recmNqLKmAF2kneZI-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804897/portfolio-projects-recmNqLKmAF2kneZI-0.jpg",
@@ -2634,6 +2696,7 @@
       "description": "A music video for LYCO x WXYNE, combining performance and cinematic imagery to create a visually distinctive world around the track.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804901/portfolio-projects-receJPGJko0JfrlK2-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804901/portfolio-projects-receJPGJko0JfrlK2-0.jpg",
@@ -2674,6 +2737,7 @@
       "description": "A short narrative film exploring character and atmosphere through a tense and visually driven story.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845517/portfolio-projects-recLaSNV1Qeiw7OI0-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845517/portfolio-projects-recLaSNV1Qeiw7OI0-0.jpg",
@@ -2714,6 +2778,7 @@
       "description": "A music video for Laura Mvula, combining performance with a stylised visual world to complement the energy and emotion of the track.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845544/portfolio-projects-recRdMBhsBIiFGId1-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845544/portfolio-projects-recRdMBhsBIiFGId1-0.jpg",
@@ -2752,6 +2817,7 @@
       "description": "",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804913/portfolio-projects-recriTofURKR8oiTd-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804913/portfolio-projects-recriTofURKR8oiTd-0.jpg",
@@ -2790,6 +2856,7 @@
       "description": "A promotional film for Rydal Gym, showcasing the facilities, atmosphere and training experience through energetic and dynamic visuals.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845484/portfolio-projects-rec2RIXmewgEo0XD0-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845484/portfolio-projects-rec2RIXmewgEo0XD0-0.jpg",
@@ -2827,6 +2894,7 @@
       "description": "A music video exploring a dark and claustrophobic atmosphere through stylised imagery and performance.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804917/portfolio-projects-recGZlDTuUXG8Iq6K-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804917/portfolio-projects-recGZlDTuUXG8Iq6K-0.jpg",
@@ -2868,6 +2936,7 @@
       "description": "Three years after a traumatic event that changed her life Kelly, a young girl, returns to her hometown Kastoria and to her friends whom she has left behind. At the same time, a curious case of a hit-and-run accident, that had shaken the town, is opened once again.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603764/portfolio-projects-recP0DyB35ZBY85Kb-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603764/portfolio-projects-recP0DyB35ZBY85Kb-0.jpg",
@@ -3002,6 +3071,7 @@
       "description": "HIDDEN DRUMMERS of INDIA is a three part documentary series on YouTube that explores the world of Carnatic music, and in particular India’s most awesome drum, the Kanjira!",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772822998/portfolio-projects-recxq79R8VQJGMsvp-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772822998/portfolio-projects-recxq79R8VQJGMsvp-0.jpg",
@@ -3043,6 +3113,7 @@
       "description": "In a small Greek village a frustrated woman in her 40s, Anna, can not handle her husbands' cheating anymore and decides to take revenge.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603770/portfolio-projects-recwmX7kG05YjKDPm-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603770/portfolio-projects-recwmX7kG05YjKDPm-0.jpg",
@@ -3157,6 +3228,7 @@
       "description": "A weary Londoner’s journey home is interrupted by two hoodies until he does the unspeakable.\nWhat would you do?",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845508/portfolio-projects-recIvlU6n8XkuxtDu-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845508/portfolio-projects-recIvlU6n8XkuxtDu-0.jpg",
@@ -3206,6 +3278,7 @@
       "description": "",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://img.youtube.com/vi/1yuiqnYVF4c/maxresdefault.jpg",
       "gallery": [],
       "videoUrl": "https://www.youtube.com/watch?v=1yuiqnYVF4c",
@@ -3242,6 +3315,7 @@
       "description": "A fast-paced, comedic ad where a burglar’s night takes an unexpected turn – instead of making a getaway, they end up securing an incredible Virgin Media deal for their friends. A playful take on how irresistible the offers are! This was such a fun project to film, balancing tight timing with sharp storytelling to pack humor and energy into every second.",
       "isFeatured": true,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603774/portfolio-projects-recC9iL5Z1deoxc30-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603774/portfolio-projects-recC9iL5Z1deoxc30-0.jpg",
@@ -3290,6 +3364,7 @@
       "description": "One day Apostolis decides that he wants to be a superhero. He creates a suit that allows him to teleport but only once per day. His flatmate Vezos needs transportation in order to go to a very important job interview, Apostolis offers to help but Vezos refuses to believe that his flatmate suddenly turned into a superhero.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603778/portfolio-projects-recYknDnapMT18OhZ-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603778/portfolio-projects-recYknDnapMT18OhZ-0.jpg",
@@ -3336,6 +3411,7 @@
       "description": "Electronic press kit content created for Blue Story, combining interviews and behind-the-scenes material to support the film's promotion.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804924/portfolio-projects-reczKSwzalWyR9bgf-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804924/portfolio-projects-reczKSwzalWyR9bgf-0.jpg",
@@ -3372,6 +3448,7 @@
       "description": "Electronic press kit content created for Blinded by the Light, combining interviews and behind-the-scenes material to promote the film.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804927/portfolio-projects-rec4tWleeVSuiUacx-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804927/portfolio-projects-rec4tWleeVSuiUacx-0.jpg",
@@ -3412,6 +3489,7 @@
       "description": "A narrative project exploring its characters and their relationship through a stylised and intimate visual approach.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804930/portfolio-projects-recsPIqnUyq78jfyv-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804930/portfolio-projects-recsPIqnUyq78jfyv-0.jpg",
@@ -3449,6 +3527,7 @@
       "description": "A narrative project set within the confined space of a train compartment, using a contained setting to build tension and character interaction.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804933/portfolio-projects-recFJA1FvBOL9VwA6-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804933/portfolio-projects-recFJA1FvBOL9VwA6-0.jpg",
@@ -3485,6 +3564,7 @@
       "description": "",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845523/portfolio-projects-recLo8YartaVx3psp-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1772845523/portfolio-projects-recLo8YartaVx3psp-0.jpg",
@@ -3523,6 +3603,7 @@
       "description": "The second film in the futuristic distopian universe of Underhill West.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768448/portfolio-projects-rec9d8M9kuWPnzbmt-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768448/portfolio-projects-rec9d8M9kuWPnzbmt-0.jpg",
@@ -3598,6 +3679,7 @@
       "description": "A music video built around the feeling of losing yourself, combining performance and cinematic imagery to create a playful and atmospheric visual world.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768429/portfolio-projects-rec4GWEg9Fzqz1vPk-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768429/portfolio-projects-rec4GWEg9Fzqz1vPk-0.jpg",
@@ -3641,6 +3723,7 @@
       "description": "I was commissioned to create a promotion video for the TEDx event happening at the University of Macedonia, Thessaloniki, Greece.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768455/portfolio-projects-recATtGUGhcvzTcvf-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768455/portfolio-projects-recATtGUGhcvzTcvf-0.jpg",
@@ -3692,6 +3775,7 @@
       "description": "My first ever proper Music Promo and the first film in the distopian future universe of Underhill West.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1792768618/portfolio-projects-recqKmuvw2HTSqEcA-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1792768618/portfolio-projects-recqKmuvw2HTSqEcA-0.jpg",
@@ -3778,6 +3862,7 @@
       "description": "A brother and a sister struggle in order to find money for their mothers chemotherapy.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764603786/portfolio-projects-reco9orD0pc1Afn1g-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764603786/portfolio-projects-reco9orD0pc1Afn1g-0.jpg",
@@ -3850,6 +3935,7 @@
       "description": "A series of corporate films for Frosstrom and Leister, showcasing their work, products and expertise through clear and engaging visual storytelling.",
       "isFeatured": false,
       "isHero": false,
+      "requestOnly": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1764804936/portfolio-projects-recbclwtLtPMCuO9a-0.jpg",
       "gallery": [
         "https://res.cloudinary.com/date24ay6/image/upload/v1764804936/portfolio-projects-recbclwtLtPMCuO9a-0.jpg",
@@ -3878,7 +3964,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.75,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -3889,7 +3975,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112628/portfolio-brands-rec36fSrsncQKzYAr-colour.png",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 1.25,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -3922,7 +4008,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112665/portfolio-brands-rectBRsTtqQ7hUBFw-colour.png",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.8,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -3933,7 +4019,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 1.25,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -3999,7 +4085,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.9,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4032,7 +4118,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112658/portfolio-brands-recjx9wNpqdGDGqr8-colour.png",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.85,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4054,7 +4140,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.95,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4076,7 +4162,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112673/portfolio-brands-reczVxSCzQ97JsfDM-colour.png",
       "logoColourOverlay": "https://res.cloudinary.com/date24ay6/image/upload/v1795112674/portfolio-brands-reczVxSCzQ97JsfDM-colour-overlay.png",
       "website": null,
-      "scale": 1,
+      "scale": 0.95,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4087,7 +4173,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 1.25,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4142,7 +4228,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.9,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4164,7 +4250,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 1.2,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4274,7 +4360,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112651/portfolio-brands-recVYjbiKNI6nTLd5-colour.png",
       "logoColourOverlay": "https://res.cloudinary.com/date24ay6/image/upload/v1795112652/portfolio-brands-recVYjbiKNI6nTLd5-colour-overlay.png",
       "website": null,
-      "scale": 1,
+      "scale": 1.15,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4285,7 +4371,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112660/portfolio-brands-recp9zhW5hdj1Ur8L-colour.png",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.9,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4296,7 +4382,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112662/portfolio-brands-recqWdEl2B1UY9J4J-colour.png",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 0.85,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4318,7 +4404,7 @@
       "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112667/portfolio-brands-rectymHY7Y26U4CUO-colour.png",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 1.1,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4373,7 +4459,7 @@
       "logoColour": "",
       "logoColourOverlay": "",
       "website": null,
-      "scale": 1,
+      "scale": 1.3,
       "wordmark": "auto",
       "treatment": "mono"
     },
@@ -4451,30 +4537,26 @@
       "label": "Work Partners Include",
       "layout": "inline",
       "colourOnHover": false,
+      "logoHeight": 20,
+      "spacing": 0.85,
       "brandIds": [
-        "rec36fSrsncQKzYAr",
-        "recW3D3IQVPqf9Gtz",
-        "rec5hqD5YySJ35odU",
-        "rec9JcH7KChJLtpQL",
-        "recPThXMfEkcSgu0N",
-        "recT4DvR8HbdG9YwP",
         "rectBRsTtqQ7hUBFw",
-        "recUQ2k6qWamnC1bQ",
-        "recVzprnMhtdsswXO",
-        "recs86o0pWVWeEEGp",
-        "rectymHY7Y26U4CUO",
-        "recv5sTd0zCvRtlaP",
-        "recqWdEl2B1UY9J4J",
-        "recZRCxp5vwucJpUX",
+        "rec5hqD5YySJ35odU",
+        "recW3D3IQVPqf9Gtz",
+        "recT4DvR8HbdG9YwP",
         "recLyXIgCVdS68fgz",
         "rec1vOELedma14B39",
-        "reczVxSCzQ97JsfDM",
+        "recVzprnMhtdsswXO",
+        "rec9JcH7KChJLtpQL",
+        "recs86o0pWVWeEEGp",
+        "rectymHY7Y26U4CUO",
+        "recqWdEl2B1UY9J4J",
+        "recUQ2k6qWamnC1bQ",
+        "recZRCxp5vwucJpUX",
         "recr21bAFnlnPcZlb",
-        "recNUHd1u0jbBFYiw",
+        "reczVxSCzQ97JsfDM",
         "recvAjmm23PIFCdUx",
         "recDCO5Rz90l84mT4",
-        "recBje4FReeqtY0OF",
-        "rec7ifNGCOu6ZQS42",
         "recJJj6ZavLSwP0rD"
       ]
     },
@@ -4516,10 +4598,10 @@
     "otherPortfolioName": "Gabriel Athanasiou",
     "defaultOgImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845699/portfolio-config-postproduction-defaultOg.jpg",
     "portfolioOwnerName": "Lemon Post",
-    "lastModified": "2026-11-19T18:21:55.000Z"
+    "lastModified": "2026-11-19T19:57:47.000Z"
   },
   "portfolioMode": "postproduction",
-  "lastUpdated": "2026-11-19T18:23:20.169Z",
+  "lastUpdated": "2026-11-19T20:14:47.914Z",
   "version": "2.0",
   "source": "sync-logic"
 }
