@@ -60,7 +60,7 @@ npm run sync:robots     # Just the robots.txt files
 
 ## 📦 Consumption
 
-The frontend fetches data from jsDelivr CDN via the **`@data` branch**:
+The frontend fetches data from jsDelivr CDN. **Directing uses `@data`; Lemon Post uses `@data-live`** because jsDelivr’s `@data` branch alias can stay stale for the postproduction file. Every publish mirrors `data` to `data-live`; `data` remains the append-only history/rollback branch.
 
 ```javascript
 const response = await fetch('https://cdn.jsdelivr.net/gh/gabathanasiou/gabriel-portfolio-data@data/directing/portfolio-data.json');

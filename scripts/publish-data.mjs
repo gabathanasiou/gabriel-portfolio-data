@@ -34,6 +34,15 @@ const __filename = fileURLToPath(import.meta.url);
 /** The only paths the published branch may contain. */
 export const ARTIFACTS = ['directing', 'postproduction', 'cloudinary-mapping.json', '.gitignore'];
 
+/** The frontend reads postproduction from this alias. */
+const LIVE_BRANCH = 'data-live';
+
+function pushLiveMirror(worktree, remote, branch) {
+  if (branch !== 'data') return;
+  log(`mirroring to ${remote}/${LIVE_BRANCH}`);
+  git(worktree, ['push', remote, `HEAD:refs/heads/${LIVE_BRANCH}`]);
+}
+
 const IDENTITY = [
   '-c', 'user.name=github-actions',
   '-c', 'user.email=github-actions@users.noreply.github.com'
@@ -151,6 +160,7 @@ export function publishData({ cwd = process.cwd(), stageDir, remote = 'origin', 
     git(worktree, ['tag', tag]);
     log(`pushing ${commit.slice(0, 7)} to ${remote}/${branch} (append-only)`);
     git(worktree, ['push', remote, `HEAD:refs/heads/${branch}`]);
+    pushLiveMirror(worktree, remote, branch);
     git(worktree, ['push', remote, tag]);
     log(`published ${tag}`);
 
@@ -192,6 +202,7 @@ export function rollbackData({ cwd = process.cwd(), ref, remote = 'origin', bran
 
     git(worktree, ['tag', tag]);
     git(worktree, ['push', remote, `HEAD:refs/heads/${branch}`]);
+    pushLiveMirror(worktree, remote, branch);
     git(worktree, ['push', remote, tag]);
     log(`rolled back to ${ref} as ${commit.slice(0, 7)} (${restored} artifact path(s))`);
 
