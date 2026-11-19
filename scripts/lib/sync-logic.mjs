@@ -430,6 +430,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
 
         const isFeatured = displayStatus === 'Featured' || displayStatus === 'Hero';
         const isHero = displayStatus === 'Hero';
+        const isRequestOnly = displayStatus === 'Request Only';
 
         const type = normalizeProjectType(f['Project Type'] || '');
         const kinds = f['Kind'] ? [f['Kind']] : (f['Kinds'] || []);
@@ -473,9 +474,13 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
         const rawLinks = f['External Links'] || '';
         const { links, videos: externalVideos } = parseExternalLinks(rawLinks);
 
-        const primaryVideos = videoUrlField ? videoUrlField.split(/[,|\n]+/).map(v => v.trim()).filter(Boolean) : [];
-        const additionalExternalVideos = externalVideos.filter(v => !primaryVideos.includes(v));
-        const finalVideoUrl = [...primaryVideos, ...additionalExternalVideos].join(', ');
+        const primaryVideos = !isRequestOnly && videoUrlField
+            ? videoUrlField.split(/[,|\n]+/).map(v => v.trim()).filter(Boolean)
+            : [];
+        const additionalExternalVideos = isRequestOnly
+            ? []
+            : externalVideos.filter(v => !primaryVideos.includes(v));
+        const finalVideoUrl = isRequestOnly ? '' : [...primaryVideos, ...additionalExternalVideos].join(', ');
 
         // ── Gallery (prefer Cloudinary URLs) ──
         const galleryAttachments = f['Gallery'] || f['Gallery (Image)'] || [];
@@ -512,7 +517,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
             slug: makeContentSlug(title, usedSlugs, record.id),
             title, type, kinds, genre, productionCompany, client, brandIds,
             year, releaseDate, workDate, description,
-            isFeatured, isHero, heroImage, gallery,
+            isFeatured, isHero, requestOnly: isRequestOnly, heroImage, gallery,
             videoUrl: finalVideoUrl, additionalVideos: [],
             awards, credits, externalLinks: links,
             relatedArticleId,

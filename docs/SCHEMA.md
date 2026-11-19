@@ -23,18 +23,22 @@ Fields marked with 🚫 are business/finance fields **not used** by the portfoli
 | `Release Date` | date | `releaseDate`, `year` | Primary sort field. YYYY-MM-DD |
 | `Work Date` | date | `workDate` | Fallback date when Release Date is empty |
 | `About` | singleLineText | `description` | Project description text |
-| `Video URL` | multilineText | `videoUrl` | Comma/Newline-separated URLs. Supports `[Label] URL` syntax. |
+| `Video URL` | multilineText | `videoUrl` | Comma/Newline-separated URLs. Supports `[Label] URL` syntax. Omitted for `Request Only` projects. |
 | `Gallery` | multipleAttachments | `gallery[]` | Images uploaded to Cloudinary, URLs resolved from mapping |
 | `Credits` | multilineText | `credits[]` | Parsed via `parseCreditsText()`. Supports `Role: Name`, `Role by Name`, or `Name`. |
-| `External Links` | multilineText | `externalLinks[]` | Parsed into `{label, url}`. Supports `[Label] URL` and auto-domain labeling. |
-| `Display Status` | singleSelect | `isFeatured`, `isHero` | Choices: Hidden, Portfolio Only, Featured, Hero. **Used for Directing portfolio** |
-| `Display Status (Post)` | singleSelect | `isFeatured`, `isHero` | Same choices. **Used for Post-Production portfolio** |
+| `External Links` | multilineText | `externalLinks[]` | Parsed into `{label, url}`. Supports `[Label] URL` and auto-domain labeling. Video-host links are parsed into `videoUrl` and omitted for `Request Only` projects. |
+| `Display Status` | singleSelect | `isFeatured`, `isHero`, `requestOnly` | Choices: Hidden, Portfolio Only, Featured, Hero, Request Only. **Used for Directing portfolio** |
+| `Display Status (Post)` | singleSelect | `isFeatured`, `isHero`, `requestOnly` | Same choices. **Used for Post-Production portfolio** |
 | `Production Company` | multipleRecordLinks → Client Book | `productionCompany` | Record ID resolved via clientsMap |
 | `Festivals` | multipleRecordLinks → Festivals | `awards[]` | Record IDs resolved via festivalsMap |
 | `Journal` | multipleRecordLinks → Journal | `relatedArticleId` | First linked record ID (if any) |
 | `Client` | singleLineText | `client` | Legacy free-text client; kept for migration/fallback |
 | `Brands` | multipleRecordLinks → Brands | `brandIds[]` | Linked brands/artists for the project page and home wall |
 | `Last Modified` | lastModifiedTime | — | Not exposed in output, but tracked by Airtable |
+
+> `Request Only` keeps the project visible in the portfolio but omits `videoUrl`
+> and video-host external links from the published JSON; the project page shows
+> a request-access CTA instead of a player.
 
 > Additional business/finance fields exist in Airtable but are **not used** by the portfolio sync and are omitted from this public document.
 
