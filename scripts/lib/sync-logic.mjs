@@ -1,7 +1,7 @@
 /**
  * Sync Logic — Clean rewrite of the portfolio data sync pipeline.
  *
- * Fetches all 5 Airtable tables ONCE, syncs images to Cloudinary,
+ * Fetches all 6 Airtable tables ONCE, syncs images to Cloudinary,
  * then processes and writes portfolio-data.json for each portfolio mode.
  *
  * Replaces the old sync-core.mjs monolith (1,219 lines → ~400 lines).
@@ -83,16 +83,17 @@ export async function syncPortfolios(config) {
     const log = verbose ? (...args) => console.log('[sync]', ...args) : () => { };
     const timestamp = new Date().toISOString();
 
-    // ── Step 1: Fetch all tables in parallel (5 API calls total) ──
+    // ── Step 1: Fetch all tables in parallel (6 API calls total) ──
     log('🔄 Fetching all Airtable tables...');
-    const [projectRecords, journalRecords, festivalRecords, clientRecords, settingsRecords] = await Promise.all([
+    const [projectRecords, journalRecords, festivalRecords, clientRecords, settingsRecords, brandRecords] = await Promise.all([
         fetchAirtableTable('tblqZvYhmZ8H81poY', 'Release Date', airtableToken, airtableBaseId), // Projects
         fetchAirtableTable('tblISFDv21C0PkgEv', 'Date', airtableToken, airtableBaseId),         // Journal
         fetchAirtableTable('tblGdWlTVC06ZT60H', null, airtableToken, airtableBaseId),          // Festivals
         fetchAirtableTable('tblv9PEHYyMy2EuqJ', null, airtableToken, airtableBaseId),          // Client Book
         fetchAirtableTable('tbl37Kj4J5zPK74oN', null, airtableToken, airtableBaseId),          // Settings
+        fetchAirtableTable('tbl60t7fcrXQMmTYA', null, airtableToken, airtableBaseId),          // Brands
     ]);
-    log(`✅ Fetched: ${projectRecords.length} projects, ${journalRecords.length} journal, ${festivalRecords.length} festivals, ${clientRecords.length} clients, ${settingsRecords.length} settings`);
+    log(`✅ Fetched: ${projectRecords.length} projects, ${journalRecords.length} journal, ${festivalRecords.length} festivals, ${clientRecords.length} clients, ${settingsRecords.length} settings, ${brandRecords.length} brands`);
 
     // ── Step 2: Build lookup maps ──
     const festivalsMap = Object.fromEntries(
@@ -123,7 +124,7 @@ export async function syncPortfolios(config) {
     );
     log(`✅ Image sync scope: ${visibleProjectRecords.length}/${projectRecords.length} projects, ${publishedJournalRecords.length}/${journalRecords.length} journal`);
 
-    const updatedMapping = await syncImagesToCloudinary(visibleProjectRecords, publishedJournalRecords, settingsRecords, existingMapping, verbose);
+    const updatedMapping = await syncImagesToCloudinary(visibleProjectRecords, publishedJournalRecords, settingsRecords, brandRecords, existingMapping, verbose);
 
     if (!skipFileWrites && updatedMapping) {
         saveCloudinaryMapping(outputDir, updatedMapping);
@@ -131,9 +132,10 @@ export async function syncPortfolios(config) {
     }
 
     const mapping = updatedMapping || existingMapping;
+    const brands = processBrands(brandRecords, mapping, verbose);
 
     // ── Step 4: Process each portfolio mode ──
-    const results = { success: true, portfolios: {}, timestamp, apiCalls: 5 };
+    const results = { success: true, portfolios: {}, timestamp, apiCalls: 6 };
 
     for (const mode of portfolioModes) {
         log(`\n📂 Processing portfolio: ${mode}`);
@@ -154,7 +156,7 @@ export async function syncPortfolios(config) {
             log(`⏭️ Journal disabled for ${mode}`);
         }
 
-        results.portfolios[mode] = { projects, journal, config: portfolioConfig };
+        results.portfolios[mode] = { projects, journal, config: portfolioConfig, brands };
 
         // Write output
         if (!skipFileWrites) {
@@ -164,6 +166,7 @@ export async function syncPortfolios(config) {
             const payload = {
                 projects: stripInternalFields(projects),
                 posts: stripInternalFields(journal),
+                brands: stripInternalFields(brands),
                 config: portfolioConfig,
                 portfolioMode: mode,
                 lastUpdated: timestamp,
@@ -221,7 +224,11 @@ export function buildPublishedMapping(mapping, publishedProjectIds, publishedJou
         journal: (mapping.journal || [])
             .filter(entry => publishedJournalIds.has(entry.recordId))
             .map(keep),
-        config: { images: (mapping.config?.images || []).map(image => ({ ...image })) }
+        config: { images: (mapping.config?.images || []).map(image => ({ ...image })) },
+        brands: (mapping.brands || []).map(entry => ({
+            recordId: entry.recordId,
+            images: entry.images || {}
+        }))
     };
 }
 
@@ -267,6 +274,9 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
     };
 
     const allowedRoles = parseRoles(f['Allowed Roles'] || '');
+    const layoutRaw = String(f['Brand Wall Layout'] || 'Inline').toLowerCase();
+    const brandWallLayout = ['inline', 'grid', 'marquee'].includes(layoutRaw) ? layoutRaw : 'inline';
+    const homeBrands = Array.isArray(f['Home Brands']) ? f['Home Brands'] : [];
 
     // Cross-site: read the OTHER portfolio's settings for cross-site credits
     const otherMode = portfolioMode === 'directing' ? 'postproduction' : 'directing';
@@ -293,6 +303,15 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
         workSectionLabel: f['Work Section Label'] || 'Filmography',
         hasJournal: f['Has Journal'] || false,
         showRoleFilter: f['Show Role Filter'] || false,
+
+        // Home page brand wall — curated, ordered in Settings → Home Brands
+        brandWall: {
+            enabled: Boolean(f['Show Brand Wall']),
+            label: f['Brand Wall Label'] || '',
+            layout: brandWallLayout,
+            colourOnHover: Boolean(f['Brands Colour On Hover']),
+            brandIds: homeBrands,
+        },
 
         // Cross-portfolio
         showOtherPortfolioLink: f['Show Other Portfolio Link'] || false,
@@ -350,6 +369,7 @@ function getDefaultConfig() {
         seoTitle: '', seoDescription: '', domain: '',
         logo: '', favicon: '', fontFamily: '',
         workSectionLabel: 'Filmography', hasJournal: true, showRoleFilter: false,
+        brandWall: { enabled: false, label: '', layout: 'inline', colourOnHover: false, brandIds: [] },
         showOtherPortfolioLink: false, otherPortfolioUrl: '', otherPortfolioLabel: '',
         aboutLayout: 'standard', themeMode: 'dark',
         tradingNameDisclosure: '', gaMeasurementId: '',
@@ -405,6 +425,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
         const kinds = f['Kind'] ? [f['Kind']] : (f['Kinds'] || []);
         const genre = f['Genre'] || [];
         const client = f['Client'] || '';
+        const brandIds = Array.isArray(f['Brands']) ? f['Brands'] : [];
 
         // ── Credits ──
         const rawCredits = f['Credits (new)'] || f['Credits'] || '';
@@ -479,7 +500,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
         projects.push({
             id: record.id,
             slug: makeContentSlug(title, usedSlugs, record.id),
-            title, type, kinds, genre, productionCompany, client,
+            title, type, kinds, genre, productionCompany, client, brandIds,
             year, releaseDate, workDate, description,
             isFeatured, isHero, heroImage, gallery,
             videoUrl: finalVideoUrl, additionalVideos: [],
@@ -496,6 +517,66 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
     });
 
     return projects;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// Brand Processor
+// ═══════════════════════════════════════════════════════════════
+
+const WORDMARK_STYLES = ['auto', 'wide', 'thin', 'black', 'serif', 'editorial', 'mono', 'lower', 'tight'];
+
+/**
+ * Build the public brand records. Assets are always Airtable attachments →
+ * Cloudinary; there is no URL fallback. A brand with no logo still ships so
+ * the wall can use its typographic wordmark.
+ */
+export function processBrands(records, cloudinaryMapping, verbose) {
+    const cloudinaryMap = {};
+    (cloudinaryMapping?.brands || []).forEach(entry => {
+        cloudinaryMap[entry.recordId] = entry.images || {};
+    });
+
+    const brands = [];
+    for (const record of records) {
+        const f = record.fields || {};
+        const name = String(f['Name'] || '').trim();
+        if (!name) continue;
+
+        const images = cloudinaryMap[record.id] || {};
+        const imageUrl = (key) => {
+            const image = images[key];
+            if (!image?.cloudinaryUrl) return '';
+            return toWebSafeImageUrl(image.cloudinaryUrl, image.format);
+        };
+
+        const treatment = f['Use Adaptive Variant']
+            ? 'adaptive'
+            : (f['Logo Treatment'] === 'Colour' ? 'colour' : 'mono');
+
+        const rawScale = Number(f['Scale']);
+        const rawWordmark = String(f['Wordmark Style'] || 'Auto').toLowerCase();
+        const wordmark = WORDMARK_STYLES.includes(rawWordmark) ? rawWordmark : 'auto';
+
+        if (!imageUrl('logo') && verbose) {
+            console.warn(`[sync] ⚠️ No Cloudinary logo for brand "${name}" (wordmark fallback)`);
+        }
+
+        brands.push({
+            id: record.id,
+            name,
+            logo: imageUrl('logo'),
+            logoColour: imageUrl('colour'),
+            logoColourMono: imageUrl('colourMono'),
+            website: String(f['Website'] || '').trim() || null,
+            scale: Number.isFinite(rawScale) && rawScale > 0 ? rawScale : 1,
+            wordmark,
+            treatment,
+        });
+    }
+
+    brands.sort((a, b) => a.name.localeCompare(b.name));
+    return brands;
 }
 
 
@@ -616,7 +697,7 @@ function configureCloudinarySdk() {
  * This means unchanged content = 0 Cloudinary API calls (instant).
  * Only genuinely new/changed images hit the network.
  */
-async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRecords, existingMapping, verbose) {
+async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRecords, brandRecords, existingMapping, verbose) {
     const cloudinaryConfig = configureCloudinarySdk();
     if (!cloudinaryConfig.enabled) {
         if (verbose) console.log('[sync] ⏭️ Cloudinary disabled or credentials missing');
@@ -647,6 +728,11 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
     for (const img of (existingMapping?.config?.images || [])) {
         if (cacheable(img)) cache.set(`${img.publicId}::${img.airtableId}`, img);
     }
+    for (const brand of (existingMapping?.brands || [])) {
+        for (const img of Object.values(brand.images || {})) {
+            if (cacheable(img)) cache.set(`${img.publicId}::${img.airtableId}`, img);
+        }
+    }
     log(`📦 Loaded ${cache.size} cached Cloudinary entries`);
 
     const newMapping = {
@@ -654,6 +740,7 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
         projects: [],
         journal: [],
         config: { images: [] },
+        brands: [],
     };
 
     let uploaded = 0, cached = 0, checkedAndFound = 0;
@@ -782,6 +869,37 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
         }
     }
 
+    // ── Brand logo attachments (logo, colour, colour-only overlay) ──
+    const brandImageFields = [
+        { field: 'Logo', type: 'logo' },
+        { field: 'Logo Colour', type: 'colour' },
+        { field: 'Logo Colour Mono', type: 'colourMono' },
+    ];
+
+    for (const record of brandRecords) {
+        const f = record.fields || {};
+        const name = f['Name'] || 'Untitled';
+        const entry = { recordId: record.id, name, images: {} };
+
+        for (const item of brandImageFields) {
+            const attachment = (f[item.field] || [])[0];
+            if (!attachment) continue;
+
+            const publicId = `portfolio-brands-${record.id}-${item.type}`;
+            const resolved = await resolveImage(
+                publicId,
+                attachment.id,
+                attachment.url,
+                name,
+                `(${item.type})`,
+                attachment.type
+            );
+            entry.images[item.type] = resolved;
+        }
+
+        newMapping.brands.push(entry);
+    }
+
     const total = cached + checkedAndFound + uploaded;
     log(`✅ Cloudinary sync: ${cached} cached, ${checkedAndFound} verified via API, ${uploaded} uploaded (${total} total)`);
     return newMapping;
@@ -799,7 +917,7 @@ function loadCloudinaryMapping(outputDir) {
     } catch (err) {
         console.warn('[sync] ⚠️ Could not load Cloudinary mapping:', err.message);
     }
-    return { generatedAt: new Date().toISOString(), projects: [], journal: [], config: { images: [] } };
+    return { generatedAt: new Date().toISOString(), projects: [], journal: [], config: { images: [] }, brands: [] };
 }
 
 function saveCloudinaryMapping(outputDir, mapping) {

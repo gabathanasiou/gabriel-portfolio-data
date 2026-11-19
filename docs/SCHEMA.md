@@ -32,7 +32,8 @@ Fields marked with 🚫 are business/finance fields **not used** by the portfoli
 | `Production Company` | multipleRecordLinks → Client Book | `productionCompany` | Record ID resolved via clientsMap |
 | `Festivals` | multipleRecordLinks → Festivals | `awards[]` | Record IDs resolved via festivalsMap |
 | `Journal` | multipleRecordLinks → Journal | `relatedArticleId` | First linked record ID (if any) |
-| `Client` | singleLineText | `client` | Direct text field |
+| `Client` | singleLineText | `client` | Legacy free-text client; kept for migration/fallback |
+| `Brands` | multipleRecordLinks → Brands | `brandIds[]` | Linked brands/artists for the project page and home wall |
 | `Last Modified` | lastModifiedTime | — | Not exposed in output, but tracked by Airtable |
 
 > Additional business/finance fields exist in Airtable but are **not used** by the portfolio sync and are omitted from this public document.
@@ -66,6 +67,31 @@ Fields marked with 🚫 are business/finance fields **not used** by the portfoli
 
 ---
 
+## Table: Brands (`tbl60t7fcrXQMmTYA`)
+
+Brands and artists credited on projects. The home wall uses a curated, ordered
+selection from Settings → `Home Brands`.
+
+| Airtable Field | Type | Output Property | Notes |
+|---|---|---|---|
+| `Name` | singleLineText | `name` | **Primary**. Display name, alt text and wordmark source |
+| `Logo` | multipleAttachments | `logo` | Primary/mono artwork → Cloudinary; theme-tinted by the site |
+| `Logo Colour` | multipleAttachments | `logoColour` | Original colour artwork (Colour treatment) → Cloudinary |
+| `Logo Colour Mono` | multipleAttachments | `logoColourMono` | Colour-only overlay → Cloudinary; layered over the mono base |
+| `Website` | url | `website` | Optional click-through |
+| `Scale` | number | `scale` | Optical size multiplier; default 1 |
+| `Wordmark Style` | singleSelect | `wordmark` | Auto, Wide, Thin, Black, Serif, Editorial, Mono, Lower, Tight; used only without a logo |
+| `Logo Treatment` | singleSelect | `treatment` | Mono, Colour; `Use Adaptive Variant` overrides to `adaptive` |
+| `Use Adaptive Variant` | checkbox | `treatment` | When checked, output `treatment: "adaptive"` (mono base + colour overlay) |
+| `Projects` | multipleRecordLinks → Projects | — | Reverse link |
+| `Settings` | multipleRecordLinks → Settings | — | Reverse link |
+
+Brand logos are always uploaded to Cloudinary (`portfolio-brands-<recordId>-logo`,
+`-colour`, `-colour-mono`); there is no logo URL fallback. A brand without a logo
+still syncs and renders as its typographic wordmark.
+
+---
+
 ## Table: Festivals (`tblGdWlTVC06ZT60H`) — Lookup Table
 
 | Airtable Field | Type | Used As |
@@ -91,6 +117,11 @@ Each row represents one portfolio mode. The `Portfolio ID` field selects the row
 | `Work Section Label` | singleLineText | `workSectionLabel` | Default: "Filmography" |
 | `Has Journal` | checkbox | `hasJournal` | |
 | `Show Role Filter` | checkbox | `showRoleFilter` | |
+| `Show Brand Wall` | checkbox | `brandWall.enabled` | |
+| `Brand Wall Label` | singleLineText | `brandWall.label` | e.g. "Brands I've worked with" / "Trusted by" |
+| `Brand Wall Layout` | singleSelect | `brandWall.layout` | Inline, Grid, Marquee |
+| `Brands Colour On Hover` | checkbox | `brandWall.colourOnHover` | |
+| `Home Brands` | multipleRecordLinks → Brands | `brandWall.brandIds[]` | Curated wall selection; array order is display order |
 | `Show Other Portfolio Link` | checkbox | `showOtherPortfolioLink` | |
 | `Other Portfolio URL` | url | `otherPortfolioUrl` | |
 | `Other Portfolio Label` | singleLineText | `otherPortfolioLabel` | |
@@ -140,6 +171,7 @@ Each `{mode}/portfolio-data.json` file (on the **`data` branch**):
 {
   "projects": [Project],
   "posts": [BlogPost],
+  "brands": [Brand],
   "config": HomeConfig,
   "portfolioMode": "directing" | "postproduction",
   "lastUpdated": "2026-03-06T17:00:00.000Z",
@@ -160,6 +192,7 @@ Images are synced to Cloudinary using a **check-then-upload** strategy:
    - Projects: `portfolio-projects-{recordId}-{galleryIndex}`
    - Journal: `portfolio-journal-{recordId}`
    - Settings: `portfolio-config-{portfolioId}-{type}` (types: logo, favicon, showreel, profile, defaultOg)
+   - Brands: `portfolio-brands-{recordId}-{logo|colour|colour-mono}`
 2. Uploads store the Airtable attachment id in the asset's Cloudinary context.
 3. For each image, `checkImageExists(publicId)` queries the Cloudinary API.
 4. If found **and** the stored attachment id matches → use the existing URL (skip upload).
