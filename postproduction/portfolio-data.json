@@ -1,31 +1,56 @@
 {
   "projects": [
     {
-      "id": "rec360otaXLhPLQ8V",
-      "slug": "aru-june-grade",
-      "title": "ARU June Grade",
+      "id": "recrxdeQc1Yo0LAMJ",
+      "slug": "byd-tiktok-campaign",
+      "title": "BYD TikTok Campaign",
       "type": "Commercial",
       "kinds": [
-        "Social"
+        "Campaign"
       ],
       "genre": [],
-      "productionCompany": "Storyflow Entertainment Limited",
-      "client": "Anglia Ruskin University London",
+      "productionCompany": "PATCHWORK FILMS STUDIO LIMITED",
+      "client": "BYD",
+      "brandIds": [
+        "rectBRsTtqQ7hUBFw"
+      ],
       "year": "2026",
       "releaseDate": "",
-      "workDate": "2026-07-20",
-      "description": "",
+      "workDate": "2026-10-22",
+      "description": "A Video Campaign for BYD, the Chinese EV brand. I was tasked to direct 3 social films in the vertical format that showcased the features of the new cars in a fun and engaging way. ",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "",
-      "gallery": [],
-      "videoUrl": "",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795112620/portfolio-projects-recrxdeQc1Yo0LAMJ-0.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112620/portfolio-projects-recrxdeQc1Yo0LAMJ-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112621/portfolio-projects-recrxdeQc1Yo0LAMJ-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112623/portfolio-projects-recrxdeQc1Yo0LAMJ-2.jpg"
+      ],
+      "videoUrl": "https://vimeo.com/1237694382/fd631de52e?fl=ls&fe=ec&share=copy, https://vimeo.com/1238078621/bcf2844c91?fl=ls&fe=ec&share=copy, https://vimeo.com/1238445487/51e1c738c5?fl=ls&fe=ec&share=copy",
       "additionalVideos": [],
       "awards": [],
       "credits": [
         {
           "role": "Colourist",
           "name": "Lemon Post"
+        },
+        {
+          "role": "Editor",
+          "name": "Lemon Post"
+        },
+        {
+          "role": "Director",
+          "name": "Gabriel Athanasiou",
+          "isCrossSite": true,
+          "externalUrl": "https://directedbygabriel.com"
+        },
+        {
+          "role": "DP",
+          "name": "Jessie Jing"
+        },
+        {
+          "role": "1st AD",
+          "name": "Nikos Papathanasiou"
         }
       ],
       "externalLinks": [],
@@ -42,15 +67,18 @@
       "genre": [],
       "productionCompany": "PATCHWORK FILMS STUDIO LIMITED",
       "client": "Caroline Andrew",
+      "brandIds": [
+        "recUQ2k6qWamnC1bQ"
+      ],
       "year": "2026",
       "releaseDate": "",
       "workDate": "2026-07-15",
       "description": "A social-first campaign exploring Caroline Andrew’s approach to weddings and bridal fashion through a series of four short documentary-style films featuring Caroline and her peers.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "",
+      "heroImage": "https://i.vimeocdn.com/video/2186370485-65ba3c66162f05e2fdaba393c785ba0c8f137aed4aa04d4c9803f44c843c4569-d_200x150?region=us",
       "gallery": [],
-      "videoUrl": "",
+      "videoUrl": "https://vimeo.com/1215246232/6d92722a6e?fl=ls&fe=ec&share=copy, https://vimeo.com/1215246233/db445d51bb?fl=ls&fe=ec&share=copy, https://vimeo.com/1215246234/56e5b28b9b?fl=ls&fe=ec&share=copy",
       "additionalVideos": [],
       "awards": [],
       "credits": [
@@ -99,15 +127,18 @@
       "genre": [],
       "productionCompany": "PATCHWORK FILMS STUDIO LIMITED",
       "client": "Caroline Andrew",
+      "brandIds": [
+        "recUQ2k6qWamnC1bQ"
+      ],
       "year": "2026",
       "releaseDate": "",
       "workDate": "2026-06-12",
       "description": "A social-first campaign of four summer fashion films for Caroline Andrew, combining photography and video to capture a youthful take on timeless style and the old-money aesthetic.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "",
+      "heroImage": "https://i.vimeocdn.com/video/2170319100-8e366eaecca2d3226e79adf470c0836f7187a154ca46545d88e02319f1c174d1-d_200x150?region=us",
       "gallery": [],
-      "videoUrl": "",
+      "videoUrl": "https://vimeo.com/1202591972/1baf23d5a1?share=copy, https://vimeo.com/1202591973/5f89aea07f?share=copy, https://vimeo.com/1202591971/95f0114e52?share=copy, https://vimeo.com/1202591977/1c85b7193f?share=copy",
       "additionalVideos": [],
       "awards": [],
       "credits": [
@@ -144,15 +175,22 @@
       "genre": [],
       "productionCompany": "PATCHWORK FILMS STUDIO LIMITED",
       "client": "Caroline Andrew",
+      "brandIds": [
+        "recUQ2k6qWamnC1bQ"
+      ],
       "year": "2026",
       "releaseDate": "",
       "workDate": "2026-05-31",
       "description": "A social-first campaign centred on Caroline Andrew’s new shop, exploring its history, design and identity through short documentary-style films featuring Caroline and her peers.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "",
-      "gallery": [],
-      "videoUrl": "",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795112617/portfolio-projects-recPZOk0FARXV2oze-0.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112617/portfolio-projects-recPZOk0FARXV2oze-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112618/portfolio-projects-recPZOk0FARXV2oze-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112619/portfolio-projects-recPZOk0FARXV2oze-2.jpg"
+      ],
+      "videoUrl": "https://vimeo.com/1195688983/5c298e57c1?share=copy, https://vimeo.com/1195688984/e7b9dc0a70?share=copy, https://vimeo.com/1195688982/8a233506f0?share=copy",
       "additionalVideos": [],
       "awards": [],
       "credits": [
@@ -179,15 +217,34 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "M&S",
+      "brandIds": [
+        "recW3D3IQVPqf9Gtz"
+      ],
       "year": "2026",
       "releaseDate": "",
       "workDate": "2026-04-16",
       "description": "A campaing of 5 different food videos for M&S.",
       "isFeatured": true,
       "isHero": false,
-      "heroImage": "",
-      "gallery": [],
-      "videoUrl": "",
+      "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1795112603/portfolio-projects-recd2lwZN8T4b1bZd-0.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112603/portfolio-projects-recd2lwZN8T4b1bZd-0.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112604/portfolio-projects-recd2lwZN8T4b1bZd-1.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112605/portfolio-projects-recd2lwZN8T4b1bZd-2.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112606/portfolio-projects-recd2lwZN8T4b1bZd-3.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112607/portfolio-projects-recd2lwZN8T4b1bZd-4.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112608/portfolio-projects-recd2lwZN8T4b1bZd-5.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112609/portfolio-projects-recd2lwZN8T4b1bZd-6.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112610/portfolio-projects-recd2lwZN8T4b1bZd-7.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112611/portfolio-projects-recd2lwZN8T4b1bZd-8.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112612/portfolio-projects-recd2lwZN8T4b1bZd-9.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112613/portfolio-projects-recd2lwZN8T4b1bZd-10.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112614/portfolio-projects-recd2lwZN8T4b1bZd-11.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112615/portfolio-projects-recd2lwZN8T4b1bZd-12.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112616/portfolio-projects-recd2lwZN8T4b1bZd-13.jpg",
+        "https://res.cloudinary.com/date24ay6/image/upload/v1795112617/portfolio-projects-recd2lwZN8T4b1bZd-14.jpg"
+      ],
+      "videoUrl": "https://vimeo.com/1248029927/21aea6ba2a?share=copy&fl=sv&fe=ci, https://vimeo.com/1248028329/3776b6cb3d?share=copy&fl=sv&fe=ci, https://vimeo.com/1248028326/d6cbf56abc?share=copy&fl=sv&fe=ci, https://vimeo.com/1248028325/6a2d68747b?share=copy&fl=sv&fe=ci, https://vimeo.com/1248028330/6de2bb5d25?share=copy&fl=sv&fe=ci",
       "additionalVideos": [],
       "awards": [],
       "credits": [
@@ -210,6 +267,9 @@
       "genre": [],
       "productionCompany": "DREAM LAB STUDIO LTD",
       "client": "Wago",
+      "brandIds": [
+        "recJJj6ZavLSwP0rD"
+      ],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-12-01",
@@ -246,6 +306,10 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Kitt Medical, Medical Tracker",
+      "brandIds": [
+        "reczVxSCzQ97JsfDM",
+        "recWjQL8MwRmVGJzz"
+      ],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-09-29",
@@ -292,6 +356,7 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-07-04",
@@ -327,6 +392,7 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-07-02",
@@ -365,6 +431,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Anglia Ruskin University London",
+      "brandIds": [
+        "rec36fSrsncQKzYAr"
+      ],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-06-12",
@@ -399,6 +468,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "University of Central Lancashire London",
+      "brandIds": [
+        "recs86o0pWVWeEEGp"
+      ],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-03-25",
@@ -433,6 +505,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Hello Sunday",
+      "brandIds": [
+        "recDCO5Rz90l84mT4"
+      ],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-02-26",
@@ -472,6 +547,7 @@
       ],
       "productionCompany": "Double J Films Limited ",
       "client": "",
+      "brandIds": [],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-02-11",
@@ -596,6 +672,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Squid Loyalty",
+      "brandIds": [
+        "recTgsRdci3asD4PJ"
+      ],
       "year": "2025",
       "releaseDate": "",
       "workDate": "2025-01-27",
@@ -636,19 +715,22 @@
     },
     {
       "id": "recrN5Q2SUgDfQDSG",
-      "slug": "neigbourly-launch-campaign",
-      "title": "Neigbourly Launch Campaign",
+      "slug": "neighbourly-launch-campaign",
+      "title": "Neighbourly Launch Campaign",
       "type": "Commercial",
       "kinds": [
         "Commercial"
       ],
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
-      "client": "Neigbourly",
+      "client": "Neighbourly",
+      "brandIds": [
+        "recu1b48EbEQyc4vF"
+      ],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-06-21",
-      "description": "A launch campaign for Neigbourly, introducing the brand through a series of engaging and accessible promotional films.",
+      "description": "A launch campaign for Neighbourly, introducing the brand through a series of engaging and accessible promotional films.",
       "isFeatured": false,
       "isHero": false,
       "heroImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845664/portfolio-projects-recrN5Q2SUgDfQDSG-0.jpg",
@@ -680,6 +762,9 @@
       "genre": [],
       "productionCompany": "Mattr Media Ltd",
       "client": "ClientEarth In Asia",
+      "brandIds": [
+        "rec5hqD5YySJ35odU"
+      ],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-06-20",
@@ -717,6 +802,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Anglia Ruskin University London",
+      "brandIds": [
+        "rec36fSrsncQKzYAr"
+      ],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-06-18",
@@ -751,6 +839,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Kitt Medical",
+      "brandIds": [
+        "reczVxSCzQ97JsfDM"
+      ],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-06-15",
@@ -788,6 +879,9 @@
       ],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Mini Cooper",
+      "brandIds": [
+        "rec1vOELedma14B39"
+      ],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-04-02",
@@ -829,6 +923,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "UPTON PROWSE",
+      "brandIds": [
+        "recv5sTd0zCvRtlaP"
+      ],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-01-25",
@@ -869,6 +966,7 @@
       "genre": [],
       "productionCompany": "Pete Hellyer Limited",
       "client": "",
+      "brandIds": [],
       "year": "2024",
       "releaseDate": "",
       "workDate": "2024-01-06",
@@ -907,6 +1005,9 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "PAQ",
+      "brandIds": [
+        "rec8M4UmbJRBb6Bnq"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-12-22",
@@ -942,6 +1043,7 @@
       "genre": [],
       "productionCompany": "Yoan Petrov",
       "client": "",
+      "brandIds": [],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-12-22",
@@ -1011,6 +1113,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Squid Loyalty",
+      "brandIds": [
+        "recTgsRdci3asD4PJ"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-12-21",
@@ -1053,6 +1158,7 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-12-16",
@@ -1091,6 +1197,7 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-12-01",
@@ -1126,13 +1233,14 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-11-24",
       "description": "A branded event film capturing the atmosphere, people and key moments of the event through a cinematic documentary approach.",
       "isFeatured": false,
       "isHero": false,
-      "heroImage": "https://vumbnail.com/889533159.jpg",
+      "heroImage": "https://i.vimeocdn.com/video/2136701914-1b23aaeded3a3da0ee2e254595f4a9e512cb14ad2064208cba0ab50b6bb3a86f-d_295x166?region=us",
       "gallery": [],
       "videoUrl": "https://vimeo.com/889533159/edae4b50f1?share=copy",
       "additionalVideos": [],
@@ -1161,6 +1269,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Cordex & Polymateria",
+      "brandIds": [
+        "recTd9XCUJT1jG4fM"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-11-17",
@@ -1199,6 +1310,9 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "Bugzy Malone",
+      "brandIds": [
+        "recvAjmm23PIFCdUx"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-11-13",
@@ -1227,41 +1341,6 @@
       "relatedArticleId": null
     },
     {
-      "id": "rec3po7P6S00cGYXX",
-      "slug": "aru-3-words-video",
-      "title": "ARU 3 Words Video",
-      "type": "Commercial",
-      "kinds": [
-        "Social"
-      ],
-      "genre": [],
-      "productionCompany": "Storyflow Entertainment Limited",
-      "client": "Anglia Ruskin University London",
-      "year": "2023",
-      "releaseDate": "",
-      "workDate": "2023-10-30",
-      "description": "A promotional film for Anglia Ruskin University London, capturing the student experience through three simple words and a series of energetic visual moments.",
-      "isFeatured": false,
-      "isHero": false,
-      "heroImage": "https://img.youtube.com/vi/TejbwNWk5JI/maxresdefault.jpg",
-      "gallery": [],
-      "videoUrl": "https://www.youtube.com/watch?v=TejbwNWk5JI",
-      "additionalVideos": [],
-      "awards": [],
-      "credits": [
-        {
-          "role": "Editor",
-          "name": "Lemon Post"
-        },
-        {
-          "role": "Colourist",
-          "name": "Lemon Post"
-        }
-      ],
-      "externalLinks": [],
-      "relatedArticleId": null
-    },
-    {
       "id": "recRpwAmdmVWoal66",
       "slug": "rap-in-paper-introduction",
       "title": "Rap In Paper: Introduction",
@@ -1272,6 +1351,9 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "PAQ",
+      "brandIds": [
+        "rec8M4UmbJRBb6Bnq"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-10-27",
@@ -1308,6 +1390,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Easol",
+      "brandIds": [
+        "recVzprnMhtdsswXO"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-09-28",
@@ -1344,6 +1429,9 @@
       "genre": [],
       "productionCompany": "Blondot Ltd",
       "client": "Embrace Building Wraps",
+      "brandIds": [
+        "recdQs0gq4DDabZ4u"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-09-19",
@@ -1378,6 +1466,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Gilley",
+      "brandIds": [
+        "rec9JcH7KChJLtpQL"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-08-02",
@@ -1427,6 +1518,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Rest Space",
+      "brandIds": [
+        "rec1x5SjHxiH93fkd"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-07-17",
@@ -1468,6 +1562,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Anglia Ruskin University London",
+      "brandIds": [
+        "rec36fSrsncQKzYAr"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-07-10",
@@ -1513,6 +1610,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Sports Analytics School",
+      "brandIds": [
+        "rectYcC97ATv02n2S"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-06-30",
@@ -1555,6 +1655,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Fraqua",
+      "brandIds": [
+        "recTxT3BHDzh8MChI"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-06-16",
@@ -1598,6 +1701,7 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-05-25",
@@ -1652,6 +1756,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [
+        "recr21bAFnlnPcZlb"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-04-19",
@@ -1696,6 +1803,7 @@
       "genre": [],
       "productionCompany": "Ioannis Mouratis",
       "client": "",
+      "brandIds": [],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-03-28",
@@ -1729,6 +1837,9 @@
       ],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [
+        "recBje4FReeqtY0OF"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-01-01",
@@ -1783,6 +1894,9 @@
       ],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "LoBros",
+      "brandIds": [
+        "recPThXMfEkcSgu0N"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-01-01",
@@ -1836,6 +1950,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "Rumble Energy",
+      "brandIds": [
+        "recYe6vcp0AvAhKSg"
+      ],
       "year": "2023",
       "releaseDate": "",
       "workDate": "2023-01-01",
@@ -1889,6 +2006,7 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "",
+      "brandIds": [],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-12-13",
@@ -1929,6 +2047,7 @@
       "genre": [],
       "productionCompany": "Anti Kino Stravaganza Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-09-03",
@@ -1965,6 +2084,7 @@
       "genre": [],
       "productionCompany": "Fully Focused",
       "client": "",
+      "brandIds": [],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-06-28",
@@ -2025,6 +2145,7 @@
       "genre": [],
       "productionCompany": "Fully Focused",
       "client": "",
+      "brandIds": [],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-06-23",
@@ -2060,6 +2181,7 @@
       "genre": [],
       "productionCompany": "Fully Focused",
       "client": "",
+      "brandIds": [],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-06-08",
@@ -2123,6 +2245,7 @@
       ],
       "productionCompany": "Double J Productions",
       "client": "",
+      "brandIds": [],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-02-19",
@@ -2252,6 +2375,9 @@
       "genre": [],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "WakeCup",
+      "brandIds": [
+        "recZp94l023a1mbyS"
+      ],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-01-01",
@@ -2303,6 +2429,9 @@
       ],
       "productionCompany": "Storyflow Entertainment Limited",
       "client": "The Dyas",
+      "brandIds": [
+        "recSXxWVC6RBRREVM"
+      ],
       "year": "2022",
       "releaseDate": "",
       "workDate": "2022-01-01",
@@ -2352,6 +2481,9 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "Pepsi Nigeria",
+      "brandIds": [
+        "recT4DvR8HbdG9YwP"
+      ],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-09-06",
@@ -2387,6 +2519,7 @@
       "genre": [],
       "productionCompany": "Camp Collective Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-08-17",
@@ -2423,6 +2556,7 @@
       "genre": [],
       "productionCompany": "Blondot Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-06-29",
@@ -2454,6 +2588,7 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-06-25",
@@ -2490,6 +2625,9 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "LYCO x WXYNE",
+      "brandIds": [
+        "reccYreqdJvtv8w7y"
+      ],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-06-21",
@@ -2529,6 +2667,7 @@
       "genre": [],
       "productionCompany": "FLAT TWELVE PRODUCTIONS",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-05-25",
@@ -2568,6 +2707,7 @@
       "genre": [],
       "productionCompany": "Just Fred",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-05-25",
@@ -2605,6 +2745,7 @@
       "genre": [],
       "productionCompany": "James Bennett",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-02-23",
@@ -2642,6 +2783,7 @@
       "genre": [],
       "productionCompany": "Stuart White",
       "client": "",
+      "brandIds": [],
       "year": "2021",
       "releaseDate": "",
       "workDate": "2021-01-25",
@@ -2678,6 +2820,7 @@
       "genre": [],
       "productionCompany": "James Bennett",
       "client": "",
+      "brandIds": [],
       "year": "2020",
       "releaseDate": "",
       "workDate": "2020-09-18",
@@ -2718,6 +2861,7 @@
       ],
       "productionCompany": "Film Lemon",
       "client": "",
+      "brandIds": [],
       "year": "2020",
       "releaseDate": "",
       "workDate": "2020-08-27",
@@ -2851,6 +2995,7 @@
       "genre": [],
       "productionCompany": "Ruairi Glasheen",
       "client": "",
+      "brandIds": [],
       "year": "2020",
       "releaseDate": "",
       "workDate": "2020-07-16",
@@ -2891,6 +3036,7 @@
       ],
       "productionCompany": "Film Lemon",
       "client": "",
+      "brandIds": [],
       "year": "2020",
       "releaseDate": "",
       "workDate": "2020-02-26",
@@ -3004,6 +3150,7 @@
       "genre": [],
       "productionCompany": "Anti Kino Stravaganza Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2020",
       "releaseDate": "",
       "workDate": "2020-01-28",
@@ -3052,6 +3199,7 @@
       "genre": [],
       "productionCompany": "Emanate Studios Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2020",
       "releaseDate": "",
       "workDate": "2020-01-12",
@@ -3085,6 +3233,9 @@
       ],
       "productionCompany": "Film Lemon",
       "client": "",
+      "brandIds": [
+        "recNUHd1u0jbBFYiw"
+      ],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-09-06",
@@ -3132,6 +3283,7 @@
       ],
       "productionCompany": "Film Lemon",
       "client": "",
+      "brandIds": [],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-04-25",
@@ -3177,6 +3329,7 @@
       "genre": [],
       "productionCompany": "Galeforce TV",
       "client": "",
+      "brandIds": [],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-04-10",
@@ -3212,6 +3365,7 @@
       "genre": [],
       "productionCompany": "Galeforce TV",
       "client": "",
+      "brandIds": [],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-04-01",
@@ -3251,6 +3405,7 @@
       ],
       "productionCompany": "Dutch London Pictures",
       "client": "",
+      "brandIds": [],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-02-27",
@@ -3287,6 +3442,7 @@
       "genre": [],
       "productionCompany": "Fudge Films Productions",
       "client": "",
+      "brandIds": [],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-02-22",
@@ -3322,6 +3478,7 @@
       "genre": [],
       "productionCompany": "FatOedo Productions",
       "client": "",
+      "brandIds": [],
       "year": "2019",
       "releaseDate": "",
       "workDate": "2019-01-01",
@@ -3357,6 +3514,9 @@
       "genre": [],
       "productionCompany": "Film Lemon",
       "client": "Underhill West",
+      "brandIds": [
+        "recChjW2POR79HujU"
+      ],
       "year": "2018",
       "releaseDate": "",
       "workDate": "2018-11-07",
@@ -3431,6 +3591,7 @@
       "genre": [],
       "productionCompany": "Film Lemon",
       "client": "",
+      "brandIds": [],
       "year": "2018",
       "releaseDate": "",
       "workDate": "2018-01-06",
@@ -3471,6 +3632,9 @@
       "genre": [],
       "productionCompany": "Film Lemon",
       "client": "TEDx",
+      "brandIds": [
+        "recqWdEl2B1UY9J4J"
+      ],
       "year": "2017",
       "releaseDate": "",
       "workDate": "2017-08-15",
@@ -3519,6 +3683,9 @@
       "genre": [],
       "productionCompany": "Film Lemon",
       "client": "Underhill West",
+      "brandIds": [
+        "recChjW2POR79HujU"
+      ],
       "year": "2017",
       "releaseDate": "",
       "workDate": "2017-06-14",
@@ -3604,6 +3771,7 @@
       ],
       "productionCompany": "Film Lemon",
       "client": "",
+      "brandIds": [],
       "year": "2017",
       "releaseDate": "",
       "workDate": "2017-01-15",
@@ -3675,6 +3843,7 @@
       "genre": [],
       "productionCompany": "Blondot Ltd",
       "client": "",
+      "brandIds": [],
       "year": "2012",
       "releaseDate": "",
       "workDate": "2012-06-28",
@@ -3701,6 +3870,569 @@
     }
   ],
   "posts": [],
+  "brands": [
+    {
+      "id": "recdN8KNfF0c1tRPK",
+      "name": "2K",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112656/portfolio-brands-recdN8KNfF0c1tRPK-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec36fSrsncQKzYAr",
+      "name": "Anglia Ruskin University London",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112627/portfolio-brands-rec36fSrsncQKzYAr-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112628/portfolio-brands-rec36fSrsncQKzYAr-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recXM3k6mKGOahPQI",
+      "name": "APERITO",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recvAjmm23PIFCdUx",
+      "name": "Bugzy Malone",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112670/portfolio-brands-recvAjmm23PIFCdUx-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112670/portfolio-brands-recvAjmm23PIFCdUx-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rectBRsTtqQ7hUBFw",
+      "name": "BYD",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112664/portfolio-brands-rectBRsTtqQ7hUBFw-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112665/portfolio-brands-rectBRsTtqQ7hUBFw-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recUQ2k6qWamnC1bQ",
+      "name": "Caroline Andrew",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112649/portfolio-brands-recUQ2k6qWamnC1bQ-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec5hqD5YySJ35odU",
+      "name": "ClientEarth",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112629/portfolio-brands-rec5hqD5YySJ35odU-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec0OSTcdg4sO3M6M",
+      "name": "Codemasters",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112623/portfolio-brands-rec0OSTcdg4sO3M6M-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recTd9XCUJT1jG4fM",
+      "name": "Cordex & Polymateria",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec1SPeEk6mNDAiQG",
+      "name": "Daughters United",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112624/portfolio-brands-rec1SPeEk6mNDAiQG-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112625/portfolio-brands-rec1SPeEk6mNDAiQG-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec5qiczfube6TZyM",
+      "name": "Diesel",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recVzprnMhtdsswXO",
+      "name": "Easol",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112653/portfolio-brands-recVzprnMhtdsswXO-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recdQs0gq4DDabZ4u",
+      "name": "Embrace Building Wraps",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recLyXIgCVdS68fgz",
+      "name": "EY",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112640/portfolio-brands-recLyXIgCVdS68fgz-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112641/portfolio-brands-recLyXIgCVdS68fgz-colour.png",
+      "logoColourOverlay": "https://res.cloudinary.com/date24ay6/image/upload/v1795112642/portfolio-brands-recLyXIgCVdS68fgz-colour-overlay.png",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recjx9wNpqdGDGqr8",
+      "name": "Fitbit",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112657/portfolio-brands-recjx9wNpqdGDGqr8-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112658/portfolio-brands-recjx9wNpqdGDGqr8-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recTxT3BHDzh8MChI",
+      "name": "Fraqua",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec9JcH7KChJLtpQL",
+      "name": "Gilley",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112631/portfolio-brands-rec9JcH7KChJLtpQL-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recDCO5Rz90l84mT4",
+      "name": "Hello Sunday",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112636/portfolio-brands-recDCO5Rz90l84mT4-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112637/portfolio-brands-recDCO5Rz90l84mT4-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "reczVxSCzQ97JsfDM",
+      "name": "Kitt Medical",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112672/portfolio-brands-reczVxSCzQ97JsfDM-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112673/portfolio-brands-reczVxSCzQ97JsfDM-colour.png",
+      "logoColourOverlay": "https://res.cloudinary.com/date24ay6/image/upload/v1795112674/portfolio-brands-reczVxSCzQ97JsfDM-colour-overlay.png",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recr21bAFnlnPcZlb",
+      "name": "Knight Dragon",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112663/portfolio-brands-recr21bAFnlnPcZlb-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec9QIE7y0oB0b9rn",
+      "name": "LADbible",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112632/portfolio-brands-rec9QIE7y0oB0b9rn-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recBje4FReeqtY0OF",
+      "name": "Lanique",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112634/portfolio-brands-recBje4FReeqtY0OF-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112635/portfolio-brands-recBje4FReeqtY0OF-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recPThXMfEkcSgu0N",
+      "name": "LoBros",
+      "logo": "",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112645/portfolio-brands-recPThXMfEkcSgu0N-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "colour"
+    },
+    {
+      "id": "reccYreqdJvtv8w7y",
+      "name": "LYCO x WXYNE",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recW3D3IQVPqf9Gtz",
+      "name": "M&S",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112653/portfolio-brands-recW3D3IQVPqf9Gtz-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recWjQL8MwRmVGJzz",
+      "name": "Medical Tracker",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112654/portfolio-brands-recWjQL8MwRmVGJzz-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec1vOELedma14B39",
+      "name": "MINI",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112626/portfolio-brands-rec1vOELedma14B39-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recu1b48EbEQyc4vF",
+      "name": "Neighbourly",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec8I6oUGWrBxHgW7",
+      "name": "OneID",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec7ifNGCOu6ZQS42",
+      "name": "Oracle Red Bull Racing",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112630/portfolio-brands-rec7ifNGCOu6ZQS42-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112630/portfolio-brands-rec7ifNGCOu6ZQS42-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec8M4UmbJRBb6Bnq",
+      "name": "PAQ",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recT4DvR8HbdG9YwP",
+      "name": "Pepsi",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112646/portfolio-brands-recT4DvR8HbdG9YwP-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112647/portfolio-brands-recT4DvR8HbdG9YwP-colour.png",
+      "logoColourOverlay": "https://res.cloudinary.com/date24ay6/image/upload/v1795112647/portfolio-brands-recT4DvR8HbdG9YwP-colour-overlay.png",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec1x5SjHxiH93fkd",
+      "name": "Rest Space",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recYe6vcp0AvAhKSg",
+      "name": "Rumble Energy",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rectYcC97ATv02n2S",
+      "name": "Sports Analytics School",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recTgsRdci3asD4PJ",
+      "name": "Squid Loyalty",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112648/portfolio-brands-recTgsRdci3asD4PJ-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recVYjbiKNI6nTLd5",
+      "name": "Supermassive Games",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112650/portfolio-brands-recVYjbiKNI6nTLd5-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112651/portfolio-brands-recVYjbiKNI6nTLd5-colour.png",
+      "logoColourOverlay": "https://res.cloudinary.com/date24ay6/image/upload/v1795112652/portfolio-brands-recVYjbiKNI6nTLd5-colour-overlay.png",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recp9zhW5hdj1Ur8L",
+      "name": "Talon Manufacturing",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112659/portfolio-brands-recp9zhW5hdj1Ur8L-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112660/portfolio-brands-recp9zhW5hdj1Ur8L-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recqWdEl2B1UY9J4J",
+      "name": "TEDx",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112661/portfolio-brands-recqWdEl2B1UY9J4J-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112662/portfolio-brands-recqWdEl2B1UY9J4J-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recSXxWVC6RBRREVM",
+      "name": "The Dyas",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rectymHY7Y26U4CUO",
+      "name": "The Health Lottery",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112666/portfolio-brands-rectymHY7Y26U4CUO-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112667/portfolio-brands-rectymHY7Y26U4CUO-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recAnftSl7gFllaXx",
+      "name": "TNT",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recZRCxp5vwucJpUX",
+      "name": "Ubisoft",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112655/portfolio-brands-recZRCxp5vwucJpUX-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recLMhZQMPjNNZSLn",
+      "name": "UEFA",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112639/portfolio-brands-recLMhZQMPjNNZSLn-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recChjW2POR79HujU",
+      "name": "Underhill West",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recs86o0pWVWeEEGp",
+      "name": "University of Central Lancashire London",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112663/portfolio-brands-recs86o0pWVWeEEGp-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recv5sTd0zCvRtlaP",
+      "name": "UPTON PROWSE",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112667/portfolio-brands-recv5sTd0zCvRtlaP-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recNUHd1u0jbBFYiw",
+      "name": "Virgin Media",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112643/portfolio-brands-recNUHd1u0jbBFYiw-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112644/portfolio-brands-recNUHd1u0jbBFYiw-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recJJj6ZavLSwP0rD",
+      "name": "Wago",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112638/portfolio-brands-recJJj6ZavLSwP0rD-logo.png",
+      "logoColour": "https://res.cloudinary.com/date24ay6/image/upload/v1795112638/portfolio-brands-recJJj6ZavLSwP0rD-colour.png",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "recZp94l023a1mbyS",
+      "name": "WakeCup",
+      "logo": "",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    },
+    {
+      "id": "rec9YOUoY9onTIBXD",
+      "name": "Xbox Game Studios",
+      "logo": "https://res.cloudinary.com/date24ay6/image/upload/v1795112633/portfolio-brands-rec9YOUoY9onTIBXD-logo.png",
+      "logoColour": "",
+      "logoColourOverlay": "",
+      "website": null,
+      "scale": 1,
+      "wordmark": "auto",
+      "treatment": "mono"
+    }
+  ],
   "config": {
     "portfolioId": "postproduction",
     "siteTitle": "Lemon Post",
@@ -3714,6 +4446,38 @@
     "workSectionLabel": "All Work",
     "hasJournal": false,
     "showRoleFilter": true,
+    "brandWall": {
+      "enabled": true,
+      "label": "Work Partners Include",
+      "layout": "inline",
+      "colourOnHover": false,
+      "brandIds": [
+        "rec36fSrsncQKzYAr",
+        "recW3D3IQVPqf9Gtz",
+        "rec5hqD5YySJ35odU",
+        "rec9JcH7KChJLtpQL",
+        "recPThXMfEkcSgu0N",
+        "recT4DvR8HbdG9YwP",
+        "rectBRsTtqQ7hUBFw",
+        "recUQ2k6qWamnC1bQ",
+        "recVzprnMhtdsswXO",
+        "recs86o0pWVWeEEGp",
+        "rectymHY7Y26U4CUO",
+        "recv5sTd0zCvRtlaP",
+        "recqWdEl2B1UY9J4J",
+        "recZRCxp5vwucJpUX",
+        "recLyXIgCVdS68fgz",
+        "rec1vOELedma14B39",
+        "reczVxSCzQ97JsfDM",
+        "recr21bAFnlnPcZlb",
+        "recNUHd1u0jbBFYiw",
+        "recvAjmm23PIFCdUx",
+        "recDCO5Rz90l84mT4",
+        "recBje4FReeqtY0OF",
+        "rec7ifNGCOu6ZQS42",
+        "recJJj6ZavLSwP0rD"
+      ]
+    },
     "showOtherPortfolioLink": true,
     "otherPortfolioUrl": "https://directedbygabriel.com",
     "otherPortfolioLabel": "Psst... I also Direct",
@@ -3752,10 +4516,10 @@
     "otherPortfolioName": "Gabriel Athanasiou",
     "defaultOgImage": "https://res.cloudinary.com/date24ay6/image/upload/v1772845699/portfolio-config-postproduction-defaultOg.jpg",
     "portfolioOwnerName": "Lemon Post",
-    "lastModified": "2026-03-06T22:41:24.000Z"
+    "lastModified": "2026-11-19T18:21:55.000Z"
   },
   "portfolioMode": "postproduction",
-  "lastUpdated": "2026-10-23T15:29:34.684Z",
+  "lastUpdated": "2026-11-19T18:23:20.169Z",
   "version": "2.0",
   "source": "sync-logic"
 }
