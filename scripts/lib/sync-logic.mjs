@@ -525,6 +525,7 @@ async function processProjects(records, festivalsMap, clientsMap, cloudinaryMapp
 // ═══════════════════════════════════════════════════════════════
 
 const WORDMARK_STYLES = ['auto', 'wide', 'thin', 'black', 'serif', 'editorial', 'mono', 'lower', 'tight'];
+const BRAND_TREATMENTS = ['mono', 'colour', 'adaptive'];
 
 /**
  * Build the public brand records. Assets are always Airtable attachments →
@@ -550,9 +551,8 @@ export function processBrands(records, cloudinaryMapping, verbose) {
             return toWebSafeImageUrl(image.cloudinaryUrl, image.format);
         };
 
-        const treatment = f['Use Adaptive Variant']
-            ? 'adaptive'
-            : (f['Logo Treatment'] === 'Colour' ? 'colour' : 'mono');
+        const rawTreatment = String(f['Logo Treatment'] || 'Mono').toLowerCase();
+        const treatment = BRAND_TREATMENTS.includes(rawTreatment) ? rawTreatment : 'mono';
 
         const rawScale = Number(f['Scale']);
         const rawWordmark = String(f['Wordmark Style'] || 'Auto').toLowerCase();
@@ -567,7 +567,7 @@ export function processBrands(records, cloudinaryMapping, verbose) {
             name,
             logo: imageUrl('logo'),
             logoColour: imageUrl('colour'),
-            logoColourMono: imageUrl('colourMono'),
+            logoColourOverlay: imageUrl('colourOverlay'),
             website: String(f['Website'] || '').trim() || null,
             scale: Number.isFinite(rawScale) && rawScale > 0 ? rawScale : 1,
             wordmark,
@@ -871,9 +871,9 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
 
     // ── Brand logo attachments (logo, colour, colour-only overlay) ──
     const brandImageFields = [
-        { field: 'Logo', type: 'logo' },
-        { field: 'Logo Colour', type: 'colour' },
-        { field: 'Logo Colour Mono', type: 'colourMono' },
+        { field: 'Logo', type: 'logo', suffix: 'logo' },
+        { field: 'Logo Colour', type: 'colour', suffix: 'colour' },
+        { field: 'Colour Overlay', type: 'colourOverlay', suffix: 'colour-overlay' },
     ];
 
     for (const record of brandRecords) {
@@ -885,7 +885,7 @@ async function syncImagesToCloudinary(projectRecords, journalRecords, settingsRe
             const attachment = (f[item.field] || [])[0];
             if (!attachment) continue;
 
-            const publicId = `portfolio-brands-${record.id}-${item.type}`;
+            const publicId = `portfolio-brands-${record.id}-${item.suffix}`;
             const resolved = await resolveImage(
                 publicId,
                 attachment.id,

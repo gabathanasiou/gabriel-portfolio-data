@@ -75,19 +75,18 @@ selection from Settings → `Home Brands`.
 | Airtable Field | Type | Output Property | Notes |
 |---|---|---|---|
 | `Name` | singleLineText | `name` | **Primary**. Display name, alt text and wordmark source |
-| `Logo` | multipleAttachments | `logo` | Primary/mono artwork → Cloudinary; theme-tinted by the site |
+| `Logo` | multipleAttachments | `logo` | Mono base artwork → Cloudinary; theme-tinted by the site |
 | `Logo Colour` | multipleAttachments | `logoColour` | Original colour artwork (Colour treatment) → Cloudinary |
-| `Logo Colour Mono` | multipleAttachments | `logoColourMono` | Colour-only overlay → Cloudinary; layered over the mono base |
+| `Colour Overlay` | multipleAttachments | `logoColourOverlay` | Colour-only overlay (Adaptive treatment) → Cloudinary; layered over the mono base |
 | `Website` | url | `website` | Optional click-through |
 | `Scale` | number | `scale` | Optical size multiplier; default 1 |
 | `Wordmark Style` | singleSelect | `wordmark` | Auto, Wide, Thin, Black, Serif, Editorial, Mono, Lower, Tight; used only without a logo |
-| `Logo Treatment` | singleSelect | `treatment` | Mono, Colour; `Use Adaptive Variant` overrides to `adaptive` |
-| `Use Adaptive Variant` | checkbox | `treatment` | When checked, output `treatment: "adaptive"` (mono base + colour overlay) |
+| `Logo Treatment` | singleSelect | `treatment` | Mono, Colour, Adaptive |
 | `Projects` | multipleRecordLinks → Projects | — | Reverse link |
 | `Settings` | multipleRecordLinks → Settings | — | Reverse link |
 
 Brand logos are always uploaded to Cloudinary (`portfolio-brands-<recordId>-logo`,
-`-colour`, `-colour-mono`); there is no logo URL fallback. A brand without a logo
+`-colour`, `-colour-overlay`); there is no logo URL fallback. A brand without a logo
 still syncs and renders as its typographic wordmark.
 
 ---
@@ -192,7 +191,7 @@ Images are synced to Cloudinary using a **check-then-upload** strategy:
    - Projects: `portfolio-projects-{recordId}-{galleryIndex}`
    - Journal: `portfolio-journal-{recordId}`
    - Settings: `portfolio-config-{portfolioId}-{type}` (types: logo, favicon, showreel, profile, defaultOg)
-   - Brands: `portfolio-brands-{recordId}-{logo|colour|colour-mono}`
+   - Brands: `portfolio-brands-{recordId}-{logo|colour|colour-overlay}`
 2. Uploads store the Airtable attachment id in the asset's Cloudinary context.
 3. For each image, `checkImageExists(publicId)` queries the Cloudinary API.
 4. If found **and** the stored attachment id matches → use the existing URL (skip upload).

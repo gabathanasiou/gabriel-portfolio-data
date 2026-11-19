@@ -78,21 +78,15 @@ const BRAND_FIELDS = [
     description: 'Upload the full-colour original logo as a transparent PNG or SVG. Used only by the Colour treatment (and optional colour-on-hover); leave empty if the brand is always mono.'
   },
   {
-    name: 'Logo Colour Mono',
+    name: 'Colour Overlay',
     type: 'multipleAttachments',
-    description: 'Upload the colour-only overlay: all non-colour areas transparent, aligned pixel-for-pixel with Logo. Used only by Adaptive, layered over the tinted mono logo.'
+    description: 'Upload the colour-only overlay: all non-colour areas transparent, aligned pixel-for-pixel with Logo. Used only by the Adaptive treatment, layered over the tinted mono logo.'
   },
   {
     name: 'Logo Treatment',
     type: 'singleSelect',
-    description: 'How the wall renders the logo: Mono = one theme-tinted colour; Colour = original artwork. For mono + colour overlay, tick Use Adaptive Variant instead.',
-    options: { choices: [{ name: 'Mono' }, { name: 'Colour' }] }
-  },
-  {
-    name: 'Use Adaptive Variant',
-    type: 'checkbox',
-    description: 'Tick to use Adaptive: the mono Logo tinted by the site, plus the Logo Colour Mono overlay. Needs both Logo and Logo Colour Mono.',
-    options: { icon: 'check', color: 'greenBright' }
+    description: 'How the wall renders the logo: Mono = one theme-tinted colour; Colour = original artwork; Adaptive = mono base with the Colour Overlay on top.',
+    options: { choices: [{ name: 'Mono' }, { name: 'Colour' }, { name: 'Adaptive' }] }
   },
   {
     name: 'Website',
