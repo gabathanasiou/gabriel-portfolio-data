@@ -130,6 +130,18 @@ const SETTINGS_FIELDS = [
     type: 'checkbox',
     description: 'Mono brands that have a Logo Colour file switch to colour on hover. Adaptive brands already show colour, so this has no effect on them.',
     options: { icon: 'check', color: 'greenBright' }
+  },
+  {
+    name: 'Brand Wall Logo Height',
+    type: 'number',
+    description: 'Base logo height in px for the home wall. Default 22. The wall still optically normalises individual logos.',
+    options: { precision: 0 }
+  },
+  {
+    name: 'Brand Wall Spacing',
+    type: 'number',
+    description: 'Spacing multiplier for the home wall: section padding and row/column gaps. 1 = default; 0.8 tighter, 1.2 looser.',
+    options: { precision: 2 }
   }
 ];
 

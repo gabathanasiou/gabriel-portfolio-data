@@ -120,6 +120,8 @@ Each row represents one portfolio mode. The `Portfolio ID` field selects the row
 | `Brand Wall Label` | singleLineText | `brandWall.label` | e.g. "Brands I've worked with" / "Trusted by" |
 | `Brand Wall Layout` | singleSelect | `brandWall.layout` | Inline, Grid, Marquee |
 | `Brands Colour On Hover` | checkbox | `brandWall.colourOnHover` | |
+| `Brand Wall Logo Height` | number | `brandWall.logoHeight` | Base height in px; default 22 |
+| `Brand Wall Spacing` | number | `brandWall.spacing` | Multiplier for padding and row/column gaps; default 1 |
 | `Home Brands` | multipleRecordLinks → Brands | `brandWall.brandIds[]` | Curated wall selection; array order is display order |
 | `Show Other Portfolio Link` | checkbox | `showOtherPortfolioLink` | |
 | `Other Portfolio URL` | url | `otherPortfolioUrl` | |

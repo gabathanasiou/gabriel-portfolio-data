@@ -277,6 +277,14 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
     const layoutRaw = String(f['Brand Wall Layout'] || 'Inline').toLowerCase();
     const brandWallLayout = ['inline', 'grid', 'marquee'].includes(layoutRaw) ? layoutRaw : 'inline';
     const homeBrands = Array.isArray(f['Home Brands']) ? f['Home Brands'] : [];
+    const rawLogoHeight = Number(f['Brand Wall Logo Height']);
+    const rawSpacing = Number(f['Brand Wall Spacing']);
+    const logoHeight = Number.isFinite(rawLogoHeight) && rawLogoHeight > 0
+        ? Math.min(40, Math.max(14, rawLogoHeight))
+        : 22;
+    const spacing = Number.isFinite(rawSpacing) && rawSpacing > 0
+        ? Math.min(2, Math.max(0.5, rawSpacing))
+        : 1;
 
     // Cross-site: read the OTHER portfolio's settings for cross-site credits
     const otherMode = portfolioMode === 'directing' ? 'postproduction' : 'directing';
@@ -310,6 +318,8 @@ function processConfig(settingsRecords, cloudinaryMapping, portfolioMode, verbos
             label: f['Brand Wall Label'] || '',
             layout: brandWallLayout,
             colourOnHover: Boolean(f['Brands Colour On Hover']),
+            logoHeight,
+            spacing,
             brandIds: homeBrands,
         },
 
@@ -369,7 +379,7 @@ function getDefaultConfig() {
         seoTitle: '', seoDescription: '', domain: '',
         logo: '', favicon: '', fontFamily: '',
         workSectionLabel: 'Filmography', hasJournal: true, showRoleFilter: false,
-        brandWall: { enabled: false, label: '', layout: 'inline', colourOnHover: false, brandIds: [] },
+        brandWall: { enabled: false, label: '', layout: 'inline', colourOnHover: false, logoHeight: 22, spacing: 1, brandIds: [] },
         showOtherPortfolioLink: false, otherPortfolioUrl: '', otherPortfolioLabel: '',
         aboutLayout: 'standard', themeMode: 'dark',
         tradingNameDisclosure: '', gaMeasurementId: '',
