@@ -14,6 +14,7 @@ changing the pipeline.
 - `npm run sync:sitemap` / `npm run sync:robots` — regenerate the per-mode static files
 - `npm run sync:all` — data + sitemap + robots
 - `npm run guard:data -- <dir>` — reject secrets/non-artifact paths before a `data` publish
+- `npm run apply:wall -- --plan <file> [--apply]` — validate and apply a Brand Wall Editor plan
 - `npm run roadmap -- list|add|close|check`
 - `npm run lint:docs` — doc-budget + roadmap hygiene (`npm run lint` runs it)
 - There is no `dev` or `build` command. Do not invent one.

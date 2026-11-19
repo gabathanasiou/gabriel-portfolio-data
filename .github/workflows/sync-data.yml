@@ -173,6 +173,7 @@ jobs:
           curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/directing/robots.txt"
           # Post-Production
           curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/portfolio-data.json"
+          curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data-live/postproduction/portfolio-data.json"
           curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/sitemap.xml"
           curl -s --max-time 20 "https://purge.jsdelivr.net/gh/${{ github.repository }}@data/postproduction/robots.txt"
           echo "✅ Cache purged for all static files"

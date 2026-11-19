@@ -10,6 +10,7 @@
     "sync:all": "npm run sync:data && npm run sync:sitemap && npm run sync:robots",
     "guard:data": "node scripts/guard-data-branch.mjs",
     "publish:data": "node scripts/publish-data.mjs",
+    "apply:wall": "node scripts/apply-brand-wall-plan.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "hooks:install": "git config core.hooksPath .githooks",

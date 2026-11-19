@@ -69,6 +69,7 @@ describe('publish-data', () => {
     expect(result.changed).toBe(true);
     expect(result.tag).toBe(`data-20261023-142530-${result.commit.slice(0, 7)}`);
     expect(remoteCount()).toBe(commits + 1);
+    expect(Number(git(remote, 'rev-list', '--count', 'data-live'))).toBe(commits + 1);
     expect(git(repo, 'show', 'origin/data:directing/portfolio-data.json')).toContain('v2-directing');
     expect(git(remote, 'tag', '--list')).toContain(result.tag);
     expect(git(repo, 'log', '--format=%s', '-1', 'origin/data')).toContain('data sync');

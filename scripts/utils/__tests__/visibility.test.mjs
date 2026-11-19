@@ -17,6 +17,8 @@ describe('isProjectVisible', () => {
   it('shows any published status when no role filter is configured', () => {
     expect(isProjectVisible({ [DIRECTING]: 'Featured' }, DIRECTING)).toBe(true);
     expect(isProjectVisible({ [DIRECTING]: 'Hero' }, DIRECTING)).toBe(true);
+    expect(isProjectVisible({ [DIRECTING]: 'Portfolio Only' }, DIRECTING)).toBe(true);
+    expect(isProjectVisible({ [DIRECTING]: 'Request Only' }, DIRECTING)).toBe(true);
   });
 
   it('applies the per-portfolio display status field', () => {
