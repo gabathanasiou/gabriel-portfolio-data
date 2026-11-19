@@ -62,38 +62,81 @@ const NAME_OVERRIDES = new Map([
 const WORDMARK_STYLES = ['Auto', 'Wide', 'Thin', 'Black', 'Serif', 'Editorial', 'Mono', 'Lower', 'Tight'];
 
 const BRAND_FIELDS = [
-  { name: 'Name', type: 'singleLineText' },
-  { name: 'Logo', type: 'multipleAttachments' },
-  { name: 'Logo Colour', type: 'multipleAttachments' },
-  { name: 'Logo Colour Mono', type: 'multipleAttachments' },
+  {
+    name: 'Name',
+    type: 'singleLineText',
+    description: 'Brand or artist name. Used for alt text, export filenames and the typographic fallback.'
+  },
+  {
+    name: 'Logo',
+    type: 'multipleAttachments',
+    description: 'Upload the mono (single-colour) logo as a transparent PNG or SVG. This is the base for Mono and Adaptive; do not upload the full-colour version here.'
+  },
+  {
+    name: 'Logo Colour',
+    type: 'multipleAttachments',
+    description: 'Upload the full-colour original logo as a transparent PNG or SVG. Used only by the Colour treatment (and optional colour-on-hover); leave empty if the brand is always mono.'
+  },
+  {
+    name: 'Logo Colour Mono',
+    type: 'multipleAttachments',
+    description: 'Upload the colour-only overlay: all non-colour areas transparent, aligned pixel-for-pixel with Logo. Used only by Adaptive, layered over the tinted mono logo.'
+  },
   {
     name: 'Logo Treatment',
     type: 'singleSelect',
+    description: 'How the wall renders the logo: Mono = one theme-tinted colour; Colour = original artwork. For mono + colour overlay, tick Use Adaptive Variant instead.',
     options: { choices: [{ name: 'Mono' }, { name: 'Colour' }] }
   },
   {
     name: 'Use Adaptive Variant',
     type: 'checkbox',
+    description: 'Tick to use Adaptive: the mono Logo tinted by the site, plus the Logo Colour Mono overlay. Needs both Logo and Logo Colour Mono.',
     options: { icon: 'check', color: 'greenBright' }
   },
-  { name: 'Website', type: 'url' },
-  { name: 'Scale', type: 'number', options: { precision: 2 } },
+  {
+    name: 'Website',
+    type: 'url',
+    description: 'Optional. Opens when the brand logo is clicked on the home wall or a project page.'
+  },
+  {
+    name: 'Scale',
+    type: 'number',
+    description: 'Optional size multiplier on the 22px wall height. 1 = normal; use about 0.85–0.9 for very wide marks or 1.1–1.2 for small compact marks.',
+    options: { precision: 2 }
+  },
   {
     name: 'Wordmark Style',
     type: 'singleSelect',
+    description: 'Only used when a brand has no usable logo: the typographic fallback style.',
     options: { choices: WORDMARK_STYLES.map((name) => ({ name })) }
   }
 ];
 
 const SETTINGS_FIELDS = [
-  { name: 'Show Brand Wall', type: 'checkbox', options: { icon: 'check', color: 'greenBright' } },
-  { name: 'Brand Wall Label', type: 'singleLineText' },
+  {
+    name: 'Show Brand Wall',
+    type: 'checkbox',
+    description: 'Show the curated Home Brands selection on the home page.',
+    options: { icon: 'check', color: 'greenBright' }
+  },
+  {
+    name: 'Brand Wall Label',
+    type: 'singleLineText',
+    description: 'Heading above the wall, e.g. “Brands I’ve worked with” or “Trusted by”.'
+  },
   {
     name: 'Brand Wall Layout',
     type: 'singleSelect',
+    description: 'Inline (default) = one centred row; Grid = 2/4-column cells; Marquee = continuous scroll.',
     options: { choices: [{ name: 'Inline' }, { name: 'Grid' }, { name: 'Marquee' }] }
   },
-  { name: 'Brands Colour On Hover', type: 'checkbox', options: { icon: 'check', color: 'greenBright' } }
+  {
+    name: 'Brands Colour On Hover',
+    type: 'checkbox',
+    description: 'Mono brands that have a Logo Colour file switch to colour on hover. Adaptive brands already show colour, so this has no effect on them.',
+    options: { icon: 'check', color: 'greenBright' }
+  }
 ];
 
 const WALL_SETTINGS = {
@@ -464,6 +507,7 @@ async function main() {
       body: {
         name: 'Brands',
         type: 'multipleRecordLinks',
+        description: 'Linked brands/artists shown on the project page instead of the legacy Client text. Add several for a multi-brand credit.',
         options: { linkedTableId: brandsTable.id }
       }
     });
@@ -488,6 +532,7 @@ async function main() {
       body: {
         name: 'Home Brands',
         type: 'multipleRecordLinks',
+        description: 'The brands shown on the home wall, in this order. Drag to reorder; the site follows the order.',
         options: { linkedTableId: brandsTable.id }
       }
     });
